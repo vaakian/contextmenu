@@ -1,0 +1,32 @@
+{
+  "name": "@contextmenu/shared",
+  "version": "0.0.1-beta.0",
+  "author": "vaakian <https://github.comvaakian>",
+  "license": "MIT",
+  "funding": "https://github.com/sponsorsvaakian",
+  "homepage": "https://github.com/contextmenu/contextmenu/tree/main/packages/shared#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/contextmenu/contextmenu.git",
+    "directory": "packages/shared"
+  },
+  "bugs": {
+    "url": "https://github.com/contextmenu/contextmenu/issues"
+  },
+  "keywords": [
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "require": "./index.cjs",
+      "import": "./index.mjs"
+    },
+    "./*": "./*"
+  },
+  "main": "./index.cjs",
+  "module": "./index.mjs",
+  "unpkg": "./index.iife.min.js",
+  "jsdelivr": "./index.iife.min.js",
+  "types": "./index.d.ts"
+}

@@ -1,0 +1,53 @@
+{
+  "name": "@contextmenu/core",
+  "type": "module",
+  "version": "0.0.1-beta.0",
+  "packageManager": "pnpm@7.9.0",
+  "description": "",
+  "author": "vaakian <vaakian@gmail.com>",
+  "license": "MIT",
+  "funding": "https://github.com/sponsors/vaakian",
+  "homepage": "https://github.com/vaakian/contextmenu#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vaakian/contextmenu.git"
+  },
+  "bugs": "https://github.com/vaakian/contextmenu/issues",
+  "keywords": [],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    },
+    "./*": "./*"
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "lint": "eslint .",
+    "prepublishOnly": "nr build",
+    "release": "bumpp && npm publish",
+    "start": "esno src/index.ts",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@contextmenu/shared": "workspace:*"
+  }
+}
