@@ -1,8 +1,8 @@
 import { createContextMenu, key } from '../src'
 
-const nextTick = () => {
-  return new Promise(resolve => setTimeout(resolve))
-}
+// const nextTick = () => {
+//   return new Promise(resolve => setTimeout(resolve))
+// }
 
 describe('contextMenu', () => {
   let menuElement: HTMLElement
@@ -29,7 +29,7 @@ describe('contextMenu', () => {
       const [x, y] = [100, 200]
       createContextMenu(menuElement)
       dispatchEvent(new MouseEvent('contextmenu', { clientX: x, clientY: y }))
-      await nextTick()
+      // await nextTick()
 
       // documentElement width/height are both 0 in test environment
       expect(menuElement.style.right).toBe(`${-x}px`)
@@ -42,6 +42,14 @@ describe('contextMenu', () => {
       expect(menuElement.dataset[key]).toBe('1')
       ctx.hideOnClick = false
       expect(menuElement.dataset[key]).toBe('0')
+    })
+
+    it('should effect dataset', async () => {
+      const ctx = createContextMenu(menuElement)
+      ctx.hide()
+      expect(menuElement.style!.visibility).toBe('hidden')
+      ctx.show()
+      expect(menuElement.style!.visibility).toBe('visible')
     })
   })
 })

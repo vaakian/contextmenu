@@ -1,5 +1,5 @@
 {
-  "name": "@contextmenu/core",
+  "name": "@contextmenu/vue",
   "type": "module",
   "version": "0.0.1-beta.0",
   "packageManager": "pnpm@7.9.0",
@@ -49,6 +49,20 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@contextmenu/shared": "workspace:*"
+    "@contextmenu/shared": "workspace:*",
+    "@contextmenu/core": "workspace:*",
+    "vue-demi": "^0.13.11"
+  },
+  "peerDependencies": {
+    "@vue/composition-api": "^1.0.0-rc.1",
+    "vue": "^2.0.0 || >=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@vue/composition-api": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "vue": "^3.0.0"
   }
 }

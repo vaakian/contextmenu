@@ -1,26 +1,46 @@
 # ktx(WIP)
 
+[![NPM version](https://img.shields.io/npm/v/@contextmenu/core?color=a1b858&label=)](https://www.npmjs.com/package/@contextmenu/core)
+
 `ktx` enables you to add custom `contextMenu` to you application effortlessly.
+
+
 
 planning to support:
 - [ ] Vue
-- [ ] React
-- [ ] Angular
-- [ ] Vanilla JS
+  - `v-directive` usage
+  - `useContextMenu` hook
+  - `<ContextMenu />` component
 
-[![NPM version](https://img.shields.io/npm/v/ktx?color=a1b858&label=)](https://www.npmjs.com/package/ktx)
+- [ ] React
+  - `useContextMenu` hook
+  - `<ContextMenu />` component
+
+- [ ] Angular
+  - TODO
+
+- [ ] Vanilla JS
+  - native `Web Component`
+  - plain JS API
+  - jQuery*
+
+TODO:
+- [ ] absolute positioning to the specific parent element without hiding on `scroll`
+- [ ] animation support
+- [ ] fully tree-shakable
+- [ ] opinionated style preset
 
 ## Installation
 
 ```bash
 # npm
-npm i -s ktx
+npm i @ktx/core
 
 # pnpm
-pnpm add ktx
+pnpm add @contexmenu/core
 
 # yarn
-yarn add ktx
+yarn add @contexmenu/core
 ```
 
 ## License
