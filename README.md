@@ -34,7 +34,7 @@ TODO:
 
 ```bash
 # npm
-npm i @ktx/core
+npm i @contexmenu/core
 
 # pnpm
 pnpm add @contexmenu/core
