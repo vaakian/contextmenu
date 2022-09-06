@@ -8,11 +8,8 @@
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview"
   },
-  "dependencies": {
-    "@contextmenu/vue": "workspace:*",
-    "vue": "^3.2.37"
-  },
   "devDependencies": {
+    "vue": "^3.2.37",
     "@unocss/preset-attributify": "^0.45.15",
     "@unocss/preset-icons": "^0.45.15",
     "@unocss/preset-uno": "^0.45.15",

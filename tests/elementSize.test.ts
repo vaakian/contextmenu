@@ -1,4 +1,4 @@
-import { ElementSizeObserver } from '../src'
+import { ElementSizeObserver } from '@contextmenu/core'
 
 describe('elementSizeObserver', () => {
   const cb = vi.fn(() => {

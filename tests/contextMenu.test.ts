@@ -1,4 +1,4 @@
-import { createContextMenu, key } from '../src'
+import { createContextMenu, key } from '@contextmenu/core'
 
 // const nextTick = () => {
 //   return new Promise(resolve => setTimeout(resolve))

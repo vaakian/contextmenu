@@ -1,5 +1,5 @@
 import type { Size, position } from '@contextmenu/shared'
-import { calculateOffset } from '../src'
+import { calculateOffset } from '@contextmenu/core'
 
 describe('offsetCalculator', () => {
   const menuSize: Size = {

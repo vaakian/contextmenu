@@ -48,13 +48,21 @@ importers:
       '@contextmenu/core': workspace:*
       '@contextmenu/shared': workspace:*
       vue: ^3.0.0
-      vue-demi: ^0.13.11
+      vue-demi: '*'
     dependencies:
       '@contextmenu/core': link:../core
       '@contextmenu/shared': link:../shared
       vue-demi: 0.13.11_vue@3.2.38
     devDependencies:
       vue: 3.2.38
+
+  packages/web-component:
+    specifiers:
+      '@contextmenu/core': workspace:*
+      '@contextmenu/shared': workspace:*
+    dependencies:
+      '@contextmenu/core': link:../core
+      '@contextmenu/shared': link:../shared
 
   playground/vanilla:
     specifiers:
@@ -69,7 +77,6 @@ importers:
 
   playground/vue3:
     specifiers:
-      '@contextmenu/vue': workspace:*
       '@unocss/preset-attributify': ^0.45.15
       '@unocss/preset-icons': ^0.45.15
       '@unocss/preset-uno': ^0.45.15
@@ -79,9 +86,6 @@ importers:
       vite: ^3.0.7
       vue: ^3.2.37
       vue-tsc: ^0.39.5
-    dependencies:
-      '@contextmenu/vue': link:../../packages/vue
-      vue: 3.2.38
     devDependencies:
       '@unocss/preset-attributify': 0.45.15
       '@unocss/preset-icons': 0.45.15
@@ -90,6 +94,7 @@ importers:
       typescript: 4.7.4
       unocss: 0.45.15_vite@3.0.7
       vite: 3.0.7
+      vue: 3.2.38
       vue-tsc: 0.39.5_typescript@4.7.4
 
 packages:

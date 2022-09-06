@@ -4,8 +4,6 @@
 
 `ktx` enables you to add custom `contextMenu` to you application effortlessly.
 
-
-
 planning to support:
 - [ ] Vue
   - `v-directive` usage

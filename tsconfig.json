@@ -10,6 +10,29 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "types": ["vitest/globals"]
-  }
+    "types": ["vitest/globals"],
+    "paths": {
+      // gain typescript inference
+      "@contextmenu/core": ["./packages/core/index.ts"],
+      "@contextmenu/vue": ["./packages/vue/index.ts"],
+      "@contextmenu/react": ["./packages/react/index.ts"],
+      "@contextmenu/angular": ["./packages/angular/index.ts"],
+      "@contextmenu/shared": ["./packages/shared/index.ts"],
+    },
+  },
+  "include": [
+    "packages/**/*.ts",
+    "packages/**/*.tsx",
+    "packages/**/*.vue",
+    "playground/**/*.ts",
+    "playground/**/*.tsx",
+    "playground/**/*.vue",
+    "meta",
+    "vitest.config.ts",
+    "tests/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*/dist"
+  ]
 }

@@ -1,4 +1,4 @@
-import { type Ref, shallowRef, watch } from 'vue-demi'
+import { type Ref, onUnmounted, shallowRef, watch } from 'vue-demi'
 import type { ContextMenu } from '@contextmenu/core'
 import { createContextMenu } from '@contextmenu/core'
 
@@ -11,7 +11,23 @@ interface UseContextMenuOptions {
   hideOnClick?: boolean
 }
 
-export const useContextMenu = (menuRef: Ref<HTMLElement | undefined>, options: UseContextMenuOptions = {}) => {
+interface useContextMenuReturn {
+  /**
+   * Hide the menu
+   */
+  hide: () => void
+
+  /**
+   * Show the menu
+   */
+  show: () => void
+  instance: Ref<ContextMenu | undefined>
+}
+
+export const useContextMenu = (
+  menuRef: Ref<HTMLElement | undefined>,
+  options: UseContextMenuOptions = {},
+): useContextMenuReturn => {
   const instance = shallowRef<ContextMenu>()
   const { hideOnClick = true } = options
   watch(() => unrefElement(menuRef), (el) => {
@@ -22,9 +38,14 @@ export const useContextMenu = (menuRef: Ref<HTMLElement | undefined>, options: U
     instance.value.hideOnClick = hideOnClick
   })
 
+  onUnmounted(() => {
+    instance.value?.unregister()
+  })
+
   return {
     hide: () => instance.value?.hide?.(),
     show: () => instance.value?.show?.(),
+    instance,
   }
 }
 

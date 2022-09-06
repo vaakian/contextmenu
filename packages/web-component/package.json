@@ -1,5 +1,5 @@
 {
-  "name": "@contextmenu/vue",
+  "name": "@contextmenu/web-component",
   "type": "module",
   "version": "0.0.1-beta.0",
   "packageManager": "pnpm@7.9.0",
@@ -26,21 +26,23 @@
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "dependencies": {
-    "@contextmenu/shared": "workspace:*",
-    "@contextmenu/core": "workspace:*",
-    "vue-demi": "*"
-  },
-  "peerDependencies": {
-    "@vue/composition-api": "^1.0.0-rc.1",
-    "vue": "^2.0.0 || >=3.0.0"
-  },
-  "peerDependenciesMeta": {
-    "@vue/composition-api": {
-      "optional": true
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ]
     }
   },
-  "devDependencies": {
-    "vue": "^3.0.0"
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub"
+  },
+  "dependencies": {
+    "@contextmenu/core": "workspace:*",
+    "@contextmenu/shared": "workspace:*"
   }
 }
