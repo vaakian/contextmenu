@@ -2,7 +2,7 @@ import type { Size } from '@contextmenu/shared'
 
 export type Subscriber = (size: Size) => void
 export type Subscribers = Subscriber | Subscriber[]
-export class ElementSizeObserver {
+export class ElementSizePublisher {
   /**
    * subscribers to notify
    */

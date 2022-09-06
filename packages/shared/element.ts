@@ -3,7 +3,7 @@ export interface Size {
   height: number
 }
 
-export interface position {
+export interface Position {
   x: number
   y: number
 }

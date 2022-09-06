@@ -39,7 +39,7 @@ export const useContextMenu = (
   })
 
   onUnmounted(() => {
-    instance.value?.unregister()
+    instance.value?.cleanup()
   })
 
   return {

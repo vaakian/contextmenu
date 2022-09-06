@@ -1,4 +1,4 @@
-import type { Size, position } from '@contextmenu/shared'
+import type { Size, Position } from '@contextmenu/shared'
 import { calculateOffset } from '@contextmenu/core'
 
 describe('offsetCalculator', () => {
@@ -12,7 +12,7 @@ describe('offsetCalculator', () => {
   }
 
   it('should set left & top', () => {
-    const noOverflow: position = {
+    const noOverflow: Position = {
       x: 20,
       y: 30,
     }
@@ -26,7 +26,7 @@ describe('offsetCalculator', () => {
   })
 
   it('should set right & top', () => {
-    const overflowX: position = {
+    const overflowX: Position = {
       x: 60,
       y: 30,
     }
@@ -40,7 +40,7 @@ describe('offsetCalculator', () => {
   })
 
   it('should set left & bottom', () => {
-    const overflowY: position = {
+    const overflowY: Position = {
       x: 30,
       y: 60,
     }
@@ -54,7 +54,7 @@ describe('offsetCalculator', () => {
   })
 
   it('should set right & bottom', () => {
-    const overflowY: position = {
+    const overflowY: Position = {
       x: 60,
       y: 60,
     }

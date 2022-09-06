@@ -1,11 +1,11 @@
-import { ElementSizeObserver } from '@contextmenu/core'
+import { ElementSizePublisher } from '@contextmenu/core'
 
 describe('elementSizeObserver', () => {
   const cb = vi.fn(() => {
 
   })
   const el = document.createElement('div')
-  const ob = new ElementSizeObserver(el, cb)
+  const ob = new ElementSizePublisher(el, cb)
   it('should trigger', () => {
     expect(cb).toBeCalledTimes(1)
     el.dispatchEvent(new UIEvent('resize'))

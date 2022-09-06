@@ -1,6 +1,7 @@
-import type { Fn } from '@contextmenu/shared'
-import { defaultDocument, defaultWindow, isClient } from './configurable'
-import { calculateOffset } from './offsetCalculator'
+import type { Fn, Position } from '@contextmenu/shared'
+import { defaultDocument, defaultWindow, isClient } from '@contextmenu/shared/configurable'
+import { _addEventListener } from './eventlistner'
+import { calculateOffset } from './utils'
 
 export const key = 'ctxHideOnClick'
 
@@ -16,23 +17,7 @@ export interface Offset {
 }
 
 export class ContextMenu {
-  /**
-   * `contextmenu` event handler
-   * @param
-   */
-  private handler = (e: MouseEvent) => {
-    e.preventDefault()
-    this.patchOffset(calculateOffset(
-      { x: e.clientX, y: e.clientY },
-      { width: this.menuElement.clientWidth, height: this.menuElement.clientHeight },
-      { width: defaultDocument!.documentElement.clientWidth, height: defaultDocument!.documentElement.clientHeight },
-    ))
-
-    this.show()
-  }
-
-  stop!: Fn
-
+  cleanup!: Fn
   get hideOnClick() {
     const el = this.menuElement
     if (key in el.dataset)
@@ -54,7 +39,6 @@ export class ContextMenu {
       return
 
     this.initMenuElement()
-    this.stop = this.register()
   }
 
   private initMenuElement() {
@@ -64,6 +48,8 @@ export class ContextMenu {
 
     if (!defaultDocument!.contains(this.menuElement))
       defaultDocument!.body.appendChild(this.menuElement)
+
+    this.register()
   }
 
   setVisibility(v: 'visible' | 'hidden') {
@@ -94,29 +80,58 @@ export class ContextMenu {
     this.setVisibility('visible')
   }
 
+  /**
+   * Register event listeners
+   * @returns
+   */
   private register() {
+    if (!(defaultWindow && this.menuElement))
+      return
+
     const hide = this.hide.bind(this)
+
+    const updateOffset = (mousePosition: Position) => {
+      const menuSize = {
+        width: this.menuElement.clientWidth,
+        height: this.menuElement.clientHeight,
+      }
+      const windowSize = {
+        width: defaultDocument!.documentElement.clientWidth,
+        height: defaultDocument!.documentElement.clientHeight,
+      }
+      const offset = calculateOffset(
+        mousePosition,
+        menuSize,
+        windowSize,
+      )
+      this.patchOffset(offset)
+    }
+
     const menuClickHandler = (e: Event) => {
       // hide on click
       if ((e.target as HTMLElement).dataset[key] === '0')
         e.stopPropagation()
     }
-    defaultWindow!.addEventListener('contextmenu', this.handler)
-    defaultWindow!.addEventListener('click', hide)
-    defaultWindow!.addEventListener('scroll', hide)
-    this.menuElement.addEventListener('click', menuClickHandler)
 
-    const stop = () => {
-      defaultWindow!.removeEventListener('contextmenu', this.handler)
-      defaultWindow!.removeEventListener('click', hide)
-      defaultWindow!.removeEventListener('scroll', hide)
-      this.menuElement.removeEventListener('click', menuClickHandler)
+    const contextMenuHandler = (e: MouseEvent) => {
+      e.preventDefault()
+      updateOffset({
+        x: e.clientX,
+        y: e.clientY,
+      })
+      this.show()
     }
-    return stop
-  }
+    // TODO: updateOffset on `window.resize` / `menu.resize`
+    const cleanups = [
+      _addEventListener(defaultWindow!, 'contextmenu', contextMenuHandler),
+      _addEventListener(defaultWindow!, 'click', hide),
+      _addEventListener(defaultWindow!, 'scroll', hide),
+      _addEventListener(defaultWindow!, 'blur', hide),
+      _addEventListener(this.menuElement, 'click', menuClickHandler),
+    ]
 
-  unregister() {
-    defaultWindow!.removeEventListener('contextmenu', this.handler)
+    const cleanup = () => cleanups.forEach(fn => fn())
+    return this.cleanup = cleanup
   }
 }
 
