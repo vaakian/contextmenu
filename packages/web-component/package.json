@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "@contextmenu/core": "workspace:*",
-    "@contextmenu/shared": "workspace:*"
+    "@contextmenu/shared": "workspace:*",
+    "lit":"2.3.1"
   }
 }

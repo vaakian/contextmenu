@@ -12,6 +12,7 @@
     "skipDefaultLibCheck": true,
     "types": ["vitest/globals"],
     "jsx": "preserve",
+    "experimentalDecorators": true,
     "paths": {
       // gain typescript inference
       "@contextmenu/core": ["./packages/core/index.ts"],
