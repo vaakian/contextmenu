@@ -1,10 +1,32 @@
 <script setup lang="ts">
+const menus = [
+  ['prest', 'i-carbon-sun'],
+  ['copy', 'i-carbon-moon'],
+  ['paste', 'i-carbon-bike'],
+  ['back', 'i-carbon-back'],
+]
 </script>
 
 <template>
-  <div class="menu" border="~ base #eee" bg-blue-50 rounded-md shadow-md>
-    <div v-for="i in 6" :key="i" px-5 text-gray hover="bg-blue-100 cursor-pointer text-green">
-      menu - {{ i }}
+  <div
+    class="menu"
+    b="~ stone-500/15"
+    rounded-md
+    shadow-md
+    overflow-hidden
+    flex
+    flex-col
+  >
+    <div
+      v-for="([value], key) in menus"
+      :key="key"
+      px-3
+      py="2px"
+      text-gray
+      lowercase
+      hover="bg-stone-500/10 cursor-pointer text-stone-500"
+    >
+      {{ value }}
     </div>
   </div>
 </template>
