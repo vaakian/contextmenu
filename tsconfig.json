@@ -19,8 +19,8 @@
       "@contextmenu/vue": ["./packages/vue/index.ts"],
       "@contextmenu/react": ["./packages/react/index.ts"],
       "@contextmenu/angular": ["./packages/angular/index.ts"],
-      "@contextmenu/shared": ["./packages/shared/index.ts"],
-    },
+      "@contextmenu/shared": ["./packages/shared/index.ts"]
+    }
   },
   "include": [
     "packages/**/*.ts",

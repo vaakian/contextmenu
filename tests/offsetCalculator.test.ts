@@ -1,4 +1,4 @@
-import type { Size, Position } from '@contextmenu/shared'
+import type { Position, Size } from '@contextmenu/shared'
 import { calculateOffset } from '@contextmenu/core'
 
 describe('offsetCalculator', () => {

@@ -1,8 +1,8 @@
 {
-    "editor.tabSize": 2,
-    "prettier.enable": false,
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslnt": true
-    }
-    
+  "editor.tabSize": 2,
+  "prettier.enable": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslnt": true
+  }
+
 }
