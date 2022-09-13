@@ -16,6 +16,16 @@ export interface Offset {
   bottom: OffsetType
 }
 
+export interface ContextMenuOptions {
+  /**
+   * Could be useful to detect the exact element the client is clicking on.
+   *
+   * @param e the MouseEvent of 'contextmenu' event
+   * @returns `true` to cancel the menu from showing up
+   */
+  onContextMenu?(e: MouseEvent): boolean | undefined
+}
+
 export class ContextMenu {
   cleanup!: Fn
   get hideOnClick() {
@@ -31,8 +41,14 @@ export class ContextMenu {
     this.menuElement.dataset.ctxHideOnClick = val ? '1' : '0'
   }
 
+  /**
+   * Set to enable/disable the current contextMenu
+   */
+  enabled = true
+
   constructor(
     public readonly menuElement: HTMLElement,
+    public readonly options: ContextMenuOptions = {},
   ) {
     // ssr
     if (!isClient)
@@ -57,6 +73,8 @@ export class ContextMenu {
   }
 
   /**
+   * @internal
+   *
    * Patches only given property and keep the rest
    *
    * @param offset
@@ -88,7 +106,7 @@ export class ContextMenu {
     if (!(defaultWindow && this.menuElement))
       return
 
-    const hide = this.hide.bind(this)
+    const hide = () => this.hide()
 
     const updateOffset = (mousePosition: Position) => {
       const menuSize = {
@@ -114,6 +132,12 @@ export class ContextMenu {
     }
 
     const contextMenuHandler = (e: MouseEvent) => {
+      if (!this.enabled)
+        return
+
+      if (this.options?.onContextMenu?.(e))
+        return
+
       e.preventDefault()
       updateOffset({
         x: e.clientX,
@@ -121,12 +145,13 @@ export class ContextMenu {
       })
       this.show()
     }
-    // TODO: updateOffset on `window.resize` / `menu.resize`
+
     const cleanups = [
       _addEventListener(defaultWindow!, 'contextmenu', contextMenuHandler),
       _addEventListener(defaultWindow!, 'click', hide),
       _addEventListener(defaultWindow!, 'scroll', hide),
       _addEventListener(defaultWindow!, 'blur', hide),
+      _addEventListener(defaultWindow!, 'resize', hide),
       _addEventListener(this.menuElement, 'click', menuClickHandler),
     ]
 

@@ -12,11 +12,25 @@ export interface GeneralEventListener<E = Event> {
   (evt: E): void
 }
 
+export function _addEventListener<E extends keyof WindowEventMap>(
+  target: Window,
+  event: E,
+  listener: (this: Window, ev: WindowEventMap[E]) => any,
+  options?: boolean | AddEventListenerOptions
+): Fn
+
 export function _addEventListener<Names extends string, EventType = Event>(
   target: InferEventTarget<Names>,
   event: Names,
   listener: GeneralEventListener<EventType>,
-  options?: AddEventListenerOptions,
+  options?: boolean | AddEventListenerOptions,
+): Fn
+
+export function _addEventListener<Names extends string, EventType = Event>(
+  target: InferEventTarget<Names>,
+  event: Names,
+  listener: GeneralEventListener<EventType>,
+  options?: boolean | AddEventListenerOptions,
 ): Fn {
   target.addEventListener(event, listener, options)
   return () => {

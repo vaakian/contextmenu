@@ -30,6 +30,7 @@ export const useContextMenu = (
 ): useContextMenuReturn => {
   const instance = shallowRef<ContextMenu>()
   const { hideOnClick = true } = options
+
   watch(() => unrefElement(menuRef), (el) => {
     if (!el)
       return

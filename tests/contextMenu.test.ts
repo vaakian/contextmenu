@@ -1,3 +1,4 @@
+import type { ContextMenu } from '@contextmenu/core'
 import { createContextMenu, key } from '@contextmenu/core'
 
 // const nextTick = () => {
@@ -6,6 +7,11 @@ import { createContextMenu, key } from '@contextmenu/core'
 
 describe('contextMenu', () => {
   let menuElement: HTMLElement
+  let ctx: ContextMenu
+  const rightClick = () => dispatchEvent(new MouseEvent('contextmenu'))
+  const expectToBeHidden = (e: HTMLElement) => expect(e.style!.visibility).toBe('hidden')
+  const expectToBeVisible = (e: HTMLElement) => expect(e.style!.visibility).toBe('visible')
+
   beforeEach(() => {
     menuElement = document.createElement('div')
     // document.body.appendChild(menuElement)
@@ -16,20 +22,20 @@ describe('contextMenu', () => {
   })
 
   describe('contextMenu test 1', () => {
+    beforeEach(() => {
+      ctx = createContextMenu(menuElement)
+    })
     it('should be initialized', async () => {
-      const ctx = createContextMenu(menuElement)
       expect(ctx.menuElement).toBe(menuElement)
       expect(menuElement.dataset[key]).toBe('0')
-      expect(menuElement.style!.visibility).toBe('hidden')
+      expectToBeHidden(menuElement)
       expect(menuElement.style!.position).toBe('fixed')
       expect(document.body.contains(menuElement)).toBeTruthy()
     })
 
     it('should register offset', async () => {
       const [x, y] = [100, 200]
-      createContextMenu(menuElement)
       dispatchEvent(new MouseEvent('contextmenu', { clientX: x, clientY: y }))
-      // await nextTick()
 
       // documentElement width/height are both 0 in test environment
       expect(menuElement.style.right).toBe(`${-x}px`)
@@ -37,19 +43,49 @@ describe('contextMenu', () => {
     })
 
     it('should effect dataset', async () => {
-      const ctx = createContextMenu(menuElement)
       ctx.hideOnClick = true
+
       expect(menuElement.dataset[key]).toBe('1')
+
       ctx.hideOnClick = false
+
       expect(menuElement.dataset[key]).toBe('0')
     })
 
-    it('should effect dataset', async () => {
-      const ctx = createContextMenu(menuElement)
+    it('should effect visibility', async () => {
       ctx.hide()
-      expect(menuElement.style!.visibility).toBe('hidden')
+
+      expectToBeHidden(menuElement)
+
       ctx.show()
-      expect(menuElement.style!.visibility).toBe('visible')
+
+      expectToBeVisible(menuElement)
+    })
+
+    it('should enable/disable', () => {
+      ctx.enabled = false
+
+      expectToBeHidden(menuElement)
+
+      rightClick()
+
+      expectToBeHidden(menuElement)
+
+      ctx.enabled = true
+
+      rightClick()
+
+      expectToBeVisible(menuElement)
+    })
+
+    it('should trigger onContextMenu', () => {
+      const onContextMenu = vitest.fn()
+      const event = new MouseEvent('contextmenu')
+      ctx.options.onContextMenu = onContextMenu
+
+      dispatchEvent(event)
+
+      expect(onContextMenu).toBeCalledWith(event)
     })
   })
 })
