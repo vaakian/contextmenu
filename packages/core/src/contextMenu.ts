@@ -38,7 +38,7 @@ export interface ContextMenuOptions {
   /**
    *
    */
-  target?: HTMLElement
+  target?: HTMLElement | null
 }
 
 export class ContextMenu {
