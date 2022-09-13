@@ -27,8 +27,5 @@
   "module": "./index.mjs",
   "unpkg": "./index.iife.min.js",
   "jsdelivr": "./index.iife.min.js",
-  "types": "./index.d.ts",
-  "devDependencies": {
-    "vue-demi": "*"
-  }
+  "types": "./index.d.ts"
 }
