@@ -1,4 +1,49 @@
 import { createContextMenu } from '@contextmenu/core'
-export function setupMenu(element: HTMLElement) {
-  return createContextMenu(element)
+
+function initGlobalMenuElement() {
+  document.querySelector<HTMLDivElement>('#app')!.append(createElement(`
+  <div 
+      id="globalMenu" 
+      style="display: inline-block; border: 1px solid; color: white; background: blue"
+  >
+      Menu
+  </div>
+`))
+}
+
+export function setupGlobalMenu() {
+  initGlobalMenuElement()
+  const menu = document.getElementById('globalMenu')!
+  return createContextMenu(menu)
+}
+
+function initTargetMenuElement() {
+  document.querySelector<HTMLDivElement>('#app')!.append(createElement(`
+    <div>
+      <div 
+          id="menu" 
+          style="display: inline-block; border: 1px solid; color: blue; background: yellow"
+      >
+          Menu Target
+      </div>
+      <div id="target" style="width: 100px; height: 100px; background: red;">
+      Right Click.
+      </div>
+    </div>
+`))
+}
+
+export function setupTargetMenu() {
+  initTargetMenuElement()
+  const menu = document.getElementById('menu')!
+  const target = document.getElementById('target')!
+  return createContextMenu(menu, {
+    target,
+  })
+}
+
+const container = /* #__PURE__ */ document.createElement('div')
+export function createElement(template: string) {
+  container.innerHTML = template
+  return container.firstElementChild!
 }
