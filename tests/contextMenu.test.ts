@@ -1,5 +1,5 @@
 import type { ContextMenu } from '@contextmenu/core'
-import { createContextMenu, key } from '@contextmenu/core'
+import { createContextMenu } from '@contextmenu/core'
 
 // const nextTick = () => {
 //   return new Promise(resolve => setTimeout(resolve))
@@ -27,7 +27,6 @@ describe('contextMenu', () => {
     })
     it('should be initialized', async () => {
       expect(ctx.menuElement).toBe(menuElement)
-      expect(menuElement.dataset[key]).toBe('0')
       expectToBeHidden(menuElement)
       expect(menuElement.style!.position).toBe('fixed')
       expect(document.body.contains(menuElement)).toBeTruthy()
@@ -40,16 +39,6 @@ describe('contextMenu', () => {
       // documentElement width/height are both 0 in test environment
       expect(menuElement.style.right).toBe(`${-x}px`)
       expect(menuElement.style.bottom).toBe(`${-y}px`)
-    })
-
-    it('should effect dataset', async () => {
-      ctx.hideOnClick = true
-
-      expect(menuElement.dataset[key]).toBe('1')
-
-      ctx.hideOnClick = false
-
-      expect(menuElement.dataset[key]).toBe('0')
     })
 
     it('should effect visibility', async () => {

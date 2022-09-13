@@ -1,11 +1,7 @@
 import type { Fn, Position } from '@contextmenu/shared'
-import { defaultDocument, defaultWindow, isClient } from '@contextmenu/shared/configurable'
-import { _addEventListener } from './eventlistner'
+import { defaultDocument, defaultWindow, isClient } from '@contextmenu/shared'
+import { _addEventListener } from './eventListener'
 import { calculateOffset } from './utils'
-
-export const key = 'ctxHideOnClick'
-
-export type Bit = '0' | '1'
 
 export type OffsetType = number | string | null
 
@@ -23,23 +19,30 @@ export interface ContextMenuOptions {
    * @param e the MouseEvent of 'contextmenu' event
    * @returns `true` to cancel the menu from showing up
    */
-  onContextMenu?(e: MouseEvent): boolean | undefined
+  onContextMenu?(e: MouseEvent): boolean | void
+
+  /**
+   * Fires when visibility of the menu changes.
+   * @param visible
+   */
+  onVisibleChange?(visible: boolean): void
+
+  /**
+   * Indicates whether to hide it when clicking on itself.
+   *
+   * @default true
+   */
+
+  hideOnClick?: boolean
+
+  /**
+   *
+   */
+  target?: HTMLElement
 }
 
 export class ContextMenu {
   cleanup!: Fn
-  get hideOnClick() {
-    const el = this.menuElement
-    if (key in el.dataset)
-      return el.dataset[key] === '1'
-    el.dataset[key] = '0'
-
-    return false
-  }
-
-  set hideOnClick(val: boolean) {
-    this.menuElement.dataset.ctxHideOnClick = val ? '1' : '0'
-  }
 
   /**
    * Set to enable/disable the current contextMenu
@@ -58,7 +61,6 @@ export class ContextMenu {
   }
 
   private initMenuElement() {
-    this.menuElement.dataset[key] = '0'
     this.menuElement.style.setProperty('position', 'fixed')
     this.menuElement.style.setProperty('visibility', 'hidden')
 
@@ -69,7 +71,11 @@ export class ContextMenu {
   }
 
   setVisibility(v: 'visible' | 'hidden') {
-    this.menuElement.style.setProperty('visibility', v)
+    const previousVisibility = this.menuElement.style.getPropertyValue('visibility')
+    if (previousVisibility !== v) {
+      this.options.onVisibleChange?.(v === 'visible')
+      this.menuElement.style.setProperty('visibility', v)
+    }
   }
 
   /**
@@ -127,7 +133,7 @@ export class ContextMenu {
 
     const menuClickHandler = (e: Event) => {
       // hide on click
-      if ((e.target as HTMLElement).dataset[key] === '0')
+      if (!this.options.hideOnClick)
         e.stopPropagation()
     }
 
@@ -144,10 +150,12 @@ export class ContextMenu {
         y: e.clientY,
       })
       this.show()
+      e.stopPropagation()
     }
 
     const cleanups = [
-      _addEventListener(defaultWindow!, 'contextmenu', contextMenuHandler),
+      _addEventListener(this.options.target ?? defaultWindow!, 'contextmenu', contextMenuHandler),
+      _addEventListener(defaultWindow!, 'contextmenu', hide, { capture: true }),
       _addEventListener(defaultWindow!, 'click', hide),
       _addEventListener(defaultWindow!, 'scroll', hide),
       _addEventListener(defaultWindow!, 'blur', hide),
@@ -162,8 +170,10 @@ export class ContextMenu {
 
 /**
  * create {@link ContextMenu} instance
- * @param el the menu element
- * @returns
  */
-export const createContextMenu = (el: HTMLElement) => new ContextMenu(el)
+export const createContextMenu = (
+  ...args: ConstructorParameters<typeof ContextMenu>
+) => {
+  return new ContextMenu(...args)
+}
 

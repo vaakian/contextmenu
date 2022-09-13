@@ -17,6 +17,17 @@ const menus = [
     flex
     flex-col
   >
+    <!-- title -->
+    <div
+      px-3
+      py="2px"
+      text-gray
+      lowercase
+      hover="bg-stone-500/10 cursor-pointer text-stone-500"
+    >
+      <slot />
+    </div>
+
     <div
       v-for="([value], key) in menus"
       :key="key"

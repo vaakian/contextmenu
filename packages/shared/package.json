@@ -13,8 +13,7 @@
   "bugs": {
     "url": "https://github.com/contextmenu/contextmenu/issues"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "sideEffects": false,
   "exports": {
     ".": {
@@ -28,5 +27,8 @@
   "module": "./index.mjs",
   "unpkg": "./index.iife.min.js",
   "jsdelivr": "./index.iife.min.js",
-  "types": "./index.d.ts"
+  "types": "./index.d.ts",
+  "devDependencies": {
+    "vue-demi": "*"
+  }
 }

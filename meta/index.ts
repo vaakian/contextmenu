@@ -1,6 +1,6 @@
 import path from 'path'
 
-const subPackages = ['core', 'vue', 'angular', 'react', 'web-component']
+const subPackages = ['core', 'vue', 'angular', 'shared', 'react', 'web-component']
 
 const generateSubAlias = () => {
   const entries = subPackages.map(key => [

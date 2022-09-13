@@ -19,6 +19,9 @@ export default defineConfig({
     vue(),
   ],
   resolve: {
+    // dedupe: [
+    //   // 'vue-demi',
+    // ],
     alias: {
       ...subPackageAlias,
       '@': path.resolve(__dirname, './src'),
