@@ -57,6 +57,8 @@ export class ContextMenu {
     if (!isClient)
       return
 
+    options.hideOnClick = options.hideOnClick ?? true
+
     this.initMenuElement()
   }
 
