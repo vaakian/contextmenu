@@ -1,7 +1,7 @@
 import { execSync } from 'child_process'
 import path from 'path'
 import consola from 'consola'
-import { version } from '../package.json'
+import fs from 'fs-extra'
 import { availablePackages } from '../meta'
 
 // bump => commit => build => publish
@@ -13,6 +13,7 @@ let command = 'pnpm publish'
 + ' --no-git-checks'
 + ' --registry https://registry.npmjs.org/'
 
+const { version } = fs.readJSONSync('package.json')
 if (version.includes('beta'))
   command += ' --tag beta'
 
