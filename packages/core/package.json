@@ -1,7 +1,7 @@
 {
   "name": "@contextmenu/core",
   "type": "module",
-  "version": "0.0.1-beta.5",
+  "version": "0.0.1-beta.6",
   "packageManager": "pnpm@7.9.0",
   "description": "",
   "author": "vaakian <vaakian@gmail.com>",
