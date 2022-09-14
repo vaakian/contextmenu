@@ -72,12 +72,12 @@ export function useContextMenu(
 
   // sync visible state
   useEffect(() => {
-    if (instance.current)
-      instance.current[visible ? 'show' : 'hide']()
+    (visible ? show : hide)()
   }, [visible])
 
   // sync hideOnClick state
   useEffect(() => {
+    hide()
     if (instance.current)
       instance.current.options.hideOnClick = !!resolveUnref(options.hideOnClick)
   }, [resolveUnref(options.hideOnClick)])
