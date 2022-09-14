@@ -30,7 +30,7 @@ export function useContextMenu(
 
     const hasTarget = !!options.target
     // target haven't initialized yet
-    if (hasTarget && !!options.target?.current)
+    if (hasTarget && !options.target?.current)
       return
 
     const hideOnClick = options.hideOnClick?.current ?? undefined
@@ -46,6 +46,9 @@ export function useContextMenu(
         setVisible(v)
       },
     })
+    // effect was called twice during dev mode,
+    // this helped me find forgotten cleanups return!
+    return () => instance.current?.cleanup()
   }, [menu.current, options.target?.current])
 
   // sync enabled state
@@ -62,6 +65,7 @@ export function useContextMenu(
 
   return {
     visible,
+    enabled,
     instance,
 
     hide,
