@@ -85,13 +85,21 @@ export const useContextMenu = (
       // maybe a ref<undefined>, so can't identify it by just `_target`
       const hasTarget = !!target
 
+      // target haven't initialized yet
+      if (hasTarget && !_target)
+        return
+
       const hideOnClick = resolveUnref(options.hideOnClick)
 
       instance.value = createContextMenu(_menu, {
         ...options,
         hideOnClick,
         target: hasTarget ? _target : undefined,
-        onVisibleChange: _visible => visible.value = _visible,
+        // spy
+        onVisibleChange: (v) => {
+          options.onVisibleChange?.(v)
+          visible.value = v
+        },
       })
 
       cleanup = () => {
