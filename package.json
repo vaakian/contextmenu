@@ -1,7 +1,7 @@
 {
   "name": "@contextmenu/monorepo",
   "type": "module",
-  "version": "0.0.1-beta.0",
+  "version": "0.0.1-beta.1",
   "packageManager": "pnpm@7.9.0",
   "description": "",
   "author": "vaakian <vaakian@gmail.com>",
@@ -37,11 +37,11 @@
     "dist"
   ],
   "scripts": {
-    "build": "unbuild",
+    "build": "esno scripts/build.ts",
     "dev": "unbuild --stub",
     "lint": "eslint .",
     "prepublishOnly": "nr build",
-    "release": "bumpp && npm publish",
+    "release": "esno scripts/publish.ts",
     "start": "esno src/index.ts",
     "test": "vitest",
     "typecheck": "tsc --noEmit"
@@ -52,6 +52,7 @@
     "@antfu/utils": "^0.5.2",
     "@types/node": "^18.7.5",
     "bumpp": "^8.2.1",
+    "consola": "^2.15.3",
     "eslint": "^8.22.0",
     "esno": "^0.16.3",
     "jsdom": "^20.0.0",

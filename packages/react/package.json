@@ -26,6 +26,11 @@
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "unpkg": "./dist/index.iife.min.js",
+  "jsdelivr": "./dist/index.iife.min.js",
+  "files": [
+    "dist"
+  ],
   "peerDependencies": {
     "react": ">=16.0.0"
   },

@@ -15,11 +15,11 @@
     "experimentalDecorators": true,
     "paths": {
       // gain typescript inference
-      "@contextmenu/core": ["./packages/core/index.ts"],
-      "@contextmenu/vue": ["./packages/vue/index.ts"],
-      "@contextmenu/react": ["./packages/react/index.ts"],
-      "@contextmenu/angular": ["./packages/angular/index.ts"],
-      "@contextmenu/shared": ["./packages/shared/index.ts"]
+      "@contextmenu/core": ["./packages/core/src/index.ts"],
+      "@contextmenu/vue": ["./packages/vue/src/index.ts"],
+      "@contextmenu/react": ["./packages/react/src/index.ts"],
+      "@contextmenu/angular": ["./packages/angular/src/index.ts"],
+      "@contextmenu/shared": ["./packages/shared/src/index.ts"]
     }
   },
   "include": [
@@ -31,7 +31,8 @@
     "playground/**/*.vue",
     "meta",
     "vitest.config.ts",
-    "tests/**/*"
+    "tests/**/*",
+    "scripts/*"
   ],
   "exclude": [
     "node_modules",
