@@ -7,11 +7,13 @@ importers:
       '@antfu/eslint-config': ^0.26.1
       '@antfu/ni': ^0.17.2
       '@antfu/utils': ^0.5.2
+      '@types/fs-extra': ^9.0.13
       '@types/node': ^18.7.5
       bumpp: ^8.2.1
       consola: ^2.15.3
       eslint: ^8.22.0
       esno: ^0.16.3
+      fs-extra: ^10.1.0
       jsdom: ^20.0.0
       pnpm: ^7.9.0
       rimraf: ^3.0.2
@@ -23,11 +25,13 @@ importers:
       '@antfu/eslint-config': 0.26.1_4rv7y5c6xz3vfxwhbrcxxi73bq
       '@antfu/ni': 0.17.2
       '@antfu/utils': 0.5.2
+      '@types/fs-extra': 9.0.13
       '@types/node': 18.7.5
       bumpp: 8.2.1
       consola: 2.15.3
       eslint: 8.22.0
       esno: 0.16.3
+      fs-extra: 10.1.0
       jsdom: 20.0.0
       pnpm: 7.9.0
       rimraf: 3.0.2
@@ -798,6 +802,12 @@ packages:
 
   /@types/estree/0.0.52:
     resolution: {integrity: sha512-BZWrtCU0bMVAIliIV+HJO1f1PR41M7NKjfxrFJwwhKI1KwhwOxYw1SXg9ao+CIMt774nFuGiG6eU+udtbEI9oQ==}
+    dev: true
+
+  /@types/fs-extra/9.0.13:
+    resolution: {integrity: sha512-nEnwB++1u5lVDM2UI4c1+5R+FYaKfaAzS4OococimjVm3nQw3TuzH5UNsocrcTBbhnerblyHj4A49qXbIiZdpA==}
+    dependencies:
+      '@types/node': 18.7.5
     dev: true
 
   /@types/json-schema/7.0.11:
