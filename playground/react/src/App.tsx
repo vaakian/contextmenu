@@ -1,5 +1,5 @@
 import { ContextMenu, useContextMenu } from '@contextmenu/react'
-import React, { forwardRef, useCallback, useRef } from 'react'
+import React, { forwardRef, useCallback, useRef, useState } from 'react'
 import './App.css'
 
 const BooleanString = ({ value }: { value: boolean }) => {
@@ -27,14 +27,20 @@ const Menu = React.memo(
 Menu.displayName = 'MenuX'
 
 function App() {
+  const [hideOnClick, setHideOnClick] = useState(false)
+
   const menu = useRef<HTMLDivElement>(null)
   const target = useRef<HTMLDivElement>(null)
+
+  const onContextMenu = useCallback((e: MouseEvent) => {
+    // eslint-disable-next-line no-console
+    console.log(e.target)
+  }, [])
+
   const ctx = useContextMenu(menu, {
+    hideOnClick,
     target,
-    onContextMenu: useCallback((e: MouseEvent) => {
-      // eslint-disable-next-line no-console
-      console.log(e.target)
-    }, []),
+    onContextMenu,
   })
   return (
     <div>
@@ -46,7 +52,14 @@ function App() {
         <p>visible: <BooleanString value={ctx.visible} /></p>
         <p>enabled: <BooleanString value={ctx.enabled} /></p>
       </div>
-      <ContextMenu>
+      <button
+      onClick={() => setHideOnClick(pre => !pre)}>
+        <span>hideOnClick {'=>'} </span>
+        <BooleanString value={hideOnClick} />
+        </button>
+      <ContextMenu
+      onContextMenu={onContextMenu}
+      hideOnClick={hideOnClick}>
         <div>OK!</div>
       </ContextMenu>
     </div>

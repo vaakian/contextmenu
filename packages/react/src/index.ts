@@ -2,10 +2,22 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import type { RefObject } from 'react'
 import { createContextMenu } from '@contextmenu/core'
 import type { ContextMenu, ContextMenuOptions } from '@contextmenu/core'
+export type MaybeRef<T> = RefObject<T> | T
+
+function isRef<T>(b: MaybeRef<T>): b is RefObject<T> {
+  return typeof b === 'object' && b !== null && 'current' in b
+}
+
+function resolveUnref<T>(v: MaybeRef<T>): T | undefined | null {
+  if (isRef(v))
+    return v.current
+  return v
+}
 export interface UseContextMenuOptions extends Omit<ContextMenuOptions, 'hideOnClick' | 'target'> {
-  hideOnClick?: RefObject<boolean>
+  hideOnClick?: MaybeRef<boolean>
   target?: RefObject<HTMLElement | null >
 }
+
 export function useContextMenu(
   menu: RefObject<HTMLElement | null>,
   options: UseContextMenuOptions = {},
@@ -33,7 +45,7 @@ export function useContextMenu(
     if (hasTarget && !options.target?.current)
       return
 
-    const hideOnClick = options.hideOnClick?.current ?? undefined
+    const hideOnClick = resolveUnref(options.hideOnClick) ?? undefined
     const target = options.target?.current
 
     instance.current = createContextMenu(menu.current, {
@@ -51,6 +63,7 @@ export function useContextMenu(
     return () => instance.current?.cleanup()
   }, [menu.current, options.target?.current])
 
+  // TODO: anything inside options changes, update it into instance.
   // sync enabled state
   useEffect(() => {
     if (instance.current)
@@ -62,6 +75,12 @@ export function useContextMenu(
     if (instance.current)
       instance.current[visible ? 'show' : 'hide']()
   }, [visible])
+
+  // sync hideOnClick state
+  useEffect(() => {
+    if (instance.current)
+      instance.current.options.hideOnClick = !!resolveUnref(options.hideOnClick)
+  }, [resolveUnref(options.hideOnClick)])
 
   return {
     visible,
