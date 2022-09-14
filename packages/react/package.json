@@ -1,0 +1,40 @@
+{
+  "name": "@contextmenu/react",
+  "type": "module",
+  "version": "0.0.1-beta.0",
+  "packageManager": "pnpm@7.9.0",
+  "description": "",
+  "author": "vaakian <vaakian@gmail.com>",
+  "license": "MIT",
+  "funding": "https://github.com/sponsors/vaakian",
+  "homepage": "https://github.com/vaakian/contextmenu#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vaakian/contextmenu.git"
+  },
+  "bugs": "https://github.com/vaakian/contextmenu/issues",
+  "keywords": [],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    },
+    "./*": "./*"
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "peerDependencies": {
+    "react": ">=16.0.0"
+  },
+  "dependencies": {
+    "@contextmenu/core": "workspace:*",
+    "@contextmenu/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.19",
+    "react": "^18.2.0"
+  }
+}
