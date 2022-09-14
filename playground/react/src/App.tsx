@@ -1,4 +1,4 @@
-import { useContextMenu } from '@contextmenu/react'
+import { ContextMenu, useContextMenu } from '@contextmenu/react'
 import React, { forwardRef, useCallback, useRef } from 'react'
 import './App.css'
 
@@ -46,8 +46,12 @@ function App() {
         <p>visible: <BooleanString value={ctx.visible} /></p>
         <p>enabled: <BooleanString value={ctx.enabled} /></p>
       </div>
+      <ContextMenu>
+        <div>OK!</div>
+      </ContextMenu>
     </div>
   )
 }
 
 export default App
+

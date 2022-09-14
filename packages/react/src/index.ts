@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import type { RefObject } from 'react'
 import { createContextMenu } from '@contextmenu/core'
 import type { ContextMenu, ContextMenuOptions } from '@contextmenu/core'
-interface UseContextMenuOptions extends Omit<ContextMenuOptions, 'hideOnClick' | 'target'> {
+export interface UseContextMenuOptions extends Omit<ContextMenuOptions, 'hideOnClick' | 'target'> {
   hideOnClick?: RefObject<boolean>
   target?: RefObject<HTMLElement | null >
 }
