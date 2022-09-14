@@ -1,6 +1,7 @@
 {
   "name": "@contextmenu/shared",
-  "version": "0.0.1-beta.0",
+  "type": "module",
+  "version": "0.0.1-beta.5",
   "author": "vaakian <https://github.comvaakian>",
   "license": "MIT",
   "funding": "https://github.com/sponsorsvaakian",
