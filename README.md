@@ -33,6 +33,11 @@
   - [ ] native `Web Component`
   - [x] plain JavaScript API
 
+- [ ] Docs
+  - [ ] Vitepress
+  - [ ] Repl Playground
+
+- [x] `IIFE` format for `script` tag
 
 ## Installation
 

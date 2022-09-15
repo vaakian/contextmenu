@@ -1,7 +1,7 @@
 import { defineComponent, h, reactive, ref } from 'vue-demi'
 import type { RenderableComponent } from './types'
-import type { UseContextMenuOptions } from '.'
-import { useContextMenu } from '.'
+import type { UseContextMenuOptions } from './hook'
+import { useContextMenu } from './hook'
 
 export interface ContextMenuProps extends UseContextMenuOptions, RenderableComponent {
 

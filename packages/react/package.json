@@ -35,8 +35,8 @@
     "react": ">=16.0.0"
   },
   "dependencies": {
-    "@contextmenu/core": "workspace:*",
-    "@contextmenu/shared": "workspace:*"
+    "@contextmenu/core": "workspace:^",
+    "@contextmenu/shared": "workspace:^"
   },
   "devDependencies": {
     "@types/react": "^18.0.19",

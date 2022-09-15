@@ -163,6 +163,11 @@ export class ContextMenu {
       _addEventListener(defaultWindow!, 'blur', hide),
       _addEventListener(defaultWindow!, 'resize', hide),
       _addEventListener(this.menuElement, 'click', menuClickHandler),
+      _addEventListener(this.menuElement, 'contextmenu', (e) => {
+        // no action on right clicking on itself.
+        e.preventDefault()
+        e.stopPropagation()
+      }),
     ]
 
     const cleanup = () => cleanups.forEach(fn => fn())

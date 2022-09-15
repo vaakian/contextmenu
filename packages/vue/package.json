@@ -28,6 +28,9 @@
   "types": "./dist/index.d.ts",
   "unpkg": "./dist/index.iife.min.js",
   "jsdelivr": "./dist/index.iife.min.js",
+  "files": [
+    "dist"
+  ],
   "peerDependencies": {
     "@vue/composition-api": "^1.0.0-rc.1",
     "vue": "^2.0.0 || >=3.0.0"
@@ -38,8 +41,8 @@
     }
   },
   "dependencies": {
-    "@contextmenu/core": "workspace:*",
-    "@contextmenu/shared": "workspace:*",
+    "@contextmenu/core": "workspace:^",
+    "@contextmenu/shared": "workspace:^",
     "vue-demi": "*"
   },
   "devDependencies": {

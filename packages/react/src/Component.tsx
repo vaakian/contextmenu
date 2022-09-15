@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
-import type { UseContextMenuOptions } from '.'
-import { useContextMenu } from '.'
+import type { UseContextMenuOptions } from './hook'
+import { useContextMenu } from './hook'
 
 interface IContextMenuProps extends UseContextMenuOptions {
   /**
@@ -17,7 +17,7 @@ interface IContextMenuProps extends UseContextMenuOptions {
 const ContextMenu = (props: IContextMenuProps) => {
   const { as, children } = props
   const menu = useRef<HTMLElement>(null)
-  const ctx = useContextMenu(menu, props)
+  /* const ctx =  */useContextMenu(menu, props)
   return React.createElement(as || 'div', { ref: menu }, children)
 }
 
