@@ -43,7 +43,8 @@
     "release": "esno scripts/publish.ts",
     "bump": "esno scripts/bump.ts",
     "test": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist packages/*/dist"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.26.1",

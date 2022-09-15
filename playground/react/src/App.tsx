@@ -27,7 +27,7 @@ const Menu = React.memo(
 Menu.displayName = 'MenuX'
 
 function App() {
-  const [hideOnClick, setHideOnClick] = useState(false)
+  const [hideOnClick, setHideOnClick] = useState(true)
 
   const menu = useRef<HTMLDivElement>(null)
   const target = useRef<HTMLDivElement>(null)
@@ -53,13 +53,19 @@ function App() {
         <p>enabled: <BooleanString value={ctx.enabled} /></p>
       </div>
       <button
+      onClick={() => ctx.setEnabled(pre => !pre)}>
+        <span>enabled {'=>'} </span>
+        <BooleanString value={ctx.enabled} />
+        </button>
+      <button
       onClick={() => setHideOnClick(pre => !pre)}>
         <span>hideOnClick {'=>'} </span>
         <BooleanString value={hideOnClick} />
         </button>
       <ContextMenu
-      onContextMenu={onContextMenu}
-      hideOnClick={hideOnClick}>
+        onContextMenu={onContextMenu}
+        hideOnClick={hideOnClick}
+      >
         <div>OK!</div>
       </ContextMenu>
     </div>

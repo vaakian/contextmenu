@@ -20,7 +20,10 @@ const log = console.log
   <Menu ref="menuRef">
     [🚀]
   </Menu>
-  <div ref="targetRef" class="w-20 h-20 bg-green">
+  <div
+    ref="targetRef"
+    class="w-20 h-20 bg-green"
+  >
     TARGET
   </div>
   <ContextMenu

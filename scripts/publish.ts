@@ -6,6 +6,7 @@ import { availablePackages } from '../meta'
 
 // bump => commit => build => publish
 execSync('pnpm run bump', { stdio: 'inherit' })
+execSync('pnpm run clean', { stdio: 'inherit' })
 execSync('pnpm run build', { stdio: 'inherit' })
 
 let command = 'pnpm publish'
