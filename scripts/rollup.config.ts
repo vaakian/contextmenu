@@ -100,10 +100,10 @@ const iifeOptions: RollupOptions[] = pkgNames
           extend: true,
           globals: iife.globals,
           plugins: [
+            ...iifePlugins,
             esbuildMinifier({
               minify: true,
             }),
-            ...iifePlugins,
           ],
         },
       ],
