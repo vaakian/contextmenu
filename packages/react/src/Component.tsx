@@ -1,3 +1,4 @@
+import type { StylableElement } from '@contextmenu/shared'
 import React, { useRef } from 'react'
 import type { UseContextMenuOptions } from './hook'
 import { useContextMenu } from './hook'
@@ -16,7 +17,7 @@ interface IContextMenuProps extends UseContextMenuOptions {
 
 const ContextMenu = (props: IContextMenuProps) => {
   const { as, children } = props
-  const menu = useRef<HTMLElement>(null)
+  const menu = useRef<StylableElement>(null)
   /* const ctx =  */useContextMenu(menu, props)
   return React.createElement(as || 'div', { ref: menu }, children)
 }

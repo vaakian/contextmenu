@@ -1,5 +1,5 @@
-import type { Fn, Position } from '@contextmenu/shared'
-import { defaultDocument, defaultWindow, isClient } from '@contextmenu/shared'
+import type { Fn, Position, StylableElement } from '@contextmenu/shared'
+import { defaultDocument, defaultWindow, isClient, isStylableElement } from '@contextmenu/shared'
 import { _addEventListener } from './eventListener'
 import { calculateOffset } from './utils'
 
@@ -38,7 +38,7 @@ export interface ContextMenuOptions {
   /**
    *
    */
-  target?: HTMLElement | null
+  target?: EventTarget | null
 }
 
 export class ContextMenu {
@@ -49,13 +49,24 @@ export class ContextMenu {
    */
   enabled = true
 
+  public readonly menuElement!: StylableElement
+  public readonly targetElement!: EventTarget
   constructor(
-    public readonly menuElement: HTMLElement,
+    menu: StylableElement | string,
     public readonly options: ContextMenuOptions = {},
   ) {
     // ssr
     if (!isClient)
       return
+
+    const { target = defaultWindow } = options
+
+    const targetElement = typeof target === 'string' ? document.querySelector(target) : target
+    this.targetElement = targetElement!
+
+    const menuElement = typeof menu === 'string' ? document.querySelector(menu) : menu
+    if (menuElement && isStylableElement(menuElement))
+      this.menuElement = menuElement
 
     options.hideOnClick = options.hideOnClick ?? true
 
@@ -156,7 +167,7 @@ export class ContextMenu {
     }
 
     const cleanups = [
-      _addEventListener(this.options.target ?? defaultWindow!, 'contextmenu', contextMenuHandler),
+      _addEventListener(this.targetElement, 'contextmenu', contextMenuHandler),
       _addEventListener(defaultWindow!, 'contextmenu', hide, { capture: true }),
       _addEventListener(defaultWindow!, 'click', hide),
       _addEventListener(defaultWindow!, 'scroll', hide),

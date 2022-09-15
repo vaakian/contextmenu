@@ -1,4 +1,4 @@
-import type { Size } from '@contextmenu/shared'
+import type { Size, StylableElement } from '@contextmenu/shared'
 
 export type Subscriber = (size: Size) => void
 export type Subscribers = Subscriber | Subscriber[]
@@ -23,7 +23,7 @@ export class ElementSizePublisher {
     })
   }
 
-  constructor(readonly el: HTMLElement, subscribers: Subscribers = []) {
+  constructor(readonly el: StylableElement, subscribers: Subscribers = []) {
     this.subscribe(subscribers)
     this.register()
   }

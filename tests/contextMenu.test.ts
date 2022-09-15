@@ -21,7 +21,7 @@ describe('contextMenu', () => {
     document.body.innerHTML = ''
   })
 
-  describe('contextMenu test 1', () => {
+  describe('create contextMenu bhy element', () => {
     beforeEach(() => {
       ctx = createContextMenu(menuElement)
     })
@@ -75,6 +75,17 @@ describe('contextMenu', () => {
       dispatchEvent(event)
 
       expect(onContextMenu).toBeCalledWith(event)
+    })
+  })
+
+  describe('create contextMenu by selector', () => {
+    it('should select the element', () => {
+      const element = document.createElement('div')
+      document.body.append(element)
+      element.id = 'menu'
+      const ctx = createContextMenu('#menu')
+
+      expect(ctx.menuElement).toBe(element)
     })
   })
 })

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import type { RefObject } from 'react'
 import { createContextMenu } from '@contextmenu/core'
 import type { ContextMenu, ContextMenuOptions } from '@contextmenu/core'
+import type { StylableElement } from '@contextmenu/shared'
 export type MaybeRef<T> = RefObject<T> | T
 
 function isRef<T>(b: MaybeRef<T>): b is RefObject<T> {
@@ -15,11 +16,11 @@ function resolveUnref<T>(v: MaybeRef<T>): T | undefined | null {
 }
 export interface UseContextMenuOptions extends Omit<ContextMenuOptions, 'hideOnClick' | 'target'> {
   hideOnClick?: MaybeRef<boolean>
-  target?: RefObject<HTMLElement | null >
+  target?: RefObject<EventTarget | null >
 }
 
 export function useContextMenu(
-  menu: RefObject<HTMLElement | null>,
+  menu: RefObject<StylableElement | null>,
   options: UseContextMenuOptions = {},
 ) {
   const [enabled, setEnabled] = useState(true)
