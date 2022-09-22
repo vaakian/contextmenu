@@ -8,7 +8,8 @@ export class MenuGroup {
   constructor(
     public readonly menuItems: MenuItem[],
   ) {
-    this.add(...menuItems)
+    // make a copy
+    this.menuItems = [...menuItems]
   }
 
   /**

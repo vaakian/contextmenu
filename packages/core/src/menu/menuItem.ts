@@ -42,9 +42,10 @@ export class MenuItem {
       return noop
 
     const subMenuElement = this.subMenu.element
+    subMenuElement.style.display = 'none'
     const cleanups = [
       _addEventListener(
-        subMenuElement,
+        this.element,
         'mouseenter',
         () => {
         // 1. determine the position.
@@ -54,7 +55,7 @@ export class MenuItem {
         },
       ),
       _addEventListener(
-        subMenuElement,
+        this.element,
         'mouseleave',
         () => hideStylableElement(subMenuElement),
       ),
