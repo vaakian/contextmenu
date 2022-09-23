@@ -42,7 +42,9 @@ export class MenuItem {
       return noop
 
     const subMenuElement = this.subMenu.element
-    subMenuElement.style.display = 'none'
+
+    hideStylableElement(subMenuElement)
+
     const cleanups = [
       _addEventListener(
         this.element,
@@ -61,6 +63,7 @@ export class MenuItem {
       ),
     ]
     this.cleanup = () => {
+      hideStylableElement(subMenuElement)
       cleanups.forEach(f => f())
       // reset
       this.cleanup = noop

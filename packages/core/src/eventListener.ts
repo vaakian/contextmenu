@@ -32,8 +32,16 @@ export function _addEventListener<Names extends string, EventType = Event>(
   listener: GeneralEventListener<EventType>,
   options?: boolean | AddEventListenerOptions,
 ): Fn {
-  target.addEventListener(event, listener, options)
+  const args = [event, listener, options] as const
+
+  if (typeof options === 'undefined') {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    args.pop()
+  }
+
+  target.addEventListener(...args)
   return () => {
-    target.removeEventListener(event, listener, options)
+    target.removeEventListener(...args)
   }
 }

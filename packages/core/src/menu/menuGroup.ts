@@ -6,7 +6,7 @@ export class MenuGroup {
    */
   element: HTMLDivElement = document.createElement('div')
   constructor(
-    public readonly menuItems: MenuItem[],
+    public readonly menuItems: MenuItem[] = [],
   ) {
     // make a copy
     this.menuItems = [...menuItems]
