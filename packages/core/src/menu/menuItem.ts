@@ -1,6 +1,7 @@
 import type { Fn } from '@contextmenu/shared'
-import { hideStylableElement, noop, showStylableElement } from '@contextmenu/shared'
+import { defaultWindow, hideStylableElement, noop, showStylableElement } from '@contextmenu/shared'
 import { _addEventListener } from '../eventListener'
+import { checkPosition } from '../utils'
 import type { MenuGroup } from './MenuGroup'
 
 export class MenuItem {
@@ -23,17 +24,23 @@ export class MenuItem {
    * MenuItem
    * @param subMenu
    */
+  subMenu: MenuGroup | null = null
   constructor(
-    public subMenu: MenuGroup | null = null,
+    initialSubMenu?: MenuGroup | null,
   ) {
-    this.registerSubMenu()
+    this.element.style.position = 'relative'
+
+    if (initialSubMenu)
+      this.setSubMenu(initialSubMenu)
   }
 
   /**
+   * @internal
    * Initialize trigger events
+   *
    * @returns unregister fn
    */
-  registerSubMenu() {
+  private registerSubMenu() {
     // cleanup first
     this.cleanup()
 
@@ -45,14 +52,39 @@ export class MenuItem {
 
     hideStylableElement(subMenuElement)
 
+    // initialize style
+    subMenuElement.style.position = 'absolute'
+
     const cleanups = [
       _addEventListener(
         this.element,
         'mouseenter',
         () => {
-        // 1. determine the position.
-        // calculateOffset()
-        // 2. show it.
+          // 1. determine the position.
+          const position = checkPosition(
+            this.element.getBoundingClientRect(),
+            // TODO: display none doesn't work properly.
+            subMenuElement.getBoundingClientRect(),
+            {
+              width: defaultWindow!.innerWidth,
+              height: defaultWindow!.innerHeight,
+            },
+          )
+          // 2. set it.
+          for (const [key, value] of Object.entries(position)) {
+            subMenuElement.style.setProperty(key, typeof value === 'number' ? `${value}px` : value)
+            if (value === 0 && ['left', 'right'].includes(key)) {
+              const directions = {
+                left: 'translateX(-100%)',
+                right: 'translateX(100%)',
+                bottom: '',
+                top: '',
+              } as const
+              subMenuElement.style.setProperty('transform', directions[key as 'left'])
+            }
+          }
+
+          // 3. show it.
           showStylableElement(subMenuElement)
         },
       ),
@@ -81,7 +113,7 @@ export class MenuItem {
    * Detach from current MenuGroup
    */
   detach() {
-    // TODO
+    this.parentMenu?.remove(this)
   }
 
   /**
@@ -90,6 +122,10 @@ export class MenuItem {
    */
   setSubMenu(subMenu: MenuGroup) {
     this.subMenu = subMenu
+
+    // append it to the DOM
+    this.element.append(subMenu.element)
+
     this.registerSubMenu()
   }
 
@@ -98,6 +134,10 @@ export class MenuItem {
    */
   removeSubMenu() {
     this.cleanup()
+
+    // remove it from the DOM
+    this.subMenu?.element.remove()
+
     this.subMenu = null
   }
 }

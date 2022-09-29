@@ -1,4 +1,4 @@
-import { createContextMenu } from '@contextmenu/core'
+import { MenuGroup, MenuItem, createContextMenu } from '@contextmenu/core'
 
 function initGlobalMenuElement() {
   document.querySelector<HTMLDivElement>('#app')!.append(createElement(`
@@ -13,8 +13,16 @@ function initGlobalMenuElement() {
 
 export function setupGlobalMenu() {
   initGlobalMenuElement()
-  const menu = document.getElementById('globalMenu')!
-  return createContextMenu(menu)
+  // const menu = document.getElementById('globalMenu')!
+
+  const nestedMenu = createNestedMenu()
+  nestedMenu.element.classList.add('nested-menu')
+  const subMenu = createNestedMenu('nested')
+  const items = [...nestedMenu.menuItems.values()]
+
+  items[1].setSubMenu(subMenu)
+
+  return createContextMenu(nestedMenu.element)
 }
 
 function initTargetMenuElement() {
@@ -46,4 +54,18 @@ const container = /* #__PURE__ */ document.createElement('div')
 export function createElement(template: string) {
   container.innerHTML = template
   return container.firstElementChild!
+}
+
+function createNestedMenu(prefix = 'item') {
+  const menu = new MenuGroup()
+
+  const items = Array.from({ length: 3 }, (_, i) => {
+    const item = new MenuItem()
+    item.element.append(createElement(`<p>${prefix}-${i}</p>`))
+    return item
+  })
+
+  menu.add(...items)
+
+  return menu
 }
