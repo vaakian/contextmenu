@@ -12,7 +12,7 @@ export class MenuItem {
   /**
    * The parent menu group
    */
-  parentMenu!: MenuGroup
+  parentMenu: MenuGroup | null = null
 
   /**
    * Unregister mouse event listener
@@ -24,7 +24,7 @@ export class MenuItem {
    * @param subMenu
    */
   constructor(
-    public subMenu?: MenuGroup,
+    public subMenu: MenuGroup | null = null,
   ) {
     this.registerSubMenu()
   }
@@ -78,6 +78,13 @@ export class MenuItem {
   }
 
   /**
+   * Detach from current MenuGroup
+   */
+  detach() {
+    // TODO
+  }
+
+  /**
    * Set a new sub menu
    * @param subMenu
    */
@@ -91,6 +98,6 @@ export class MenuItem {
    */
   removeSubMenu() {
     this.cleanup()
-    this.subMenu = undefined
+    this.subMenu = null
   }
 }

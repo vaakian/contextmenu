@@ -4,12 +4,13 @@ export class MenuGroup {
   /**
    * the root wrapper Element
    */
-  element: HTMLDivElement = document.createElement('div')
+  readonly element: HTMLDivElement = document.createElement('div')
+  readonly menuItems: Set<MenuItem>
   constructor(
-    public readonly menuItems: MenuItem[] = [],
+    initialItems: MenuItem[] = [],
   ) {
-    // make a copy
-    this.menuItems = [...menuItems]
+    // dedupe
+    this.menuItems = new Set(initialItems)
   }
 
   /**
@@ -19,12 +20,23 @@ export class MenuGroup {
   add(...menuItems: MenuItem[]) {
     if (!Array.isArray(menuItems))
       menuItems = [menuItems]
-
     // store
-    this.menuItems.push(...menuItems)
-    // append to DOM
+    menuItems.forEach(item => this.menuItems.add(item))
+    // append to the DOM
     this.element.append(...menuItems.map(({ element }) => element))
     // tag
     menuItems.forEach(item => item.parentMenu = this)
+  }
+
+  remove(...menuItems: MenuItem[]) {
+    menuItems.forEach((item) => {
+      if (!this.menuItems.delete(item))
+        return
+
+      // remove item from the DOM
+      item.element.remove()
+      // clean tag
+      item.parentMenu = null
+    })
   }
 }
