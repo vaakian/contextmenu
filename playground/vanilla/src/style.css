@@ -98,3 +98,6 @@ button:focus-visible {
 .nested-menu div {
   border: 1px solid #eee;
 }
+.nested-menu div p {
+  cursor: pointer;
+}

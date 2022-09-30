@@ -93,6 +93,11 @@ export class MenuItem {
         'mouseleave',
         () => hideStylableElement(subMenuElement),
       ),
+      _addEventListener(
+        this.element,
+        'click',
+        () => hideStylableElement(subMenuElement),
+      ),
     ]
     this.cleanup = () => {
       hideStylableElement(subMenuElement)
