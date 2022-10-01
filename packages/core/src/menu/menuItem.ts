@@ -48,12 +48,16 @@ export class MenuItem {
     if (!this.subMenu)
       return noop
 
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const menuItem = this
+    const subMenu = this.subMenu
     const subMenuElement = this.subMenu.element
 
     hideStylableElement(subMenuElement)
 
     // initialize style
     subMenuElement.style.position = 'absolute'
+    // subMenuElement.style.transform = `translateX(${subMenu.offset.left}px, ${subMenu.offset.top}px)`
 
     const cleanups = [
       _addEventListener(
@@ -62,9 +66,8 @@ export class MenuItem {
         () => {
           // 1. determine the position.
           const position = checkPosition(
-            this.element.getBoundingClientRect(),
-            // TODO: display none doesn't work properly.
-            subMenuElement.getBoundingClientRect(),
+            menuItem,
+            subMenu,
             {
               width: defaultWindow!.innerWidth,
               height: defaultWindow!.innerHeight,
@@ -75,8 +78,8 @@ export class MenuItem {
             subMenuElement.style.setProperty(key, typeof value === 'number' ? `${value}px` : value)
             if (value === 0 && ['left', 'right'].includes(key)) {
               const directions = {
-                left: 'translateX(-100%)',
-                right: 'translateX(100%)',
+                left: 'translateX(calc(-100% - 20px))',
+                right: 'translateX(calc(100% + 20px))',
                 bottom: '',
                 top: '',
               } as const
@@ -144,5 +147,15 @@ export class MenuItem {
     this.subMenu?.element.remove()
 
     this.subMenu = null
+  }
+
+  dispose() {
+    // dispose sub menu,
+    // so that we could cause a chained dispose.
+    this.subMenu?.dispose()
+
+    this.removeSubMenu() // remove sub menu
+    this.detach() // remove from parent menu
+    this.element.remove() // remove from the DOM
   }
 }

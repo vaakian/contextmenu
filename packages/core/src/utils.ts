@@ -1,5 +1,7 @@
 import type { Position, Size } from '@contextmenu/shared'
 import type { Offset, OffsetType } from './contextMenu'
+import type { MenuGroup } from './menu/menuGroup'
+import type { MenuItem } from './menu/MenuItem'
 
 /**
  * Calculate the `position: fixed/absolute` position offset of {@link menuSize}
@@ -40,16 +42,23 @@ export function calculateOffset(
  * @param containerSize
  */
 export function checkPosition(
-  item: DOMRect,
-  sumMenu: DOMRect,
+  menuItem: MenuItem,
+  subMenu: MenuGroup,
   containerSize: Size,
 ) {
+  const offset = subMenu.offset
+  const itemRect = menuItem.element.getBoundingClientRect()
+  const subMenuRect = subMenu.element.getBoundingClientRect()
+
+  const subMenuWidth = subMenuRect.width + offset.left
+  const subMenuHeight = subMenuRect.height + offset.top
+
   // TODO: able to give an custom offset(left, right, top, bottom)
   // if zero(left, right), make a 100% translate for that direction
   let [left, top, right, bottom] = [null, 0, 0, null] as Array<number | null>
-  const overflowX = item.right + sumMenu.width > containerSize.width
+  const overflowX = itemRect.right + subMenuWidth > containerSize.width
 
-  const overflowY = item.top + sumMenu.height > containerSize.height
+  const overflowY = itemRect.top + subMenuHeight > containerSize.height
 
   if (overflowX)
     [left, right] = [0, null]

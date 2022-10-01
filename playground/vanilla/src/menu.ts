@@ -57,7 +57,12 @@ export function createElement(template: string) {
 }
 
 function createNestedMenu(prefix = 'item') {
-  const menu = new MenuGroup()
+  const menu = new MenuGroup(undefined, {
+    offset: {
+      left: 20,
+      top: 20,
+    },
+  })
 
   const items = Array.from({ length: 3 }, (_, i) => {
     const item = new MenuItem()
