@@ -24,9 +24,9 @@ describe('MenuGroup & MenuItem', () => {
 
   describe('MenuGroup', () => {
     it('should add item', () => {
-      expect(group.menuItems.length).toBe(3)
+      expect(group.menuItems.size).toBe(3)
 
-      items.forEach(item => expect(group.menuItems.includes(item)).toBeTruthy())
+      items.forEach(item => expect(group.menuItems.has(item)).toBeTruthy())
     })
   })
 
@@ -36,7 +36,7 @@ describe('MenuGroup & MenuItem', () => {
       // group.add(item)
       item.attach(group)
 
-      expect(group.menuItems.includes(item)).toBeTruthy()
+      expect(group.menuItems.has(item)).toBeTruthy()
     })
 
     it('should set/remove sub menu afterwards', () => {
@@ -48,7 +48,7 @@ describe('MenuGroup & MenuItem', () => {
 
       item.removeSubMenu()
 
-      expect(item.subMenu).toBeUndefined()
+      expect(item.subMenu).toBeNull()
     })
 
     it('should show sub menu', () => {

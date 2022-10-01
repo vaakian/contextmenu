@@ -8,9 +8,11 @@ export const mouseLeave = (el: EventTarget) => {
 }
 
 export const expectToBeVisible = (el: StylableElement) => {
-  expect(el.style.display).toBe('block')
+  // expect(el.style.display).toBe('block')
+  expect(el.style.visibility).toBe('visible')
 }
 
 export const expectToBeHidden = (el: StylableElement) => {
-  expect(el.style.display).toBe('none')
+  // expect(el.style.display).toBe('none')
+  expect(el.style.visibility).toBe('hidden')
 }

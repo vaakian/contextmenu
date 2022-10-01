@@ -1,30 +1,92 @@
 import type { MenuItem } from './MenuItem'
 
+export interface SubMenuOffset {
+  left: number
+  top: number
+}
+export interface MenuGroupOptions {
+  /**
+   * Offset(left, top) to the parentMenu
+   */
+  offset?: Partial<SubMenuOffset>
+}
+
 export class MenuGroup {
   /**
-   * the root wrapper Element
+   * The root wrapper Element
    */
-  element: HTMLDivElement = document.createElement('div')
+  readonly element: HTMLDivElement = document.createElement('div')
+
+  /**
+   * Current menuItems
+   */
+  readonly menuItems: Set<MenuItem>
+
+  /**
+   * The Offset(left, top) to the parentMenu
+   */
+  readonly offset: SubMenuOffset
   constructor(
-    public readonly menuItems: MenuItem[] = [],
+    initialItems: MenuItem[] = [],
+    options: MenuGroupOptions = {},
   ) {
-    // make a copy
-    this.menuItems = [...menuItems]
+    this.offset = mergeDefaultOffset(options.offset)
+    // dedupe
+    this.menuItems = new Set(initialItems)
   }
 
   /**
    * Add MenuItem(s)
+   *
    * @param menuItems
    */
   add(...menuItems: MenuItem[]) {
     if (!Array.isArray(menuItems))
       menuItems = [menuItems]
 
-    // store
-    this.menuItems.push(...menuItems)
-    // append to DOM
-    this.element.append(...menuItems.map(({ element }) => element))
-    // tag
-    menuItems.forEach(item => item.parentMenu = this)
+    menuItems.forEach((item) => {
+      // 1. store
+      this.menuItems.add(item)
+      // 2. append to the DOM
+      this.element.append(item.element)
+      // 3. tag
+      item.parentMenu = this
+    })
+  }
+
+  /**
+   * Remove menuItem(s)
+   *
+   * @param menuItems
+   */
+  remove(...menuItems: MenuItem[]) {
+    menuItems.forEach((item) => {
+      // 1. delete
+      if (!this.menuItems.delete(item))
+        return
+
+      // 2. remove item from the DOM
+      item.element.remove()
+      // 3. clean tag
+      item.parentMenu = null
+    })
+  }
+
+  dispose() {
+    this.menuItems.forEach(item => item.dispose())
+    this.menuItems.clear()
+    this.element.remove()
+  }
+}
+
+function mergeDefaultOffset(offset: Partial<SubMenuOffset> = {}) {
+  const {
+    left = 0,
+    top = 0,
+  } = offset
+
+  return {
+    left,
+    top,
   }
 }

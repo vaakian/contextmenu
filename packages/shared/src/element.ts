@@ -15,8 +15,8 @@ export const isStylableElement = (el: Element): el is StylableElement => {
 }
 
 export const hideStylableElement = (el: StylableElement) => {
-  el.style.display = 'none'
+  el.style.visibility = 'hidden'
 }
 export const showStylableElement = (el: StylableElement) => {
-  el.style.display = 'block'
+  el.style.visibility = 'visible'
 }
