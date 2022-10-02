@@ -1,8 +1,20 @@
 # ContextMenu(WIP)
 
-[![NPM version](https://img.shields.io/npm/v/@contextmenu/core?color=a1b858&label=)](https://www.npmjs.com/package/@contextmenu/core)
+<p align="center">
+  <img width="400" src="https://developer.apple.com/design/human-interface-guidelines/images/intro/components/context-menu-intro.png" />
+</p>
 
-> Add custom `contextMenu` to you application the simplest way.
+<p align="center">
+  <a href="https://www.npmjs.com/package/@contextmenu/core">
+    <img src="https://img.shields.io/npm/v/@contextmenu/core?color=a1b858&label=npm" alt="NPM version" />
+  </a>
+  <a href="https://app.netlify.com/sites/contextmenu/deploys">
+    <img src="https://api.netlify.com/api/v1/badges/c6bd4317-b303-4dcf-b87a-69a548b121d8/deploy-status" alt="Netlify Status" />
+  </a>
+</p>
+
+<p align="center">Add custom <code>contextMenu</code> to you application the simplest way.</p>
+
 
 ## Feature
 - 🪆 Support **Deeply nested** sub menu
