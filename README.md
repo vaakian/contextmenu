@@ -5,6 +5,7 @@
 > Add custom `contextMenu` to you application the simplest way.
 
 ## Feature
+- 🪆 Support **Deeply nested** sub menu
 - 💪 Fully written in **TypeScript**
 - 🎄 Fully tree-shakable
 - 📦 Fully customizable
@@ -19,7 +20,12 @@
   - Web Component
 
 ### Current Progress
-- [x] Vue
+- [x] Core
+  - [x] Basic top level menu using custom element
+  - [x] Deeply nested menu
+  - [ ] Animation
+
+- [x] Vue (both Vue2 & Vue3, empowered by [Vue Demi](https://github.com/vueuse/vue-demi))
   - [ ] `v-directive` usage
   - [x] `useContextMenu` hook
   - [x] `<ContextMenu />` component
@@ -31,10 +37,10 @@
 - [ ] Angular(pending)
 
 - [ ] Vanilla JavaScript
-  - [ ] native `Web Component`
-  - [x] plain JavaScript API
+  - [ ] Native `Web Component`
+  - [x] Plain JavaScript API
 
-- [ ] Docs
+- [ ] Docs (coming soon!)
   - [ ] Vitepress
   - [ ] Repl Playground
 

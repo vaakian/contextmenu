@@ -1,23 +1,24 @@
 import { MenuGroup, MenuItem, createContextMenu } from '@contextmenu/core'
 
-function initGlobalMenuElement() {
-  document.querySelector<HTMLDivElement>('#app')!.append(createElement(`
-  <div 
-      id="globalMenu" 
-      style="display: inline-block; border: 1px solid; color: white; background: blue"
-  >
-      Menu
-  </div>
-`))
-}
+// function initGlobalMenuElement() {
+//   document.querySelector<HTMLDivElement>('#app')!.append(createElement(`
+//   <div
+//       id="globalMenu"
+//       style="display: inline-block; border: 1px solid; color: white; background: blue"
+//   >
+//       Menu
+//   </div>
+// `))
+// }
 
 export function setupGlobalMenu() {
-  initGlobalMenuElement()
+  // initGlobalMenuElement()
   // const menu = document.getElementById('globalMenu')!
 
   const nestedMenu = createNestedMenu()
   nestedMenu.element.classList.add('nested-menu')
   const subMenu = createNestedMenu('nested')
+  subMenu.element.classList.add('nested-menu')
   const items = [...nestedMenu.menuItems.values()]
 
   items[1].setSubMenu(subMenu)

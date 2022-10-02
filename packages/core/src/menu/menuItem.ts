@@ -1,7 +1,7 @@
 import type { Fn } from '@contextmenu/shared'
 import { defaultWindow, hideStylableElement, noop, showStylableElement } from '@contextmenu/shared'
 import { _addEventListener } from '../eventListener'
-import { checkPosition } from '../utils'
+import { calculateSubMenuOffset } from '../utils'
 import type { MenuGroup } from './MenuGroup'
 
 export class MenuItem {
@@ -56,7 +56,7 @@ export class MenuItem {
     hideStylableElement(subMenuElement)
 
     // initialize style
-    subMenuElement.style.position = 'absolute'
+    subMenuElement.style.position = 'fixed'
     // subMenuElement.style.transform = `translateX(${subMenu.offset.left}px, ${subMenu.offset.top}px)`
 
     const cleanups = [
@@ -65,7 +65,7 @@ export class MenuItem {
         'mouseenter',
         () => {
           // 1. determine the position.
-          const position = checkPosition(
+          const position = calculateSubMenuOffset(
             menuItem,
             subMenu,
             {
@@ -74,18 +74,8 @@ export class MenuItem {
             },
           )
           // 2. set it.
-          for (const [key, value] of Object.entries(position)) {
+          for (const [key, value] of Object.entries(position))
             subMenuElement.style.setProperty(key, typeof value === 'number' ? `${value}px` : value)
-            if (value === 0 && ['left', 'right'].includes(key)) {
-              const directions = {
-                left: 'translateX(calc(-100% - 20px))',
-                right: 'translateX(calc(100% + 20px))',
-                bottom: '',
-                top: '',
-              } as const
-              subMenuElement.style.setProperty('transform', directions[key as 'left'])
-            }
-          }
 
           // 3. show it.
           showStylableElement(subMenuElement)

@@ -18,8 +18,7 @@ export function calculateOffset(
 ): Offset {
   let [left, top, right, bottom]: OffsetType[] = [mousePosition.x, mousePosition.y, null, null]
 
-  const overflowX = mousePosition.x + menuSize.width > containerSize.width
-  const overflowY = mousePosition.y + menuSize.height > containerSize.height
+  const { overflowX, overflowY } = checkOverflow(mousePosition, menuSize, containerSize)
 
   if (overflowX)
     [left, right] = [null, containerSize.width - mousePosition.x]
@@ -35,42 +34,49 @@ export function calculateOffset(
   }
 }
 
+function checkOverflow(mousePosition: Position, menuSize: Size, containerSize: Size) {
+  const overflowX = mousePosition.x + menuSize.width > containerSize.width
+  const overflowY = mousePosition.y + menuSize.height > containerSize.height
+  return { overflowX, overflowY }
+}
+
 /**
- * Check position of a sub menu
- * @param itemSize
- * @param menuSize
+ * Determine the position of a sub menu
+ * @param menuItem
+ * @param subMenu
  * @param containerSize
  */
-export function checkPosition(
+export function calculateSubMenuOffset(
   menuItem: MenuItem,
   subMenu: MenuGroup,
   containerSize: Size,
 ) {
-  const offset = subMenu.offset
   const itemRect = menuItem.element.getBoundingClientRect()
   const subMenuRect = subMenu.element.getBoundingClientRect()
 
-  const subMenuWidth = subMenuRect.width + offset.left
-  const subMenuHeight = subMenuRect.height + offset.top
-
-  // TODO: able to give an custom offset(left, right, top, bottom)
-  // if zero(left, right), make a 100% translate for that direction
-  let [left, top, right, bottom] = [null, 0, 0, null] as Array<number | null>
-  const overflowX = itemRect.right + subMenuWidth > containerSize.width
-
-  const overflowY = itemRect.top + subMenuHeight > containerSize.height
-
-  if (overflowX)
-    [left, right] = [0, null]
-
-  if (overflowY)
-    // TODO: implement MacOS like vertical positioning
-    [top, bottom] = [null, 0]
-
-  return {
-    left,
-    top,
-    right,
-    bottom,
+  const mousePosition: Position = {
+    y: itemRect.top,
+    x: itemRect.right,
   }
+
+  const { overflowX, overflowY } = checkOverflow(
+    mousePosition,
+    subMenuRect,
+    containerSize,
+  )
+
+  // mousePosition `x` should be `left` if horizontally overflows.
+  if (overflowX)
+    mousePosition.x = itemRect.left
+
+  // mousePosition `y` should be at the bottom
+  // of the container if vertically overflows.
+  if (overflowY)
+    mousePosition.y = containerSize.height
+
+  return calculateOffset(
+    mousePosition,
+    subMenuRect,
+    containerSize,
+  )
 }
