@@ -95,3 +95,9 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+.nested-menu div {
+  border: 1px solid #eee;
+}
+.nested-menu div p {
+  cursor: pointer;
+}

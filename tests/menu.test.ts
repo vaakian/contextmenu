@@ -1,4 +1,5 @@
 import { MenuGroup, MenuItem } from '@contextmenu/core'
+import { expectToBeHidden, expectToBeVisible, mouseEnter, mouseLeave } from './utils'
 
 describe('MenuGroup & MenuItem', () => {
   let items: MenuItem[]
@@ -21,25 +22,51 @@ describe('MenuGroup & MenuItem', () => {
     )
   })
 
-  it('should add item', () => {
-    expect(group.menuItems.length).toBe(3)
+  describe('MenuGroup', () => {
+    it('should add item', () => {
+      expect(group.menuItems.size).toBe(3)
 
-    items.forEach(item => expect(group.menuItems.includes(item)).toBeTruthy())
+      items.forEach(item => expect(group.menuItems.has(item)).toBeTruthy())
+    })
   })
 
-  it('should attach', () => {
-    const item = new MenuItem()
-    group.add(item)
+  describe('MenuItem', () => {
+    it('should attach', () => {
+      const item = new MenuItem()
+      // group.add(item)
+      item.attach(group)
 
-    expect(group.menuItems.includes(item)).toBeTruthy()
-  })
-  it('should show sub menu', async () => {
-    const item = new MenuItem(group)
-    // const addSpy = vitest.spyOn(item.element, 'addEventListener')
+      expect(group.menuItems.has(item)).toBeTruthy()
+    })
 
-    expect(group.element.style!.display).toBe('none')
-    item.element.dispatchEvent(new MouseEvent('mouseenter'))
-    await Promise.resolve()
-    expect(group.element.style!.display).toBe('block')
+    it('should set/remove sub menu afterwards', () => {
+      const item = new MenuItem()
+
+      item.setSubMenu(group)
+
+      expect(item.subMenu).toBe(group)
+
+      item.removeSubMenu()
+
+      expect(item.subMenu).toBeNull()
+    })
+
+    it('should show sub menu', () => {
+      const item = new MenuItem(group)
+
+      expectToBeHidden(item.subMenu!.element)
+
+      mouseEnter(item.element)
+      expectToBeVisible(item.subMenu!.element)
+
+      mouseLeave(item.element)
+      expectToBeHidden(item.subMenu!.element)
+
+      // after cleanup
+      item.cleanup()
+
+      mouseEnter(item.element)
+      expectToBeHidden(item.subMenu!.element)
+    })
   })
 })

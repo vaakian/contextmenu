@@ -1,6 +1,7 @@
 import type { Fn } from '@contextmenu/shared'
-import { hideStylableElement, noop, showStylableElement } from '@contextmenu/shared'
+import { defaultWindow, hideStylableElement, noop, showStylableElement } from '@contextmenu/shared'
 import { _addEventListener } from '../eventListener'
+import { checkPosition } from '../utils'
 import type { MenuGroup } from './MenuGroup'
 
 export class MenuItem {
@@ -12,7 +13,7 @@ export class MenuItem {
   /**
    * The parent menu group
    */
-  parentMenu!: MenuGroup
+  parentMenu: MenuGroup | null = null
 
   /**
    * Unregister mouse event listener
@@ -23,17 +24,23 @@ export class MenuItem {
    * MenuItem
    * @param subMenu
    */
+  subMenu: MenuGroup | null = null
   constructor(
-    public subMenu?: MenuGroup,
+    initialSubMenu?: MenuGroup | null,
   ) {
-    this.registerSubMenu()
+    this.element.style.position = 'relative'
+
+    if (initialSubMenu)
+      this.setSubMenu(initialSubMenu)
   }
 
   /**
+   * @internal
    * Initialize trigger events
+   *
    * @returns unregister fn
    */
-  registerSubMenu() {
+  private registerSubMenu() {
     // cleanup first
     this.cleanup()
 
@@ -41,16 +48,46 @@ export class MenuItem {
     if (!this.subMenu)
       return noop
 
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const menuItem = this
+    const subMenu = this.subMenu
     const subMenuElement = this.subMenu.element
-    subMenuElement.style.display = 'none'
+
+    hideStylableElement(subMenuElement)
+
+    // initialize style
+    subMenuElement.style.position = 'absolute'
+    // subMenuElement.style.transform = `translateX(${subMenu.offset.left}px, ${subMenu.offset.top}px)`
+
     const cleanups = [
       _addEventListener(
         this.element,
         'mouseenter',
         () => {
-        // 1. determine the position.
-        // calculateOffset()
-        // 2. show it.
+          // 1. determine the position.
+          const position = checkPosition(
+            menuItem,
+            subMenu,
+            {
+              width: defaultWindow!.innerWidth,
+              height: defaultWindow!.innerHeight,
+            },
+          )
+          // 2. set it.
+          for (const [key, value] of Object.entries(position)) {
+            subMenuElement.style.setProperty(key, typeof value === 'number' ? `${value}px` : value)
+            if (value === 0 && ['left', 'right'].includes(key)) {
+              const directions = {
+                left: 'translateX(calc(-100% - 20px))',
+                right: 'translateX(calc(100% + 20px))',
+                bottom: '',
+                top: '',
+              } as const
+              subMenuElement.style.setProperty('transform', directions[key as 'left'])
+            }
+          }
+
+          // 3. show it.
           showStylableElement(subMenuElement)
         },
       ),
@@ -59,8 +96,14 @@ export class MenuItem {
         'mouseleave',
         () => hideStylableElement(subMenuElement),
       ),
+      _addEventListener(
+        this.element,
+        'click',
+        () => hideStylableElement(subMenuElement),
+      ),
     ]
     this.cleanup = () => {
+      hideStylableElement(subMenuElement)
       cleanups.forEach(f => f())
       // reset
       this.cleanup = noop
@@ -75,11 +118,22 @@ export class MenuItem {
   }
 
   /**
+   * Detach from current MenuGroup
+   */
+  detach() {
+    this.parentMenu?.remove(this)
+  }
+
+  /**
    * Set a new sub menu
    * @param subMenu
    */
   setSubMenu(subMenu: MenuGroup) {
     this.subMenu = subMenu
+
+    // append it to the DOM
+    this.element.append(subMenu.element)
+
     this.registerSubMenu()
   }
 
@@ -88,6 +142,20 @@ export class MenuItem {
    */
   removeSubMenu() {
     this.cleanup()
-    this.subMenu = undefined
+
+    // remove it from the DOM
+    this.subMenu?.element.remove()
+
+    this.subMenu = null
+  }
+
+  dispose() {
+    // dispose sub menu,
+    // so that we could cause a chained dispose.
+    this.subMenu?.dispose()
+
+    this.removeSubMenu() // remove sub menu
+    this.detach() // remove from parent menu
+    this.element.remove() // remove from the DOM
   }
 }
