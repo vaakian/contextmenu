@@ -1,5 +1,8 @@
 lockfileVersion: 5.4
 
+overrides:
+  vue-demi: 0.13.11
+
 importers:
 
   .:
@@ -81,7 +84,7 @@ importers:
       '@contextmenu/core': workspace:^
       '@contextmenu/shared': workspace:^
       vue: ^3.0.0
-      vue-demi: '*'
+      vue-demi: 0.13.11
     dependencies:
       '@contextmenu/core': link:../core
       '@contextmenu/shared': link:../shared
