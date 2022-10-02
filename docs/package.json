@@ -1,0 +1,16 @@
+{
+  "name": "@contextmenu/docs",
+  "version": "0.0.1",
+  "description": "Docs of @contextmenu/*",
+  "scripts": {
+    "docs:dev": "vitepress dev .",
+    "docs:build": "vitepress build .",
+    "docs:serve": "vitepress serve ."
+  },
+  "author": "vaakian <vaakian@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "vitepress": "1.0.0-alpha.18",
+    "vue": "^3.2.40"
+  }
+}
