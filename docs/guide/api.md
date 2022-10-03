@@ -1,7 +1,7 @@
 # API
 
 
-## typescript definition
+## Type Definition
 
 
 ```typescript

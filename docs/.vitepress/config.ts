@@ -6,6 +6,7 @@ export default defineConfig({
   markdown: {
     theme: 'github-dark',
   },
+  cleanUrls: 'with-subfolders',
   themeConfig: {
     siteTitle: '@contextmenu',
     algolia: {
