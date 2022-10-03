@@ -14,7 +14,7 @@ yarn add @contextmenu/vue
 ```
 
 ### Component usage
-It's easier to create using `ContextMenu` component if you don't need extra control of it.
+It's easier using `ContextMenu` component if you don't need extra control of it.
 ```Vue{6-8}
 <script setup lang="ts">
 import { ContextMenu } from '@contextmenu/vue'
@@ -22,7 +22,7 @@ import { ContextMenu } from '@contextmenu/vue'
 
 <template>
   <ContextMenu>
-      Place your contextmenu here.
+      Place your context menu here.
   </ContextMenu>
 </template>
 
@@ -44,7 +44,7 @@ const ctxMenu = useContextMenu(menuRef)
 
 <template>
   <div ref="menuRef">
-    Place your contextmenu here.
+    Place your context menu here.
   </div>
 </template>
 ```

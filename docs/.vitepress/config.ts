@@ -32,18 +32,23 @@ export default defineConfig({
         items: [
           { text: 'Get started', link: '/guide/' },
           { text: 'Usage', link: '/guide/usage' },
+          { text: 'API', link: '/guide/API' },
         ],
       },
       {
         text: 'Vue',
         items: [
-          { text: 'Usage', link: '/vue/' },
+          { text: 'Install', link: '/vue/#installation' },
+          { text: 'Component', link: '/vue/#component-usage' },
+          { text: 'Hook', link: '/vue/#hook-usage' },
         ],
       },
       {
         text: 'React',
         items: [
-          { text: 'Usage', link: '/react/' },
+          { text: 'Install', link: '/react/#installation' },
+          { text: 'Component', link: '/react/#component-usage' },
+          { text: 'Hook', link: '/react/#hook-usage' },
         ],
       },
     ],
