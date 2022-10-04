@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    // without overriding `react`
+    "paths": {
+      "@contextmenu/core": ["./packages/core/src/index.ts"],
+      "@contextmenu/vue": ["./packages/vue/src/index.ts"],
+      "@contextmenu/react": ["./packages/react/src/index.ts"],
+      "@contextmenu/angular": ["./packages/angular/src/index.ts"],
+      "@contextmenu/shared": ["./packages/shared/src/index.ts"],
+    }
+  }
+}

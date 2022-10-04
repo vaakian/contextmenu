@@ -1,4 +1,4 @@
-import { defineComponent, h, reactive, ref } from 'vue-demi'
+import { defineComponent, h, reactive, ref, toRefs } from 'vue-demi'
 import type { StylableElement } from '@contextmenu/shared'
 import type { RenderableComponent } from './types'
 import type { UseContextMenuOptions } from './hook'
@@ -10,13 +10,24 @@ export interface ContextMenuProps extends UseContextMenuOptions, RenderableCompo
 
 export const ContextMenu = defineComponent<ContextMenuProps>({
   name: 'ContextMenu',
-  props: ['hideOnClick', 'onContextMenu', 'as'] as unknown as undefined,
+  props: ['hideOnClick', 'onContextMenu', 'as', 'target'] as unknown as undefined,
   setup(props, { slots }) {
     const menuRef = ref<StylableElement>()
 
+    // Avoid losing reactive when destructuring in `useContextMenu` hook:
+    // because a ref will be a plain value of `props` when passing it to a vue `component`,
+    // we should keep it as a `ref` to keep track of it's changes.
+    const { target, hideOnClick } = toRefs(props)
+    const options = {
+      ...props,
+      target,
+      hideOnClick,
+    }
+
     const data = reactive(useContextMenu(
       menuRef,
-      props,
+      // TODO: type it
+      options as unknown as any,
     ))
 
     return () => {

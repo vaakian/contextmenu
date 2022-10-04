@@ -1,4 +1,5 @@
 {
+  "extends": "@vue/tsconfig/tsconfig.json",
   "compilerOptions": {
     "target": "es2018",
     "module": "esnext",
@@ -10,7 +11,10 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "types": ["vitest/globals"],
+    "types": [
+      "vitest/globals", 
+      "vite/client"
+    ],
     "jsx": "preserve",
     "experimentalDecorators": true,
     "paths": {
@@ -19,23 +23,24 @@
       "@contextmenu/vue": ["./packages/vue/src/index.ts"],
       "@contextmenu/react": ["./packages/react/src/index.ts"],
       "@contextmenu/angular": ["./packages/angular/src/index.ts"],
-      "@contextmenu/shared": ["./packages/shared/src/index.ts"]
+      "@contextmenu/shared": ["./packages/shared/src/index.ts"],
+      // stub react as empty
+      "react": ["./stub/types__react"]
     }
   },
   "include": [
-    "packages/**/*.ts",
-    "packages/**/*.tsx",
-    "packages/**/*.vue",
-    "playground/**/*.ts",
-    "playground/**/*.tsx",
-    "playground/**/*.vue",
+    "packages",
+    "playground",
     "meta",
     "vitest.config.ts",
     "tests/**/*",
-    "scripts/*"
+    "scripts/*",
+    "docs/**/*"
   ],
   "exclude": [
     "node_modules",
-    "**/*/dist"
+    "**/**/node_modules",
+    "**/**/dist",
+    "**/**/*.md"
   ]
 }

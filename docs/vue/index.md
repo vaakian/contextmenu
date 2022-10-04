@@ -1,4 +1,12 @@
+<script setup>
+  import { ref } from 'vue'
+  import { ContextMenu, useContextMenu } from '@contextmenu/vue'
+  import Area from '../components/Area.vue'
+  const targetRef = ref(null)
+</script>
+
 # Vue usage
+
 
 :TODO
 
@@ -14,7 +22,7 @@ yarn add @contextmenu/vue
 ```
 
 ### Component usage
-It's easier to create using `ContextMenu` component if you don't need extra control of it.
+It's easier using `ContextMenu` component if you don't need extra control of it.
 ```Vue{6-8}
 <script setup lang="ts">
 import { ContextMenu } from '@contextmenu/vue'
@@ -22,12 +30,21 @@ import { ContextMenu } from '@contextmenu/vue'
 
 <template>
   <ContextMenu>
-      Place your contextmenu here.
+    Place your context menu here.
   </ContextMenu>
 </template>
-
-
 ```
+
+### DEMO
+
+<!-- DEMO -->
+<Area ref="targetRef">
+  right click on me
+</Area>
+
+<ContextMenu :target="targetRef">
+  <div bg="$vp-c-bg-soft" p-2 shadow-lg rounded-lg>You got me!</div>
+</ContextMenu>
 
 ### Hook usage
 
@@ -44,7 +61,7 @@ const ctxMenu = useContextMenu(menuRef)
 
 <template>
   <div ref="menuRef">
-    Place your contextmenu here.
+    Place your context menu here.
   </div>
 </template>
 ```
