@@ -2,7 +2,7 @@ import type { Fn } from '@contextmenu/shared'
 import { defaultWindow, hideStylableElement, noop, showStylableElement } from '@contextmenu/shared'
 import { _addEventListener } from '../eventListener'
 import { calculateSubMenuOffset } from '../utils'
-import type { MenuGroup } from './MenuGroup'
+import type { MenuGroup } from '.'
 
 export class MenuItem {
   /**

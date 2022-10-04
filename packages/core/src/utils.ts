@@ -1,7 +1,6 @@
 import type { Position, Size } from '@contextmenu/shared'
 import type { Offset, OffsetType } from './contextMenu'
-import type { MenuGroup } from './menu/menuGroup'
-import type { MenuItem } from './menu/MenuItem'
+import type { MenuGroup, MenuItem } from './menu'
 
 /**
  * Calculate the `position: fixed/absolute` position offset of {@link menuSize}
