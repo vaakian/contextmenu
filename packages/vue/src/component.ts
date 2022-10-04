@@ -10,7 +10,7 @@ export interface ContextMenuProps extends UseContextMenuOptions, RenderableCompo
 
 export const ContextMenu = defineComponent<ContextMenuProps>({
   name: 'ContextMenu',
-  props: ['hideOnClick', 'onContextMenu', 'as'] as unknown as undefined,
+  props: ['hideOnClick', 'onContextMenu', 'as', 'target'] as unknown as undefined,
   setup(props, { slots }) {
     const menuRef = ref<StylableElement>()
 

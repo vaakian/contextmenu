@@ -14,6 +14,7 @@ importers:
       '@types/fs-extra': ^9.0.13
       '@types/node': ^18.7.5
       '@vitest/coverage-c8': ^0.23.4
+      '@vue/tsconfig': ^0.1.3
       bumpp: ^8.2.1
       c8: ^7.12.0
       consola: ^2.15.3
@@ -39,6 +40,7 @@ importers:
       '@types/fs-extra': 9.0.13
       '@types/node': 18.7.5
       '@vitest/coverage-c8': 0.23.4_jsdom@20.0.0
+      '@vue/tsconfig': 0.1.3_@types+node@18.7.5
       bumpp: 8.2.1
       c8: 7.12.0
       consola: 2.15.3
@@ -59,11 +61,20 @@ importers:
 
   docs:
     specifiers:
+      '@unocss/preset-attributify': ^0.45.15
+      '@unocss/preset-icons': ^0.45.15
+      '@unocss/preset-uno': ^0.45.15
+      unocss: ^0.45.15
       vitepress: 1.0.0-alpha.18
       vue: ^3.2.40
     dependencies:
       vitepress: 1.0.0-alpha.18
       vue: 3.2.40
+    devDependencies:
+      '@unocss/preset-attributify': 0.45.15
+      '@unocss/preset-icons': 0.45.15
+      '@unocss/preset-uno': 0.45.15
+      unocss: 0.45.15
 
   packages/core:
     specifiers:
@@ -1127,6 +1138,16 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
+  /@unocss/astro/0.45.15:
+    resolution: {integrity: sha512-cUrPw+9TiK1FhUrPy10PUB1cHShVNZ7Np9wDYo4f6lqB4irEYV2lpmUxaZbhfNC9uZ1hGkFT5dFTEp6dieKlpw==}
+    dependencies:
+      '@unocss/core': 0.45.15
+      '@unocss/reset': 0.45.15
+      '@unocss/vite': 0.45.15
+    transitivePeerDependencies:
+      - vite
+    dev: true
+
   /@unocss/astro/0.45.15_vite@3.0.7:
     resolution: {integrity: sha512-cUrPw+9TiK1FhUrPy10PUB1cHShVNZ7Np9wDYo4f6lqB4irEYV2lpmUxaZbhfNC9uZ1hGkFT5dFTEp6dieKlpw==}
     dependencies:
@@ -1260,6 +1281,21 @@ packages:
     resolution: {integrity: sha512-noHC7e0sfNdh0mcIC6AoozPboXcE2ccu0M2JxH8EKZrUo6R7jzah3qtRsXzhyDRKbJB19nLvxlCEW9CYnwdOhQ==}
     dependencies:
       '@unocss/core': 0.45.15
+    dev: true
+
+  /@unocss/vite/0.45.15:
+    resolution: {integrity: sha512-+wP/Xmsz7LI7s+Sf+ekwokJ12V0XX+XOBLBXb6lOJpqzv27tkN0au3/52NWgEC0xFig7L2Dm94D/wrc3qlSoOg==}
+    peerDependencies:
+      vite: ^2.9.0 || ^3.0.0-0
+    dependencies:
+      '@ampproject/remapping': 2.2.0
+      '@rollup/pluginutils': 4.2.1
+      '@unocss/config': 0.45.15
+      '@unocss/core': 0.45.15
+      '@unocss/inspector': 0.45.15
+      '@unocss/scope': 0.45.15
+      '@unocss/transformer-directives': 0.45.15
+      magic-string: 0.26.2
     dev: true
 
   /@unocss/vite/0.45.15_vite@3.0.7:
@@ -1539,6 +1575,17 @@ packages:
   /@vue/shared/3.2.40:
     resolution: {integrity: sha512-0PLQ6RUtZM0vO3teRfzGi4ltLUO5aO+kLgwh4Um3THSR03rpQWLTuRCkuO5A41ITzwdWeKdPHtSARuPkoo5pCQ==}
     dev: false
+
+  /@vue/tsconfig/0.1.3_@types+node@18.7.5:
+    resolution: {integrity: sha512-kQVsh8yyWPvHpb8gIc9l/HIDiiVUy1amynLNpCy8p+FoCiZXCo6fQos5/097MmnNZc9AtseDsCrfkhqCrJ8Olg==}
+    peerDependencies:
+      '@types/node': '*'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+    dependencies:
+      '@types/node': 18.7.5
+    dev: true
 
   /@vueuse/core/9.3.0_vue@3.2.40:
     resolution: {integrity: sha512-64Rna8IQDWpdrJxgitDg7yv1yTp41ZmvV8zlLEylK4QQLWAhz1OFGZDPZ8bU4lwcGgbEJ2sGi2jrdNh4LttUSQ==}
@@ -4901,6 +4948,37 @@ packages:
   /universalify/2.0.0:
     resolution: {integrity: sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==}
     engines: {node: '>= 10.0.0'}
+    dev: true
+
+  /unocss/0.45.15:
+    resolution: {integrity: sha512-aAyGXf/AifEIDQOShCsjZTJ9yjpk8eXTK0DuPfvNsp+/9v/FH/sgehlRQpbhOmVGJ8UdYm+lcTQHyx6mg1T7Vg==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@unocss/webpack': 0.45.15
+    peerDependenciesMeta:
+      '@unocss/webpack':
+        optional: true
+    dependencies:
+      '@unocss/astro': 0.45.15
+      '@unocss/cli': 0.45.15
+      '@unocss/core': 0.45.15
+      '@unocss/preset-attributify': 0.45.15
+      '@unocss/preset-icons': 0.45.15
+      '@unocss/preset-mini': 0.45.15
+      '@unocss/preset-tagify': 0.45.15
+      '@unocss/preset-typography': 0.45.15
+      '@unocss/preset-uno': 0.45.15
+      '@unocss/preset-web-fonts': 0.45.15
+      '@unocss/preset-wind': 0.45.15
+      '@unocss/reset': 0.45.15
+      '@unocss/transformer-attributify-jsx': 0.45.15
+      '@unocss/transformer-compile-class': 0.45.15
+      '@unocss/transformer-directives': 0.45.15
+      '@unocss/transformer-variant-group': 0.45.15
+      '@unocss/vite': 0.45.15
+    transitivePeerDependencies:
+      - supports-color
+      - vite
     dev: true
 
   /unocss/0.45.15_vite@3.0.7:

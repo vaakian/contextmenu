@@ -12,5 +12,11 @@
   "dependencies": {
     "vitepress": "1.0.0-alpha.18",
     "vue": "^3.2.40"
+  },
+  "devDependencies": {
+    "@unocss/preset-attributify": "^0.45.15",
+    "@unocss/preset-icons": "^0.45.15",
+    "@unocss/preset-uno": "^0.45.15",
+    "unocss": "^0.45.15"
   }
 }
