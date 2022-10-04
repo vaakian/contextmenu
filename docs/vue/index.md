@@ -1,4 +1,12 @@
+<script setup>
+  import { ref } from 'vue'
+  import { ContextMenu, useContextMenu } from '@contextmenu/vue'
+  import Area from '../components/Area.vue'
+  const targetRef = ref(null)
+</script>
+
 # Vue usage
+
 
 :TODO
 
@@ -22,12 +30,21 @@ import { ContextMenu } from '@contextmenu/vue'
 
 <template>
   <ContextMenu>
-      Place your context menu here.
+    Place your context menu here.
   </ContextMenu>
 </template>
-
-
 ```
+
+### DEMO
+
+<!-- DEMO -->
+<Area ref="targetRef">
+  right click on me
+</Area>
+
+<ContextMenu :target="targetRef">
+  <div bg="$vp-c-bg-soft" p-2 shadow-lg rounded-lg>You got me!</div>
+</ContextMenu>
 
 ### Hook usage
 

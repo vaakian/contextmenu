@@ -38,7 +38,9 @@ const ctxMenu = createContextMenu(menu)
 <script setup>
 import { ref } from 'vue'
 import { useContextMenu } from '@contextmenu/vue'
-import Menu from './Menu.vue'
+// TODO: using unplugin-import
+import Menu from '../components/Menu.vue'
+import Area from '../components/Area.vue'
 
 const targetRef = ref(null)
 const menuRef = ref(null)
@@ -47,15 +49,9 @@ const ctx = useContextMenu(menuRef, { target: targetRef })
 console.log(ctx)
 </script>
 
-<div 
-  ref="targetRef"
-  class="w-20 h-20 bg-red-500/20 flex rounded-lg items-center justify-center text-center box-content select-none"
-  p="x-10 y-10"
-  mx-auto
->
-  right click on me
-</div>
-
+<Area ref="targetRef">
+right click on me
+</Area>
 <Menu ref="menuRef" />
 
 ## Framework support
