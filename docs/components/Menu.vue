@@ -20,16 +20,6 @@ const menus = [
     select-none
     z-20
   >
-    <!-- title -->
-    <div
-      px-3
-      py="2px"
-      lowercase
-      hover="bg-stone-500/10 cursor-pointer text-$vp-c-brand"
-    >
-      <slot />
-    </div>
-
     <div
       v-for="([value], key) in menus"
       :key="key"

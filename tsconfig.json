@@ -34,10 +34,12 @@
     "meta",
     "vitest.config.ts",
     "tests/**/*",
-    "scripts/*"
+    "scripts/*",
+    "docs"
   ],
   "exclude": [
     "node_modules",
-    "**/*/dist"
+    "**/**/dist",
+    "**/**/*.md"
   ]
 }

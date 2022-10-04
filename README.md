@@ -15,6 +15,8 @@
 
 <p align="center">Add custom <code>contextMenu</code> to you application the simplest way.</p>
 
+> Refer to [Documentations](https://contextmenu.netlify.app/)
+
 
 ## Feature
 - 🪆 Support **Deeply nested** sub menu
@@ -70,6 +72,37 @@ pnpm add @contexmenu/core
 # yarn
 yarn add @contexmenu/core
 ```
+
+## Quick example
+Show case using `ContextMenu` component creating a context menu.
+
+1. in Vue setup
+```html
+<script setup lang="ts">
+import { ContextMenu } from '@contextmenu/vue'
+</script>
+
+<template>
+  <ContextMenu>
+    Place your context menu here.
+  </ContextMenu>
+</template>
+```
+
+2. in React
+```tsx
+import { ContextMenu } from '@contextmenu/react'
+
+function App() {
+  return (
+    <ContextMenu>
+      Place your context menu here.
+    </ContextMenu>
+  )
+}
+```
+
+Please refer to [documentations](https://contextmenu.netlify.app/) for more details.
 
 ## License
 

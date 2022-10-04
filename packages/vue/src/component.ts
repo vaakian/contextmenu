@@ -1,4 +1,5 @@
-import { defineComponent, h, reactive, ref, toRefs } from 'vue-demi'
+import type { Ref } from 'vue-demi'
+import { defineComponent, h, reactive, ref, toRef } from 'vue-demi'
 import type { StylableElement } from '@contextmenu/shared'
 import type { RenderableComponent } from './types'
 import type { UseContextMenuOptions } from './hook'
@@ -17,17 +18,11 @@ export const ContextMenu = defineComponent<ContextMenuProps>({
     // Avoid losing reactive when destructuring in `useContextMenu` hook:
     // because a ref will be a plain value of `props` when passing it to a vue `component`,
     // we should keep it as a `ref` to keep track of it's changes.
-    const { target, hideOnClick } = toRefs(props)
-    const options = {
-      ...props,
-      target,
-      hideOnClick,
-    }
+    const options = propsToRefs(props, ['target', 'hideOnClick'])
 
     const data = reactive(useContextMenu(
       menuRef,
-      // TODO: type it
-      options as unknown as any,
+      options,
     ))
 
     return () => {
@@ -36,3 +31,27 @@ export const ContextMenu = defineComponent<ContextMenuProps>({
     }
   },
 })
+
+// type RefKeys<T extends object> = keyof {
+//   [K in keyof T as T[K] extends MaybeRef<any> ? K : never]: T[K]
+// }
+
+/**
+ * Partially make data in props as a ref
+ * @param props
+ * @param keys
+ * @returns
+ */
+function propsToRefs<T extends object>(props: T, keys: (keyof T)[]) {
+  const refs: {
+    [K in keyof T]: Ref<T[K]>
+  } = {} as unknown as any
+
+  for (const key of keys)
+    refs[key] = toRef(props, key)
+
+  return {
+    ...props,
+    ...refs,
+  }
+}
