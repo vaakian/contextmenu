@@ -10,10 +10,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "types": [
-      "vitest/globals", 
-      "vite/client"
-    ],
+    "types": ["vitest/globals"],
     "jsx": "preserve",
     "experimentalDecorators": true,
     "paths": {
@@ -28,18 +25,19 @@
     }
   },
   "include": [
-    "packages",
-    "playground",
+    "packages/**/*.ts",
+    "packages/**/*.tsx",
+    "packages/**/*.vue",
+    "playground/**/*.ts",
+    "playground/**/*.tsx",
+    "playground/**/*.vue",
     "meta",
     "vitest.config.ts",
     "tests/**/*",
-    "scripts/*",
-    "docs/**/*"
+    "scripts/*"
   ],
   "exclude": [
     "node_modules",
-    "**/**/node_modules",
-    "**/**/dist",
-    "**/**/*.md"
+    "**/*/dist"
   ]
 }
