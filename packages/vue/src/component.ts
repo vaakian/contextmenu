@@ -18,6 +18,7 @@ export const ContextMenu = defineComponent<ContextMenuProps>({
     // Avoid losing reactive when destructuring in `useContextMenu` hook:
     // because a ref will be a plain value of `props` when passing it to a vue `component`,
     // we should keep it as a `ref` to keep track of it's changes.
+    // TODO: fix still ref when not provided
     const options = propsToRefs(props, ['target', 'hideOnClick'])
 
     const data = reactive(useContextMenu(
@@ -43,12 +44,15 @@ export const ContextMenu = defineComponent<ContextMenuProps>({
  * @returns
  */
 function propsToRefs<T extends object>(props: T, keys: (keyof T)[]) {
+  // return props
   const refs: {
     [K in keyof T]: Ref<T[K]>
   } = {} as unknown as any
 
-  for (const key of keys)
-    refs[key] = toRef(props, key)
+  for (const key of keys) {
+    if (typeof props[key] !== 'undefined')
+      refs[key] = toRef(props, key)
+  }
 
   return {
     ...props,

@@ -2,7 +2,11 @@
   import { ref } from 'vue'
   import { ContextMenu, useContextMenu } from '@contextmenu/vue'
   import Area from '../components/Area.vue'
+  import NestedMenu from '../components/NestedMenu.vue'
   const targetRef = ref(null)
+
+  const nestedTargetRef = ref(null)
+  
 </script>
 
 # Vue usage
@@ -43,7 +47,7 @@ import { ContextMenu } from '@contextmenu/vue'
 </Area>
 
 <ContextMenu :target="targetRef">
-  <div bg="$vp-c-bg-soft" p-2 shadow-lg rounded-lg>You got me!</div>
+  <div class="bg-$vp-c-bg overflow-hidden shadow-xl rounded-md b-1 b-color-gray-400/30 p-2">You got me!</div>
 </ContextMenu>
 
 ### Hook usage
@@ -55,7 +59,7 @@ Use `useContextMenu` hook to programmatically create a menu.
 import { ref } from 'vue'
 import { useContextMenu } from '@contextmenu/vue'
 
-const menuRef = ref<HTMLElement>()
+const menuRef = ref<HTMLElement>(null)
 const ctxMenu = useContextMenu(menuRef)
 </script>
 
@@ -65,3 +69,49 @@ const ctxMenu = useContextMenu(menuRef)
   </div>
 </template>
 ```
+
+
+## Advanced usage
+
+### 1) Nested sub menu
+You can easily create nested sub menu by using `MenuGroup` and `MenuItem` component.
+
+```vue
+<script setup lang="ts">
+import { ContextMenu, MenuGroup, MenuItem } from '@contextmenu/vue'
+</script>
+
+<template>
+  <ContextMenu>
+    <MenuGroup>
+      <MenuItem>Item 1</MenuItem>
+      <MenuItem>Item 2</MenuItem>
+      <MenuItem>
+        SubMenu1
+        <!-- sub menu content -->
+        <MenuGroup>
+          <MenuItem>Nested1</MenuItem>
+          <MenuItem>Nested2</MenuItem>
+          <MenuItem>
+            SubMenu2
+            <!-- deep sub menu content -->
+            <MenuGroup>
+              <MenuItem>Apple</MenuItem>
+              <MenuItem>Orange</MenuItem>
+              <MenuItem>Banana</MenuItem>
+            </MenuGroup>
+          </MenuItem>
+        </MenuGroup>
+      </MenuItem>
+    </MenuGroup>
+  </ContextMenu>
+</template>
+```
+
+#### DEMO
+
+<Area ref="nestedTargetRef">
+  right click any where on the page
+</Area>
+
+<NestedMenu z-20/>
