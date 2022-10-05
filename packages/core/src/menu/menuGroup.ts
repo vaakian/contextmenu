@@ -1,3 +1,4 @@
+import type { StylableElement } from '@contextmenu/shared'
 import type { MenuItem } from '.'
 
 export interface SubMenuOffset {
@@ -15,7 +16,7 @@ export class MenuGroup {
   /**
    * The root wrapper Element
    */
-  readonly element: HTMLDivElement = document.createElement('div')
+  element: StylableElement = document.createElement('div')
 
   /**
    * Current menuItems

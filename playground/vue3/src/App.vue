@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { ContextMenu, useContextMenu } from '@contextmenu/vue'
+import { ContextMenu, MenuGroup, MenuItem, useContextMenu } from '@contextmenu/vue'
 import Menu from './components/Menu.vue'
 const menuRef = ref<HTMLElement>()
 const targetRef = ref<HTMLElement>()
@@ -26,13 +26,35 @@ const log = console.log
   >
     TARGET
   </div>
-  <ContextMenu
+  <!-- <ContextMenu
     :hide-on-click="true"
     @context-menu="log($event.target)"
   >
     <Menu>
       [✈️]
     </Menu>
+  </ContextMenu> -->
+
+  <ContextMenu>
+    <MenuGroup bg-cyan rounded>
+      <MenuItem>Item 1</MenuItem>
+      <MenuItem>Item 2</MenuItem>
+      <MenuItem>
+        SubMenu
+        <MenuGroup>
+          <MenuItem>Nested1</MenuItem>
+          <MenuItem>Nested2</MenuItem>
+          <MenuItem>
+            SubMenu
+            <MenuGroup>
+              <MenuItem>Apple</MenuItem>
+              <MenuItem>Orange</MenuItem>
+              <MenuItem>Banana</MenuItem>
+            </MenuGroup>
+          </MenuItem>
+        </MenuGroup>
+      </MenuItem>
+    </MenuGroup>
   </ContextMenu>
 </template>
 

@@ -1,4 +1,4 @@
-import type { Fn } from '@contextmenu/shared'
+import type { Fn, StylableElement } from '@contextmenu/shared'
 import { defaultWindow, hideStylableElement, noop, showStylableElement } from '@contextmenu/shared'
 import { _addEventListener } from '../eventListener'
 import { calculateSubMenuOffset } from '../utils'
@@ -8,7 +8,7 @@ export class MenuItem {
   /**
    * The root wrapper Element
    */
-  readonly element: HTMLDivElement = document.createElement('div')
+  element: StylableElement = document.createElement('div')
 
   /**
    * The parent menu group
