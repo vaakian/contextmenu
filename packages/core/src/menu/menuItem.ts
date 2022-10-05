@@ -69,8 +69,8 @@ export class MenuItem {
             menuItem,
             subMenu,
             {
-              width: defaultWindow!.innerWidth,
-              height: defaultWindow!.innerHeight,
+              width: defaultWindow!.document.documentElement.clientWidth,
+              height: defaultWindow!.document.documentElement.clientHeight,
             },
           )
           // 2. set it.

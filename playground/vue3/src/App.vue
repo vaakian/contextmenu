@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { ContextMenu, MenuGroup, MenuItem, useContextMenu } from '@contextmenu/vue'
 import Menu from './components/Menu.vue'
+import NestedMenu from './components/NestedMenu.vue'
 const menuRef = ref<HTMLElement>()
 const targetRef = ref<HTMLElement>()
 
@@ -34,29 +35,8 @@ const log = console.log
       [✈️]
     </Menu>
   </ContextMenu> -->
-
-  <ContextMenu>
-    <MenuGroup bg-cyan rounded>
-      <MenuItem>Item 1</MenuItem>
-      <MenuItem>Item 2</MenuItem>
-      <MenuItem>
-        SubMenu
-        <MenuGroup>
-          <MenuItem>Nested1</MenuItem>
-          <MenuItem>Nested2</MenuItem>
-          <MenuItem>
-            SubMenu
-            <MenuGroup>
-              <MenuItem>Apple</MenuItem>
-              <MenuItem>Orange</MenuItem>
-              <MenuItem>Banana</MenuItem>
-            </MenuGroup>
-          </MenuItem>
-        </MenuGroup>
-      </MenuItem>
-    </MenuGroup>
-  </ContextMenu>
+  <NestedMenu />
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
 </style>

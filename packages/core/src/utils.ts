@@ -14,10 +14,14 @@ export function calculateOffset(
   mousePosition: Position,
   menuSize: Size,
   containerSize: Size,
+  specifiedOverflow?: {
+    overflowX: boolean
+    overflowY: boolean
+  },
 ): Offset {
   let [left, top, right, bottom]: OffsetType[] = [mousePosition.x, mousePosition.y, null, null]
 
-  const { overflowX, overflowY } = checkOverflow(mousePosition, menuSize, containerSize)
+  const { overflowX, overflowY } = specifiedOverflow ?? checkOverflow(mousePosition, menuSize, containerSize)
 
   if (overflowX)
     [left, right] = [null, containerSize.width - mousePosition.x]
@@ -77,5 +81,8 @@ export function calculateSubMenuOffset(
     mousePosition,
     subMenuRect,
     containerSize,
+    // change of the mousePosition may cause it recover from overflow
+    // so specify it manually
+    { overflowX, overflowY },
   )
 }
