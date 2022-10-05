@@ -44,13 +44,15 @@ export const ContextMenu = defineComponent<ContextMenuProps>({
  * @returns
  */
 function propsToRefs<T extends object>(props: T, keys: (keyof T)[]) {
-  return props
+  // return props
   const refs: {
     [K in keyof T]: Ref<T[K]>
   } = {} as unknown as any
 
-  for (const key of keys)
-    refs[key] = toRef(props, key)
+  for (const key of keys) {
+    if (typeof props[key] !== 'undefined')
+      refs[key] = toRef(props, key)
+  }
 
   return {
     ...props,
