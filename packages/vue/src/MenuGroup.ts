@@ -1,11 +1,7 @@
-import type { MenuItem } from '@contextmenu/core'
 import { MenuGroup } from '@contextmenu/core'
 import type { StylableElement } from '@contextmenu/shared'
-import type { InjectionKey } from 'vue-demi'
 import { defineComponent, h, inject, onUnmounted, provide, ref, unref, watch } from 'vue-demi'
-import { MenuItemInjectionKey } from './MenuItem'
-
-export const MenuGroupInjectionKey: InjectionKey<MenuGroup> = Symbol('MenuGroup')
+import { MenuGroupInjectionKey, MenuItemInjectionKey } from './types'
 
 export default defineComponent<{
   modelValue?: MenuGroup | undefined | null
@@ -14,8 +10,7 @@ export default defineComponent<{
     const instance = new MenuGroup()
     const targetRef = ref<StylableElement>()
 
-    const parentItem: MenuItem | undefined = inject(MenuItemInjectionKey)
-
+    const parentItem = inject(MenuItemInjectionKey)
 
     watch(
       () => unref(targetRef),

@@ -1,6 +1,7 @@
 import { unref } from 'vue-demi'
-import type { ComputedRef, Ref } from 'vue-demi'
+import type { ComputedRef, InjectionKey, Ref } from 'vue-demi'
 import type { StylableElement } from '@contextmenu/shared'
+import type { MenuGroupInstance, MenuItemInstance } from '@contextmenu/core'
 export interface RenderableComponent {
   /**
      * The element that the component should be rendered as
@@ -24,3 +25,5 @@ export function resolveUnref<T>(r: MaybeComputedRef<T>): T {
     : unref(r)
 }
 
+export const MenuItemInjectionKey: InjectionKey<MenuItemInstance> = Symbol('MenuGroup')
+export const MenuGroupInjectionKey: InjectionKey<MenuGroupInstance> = Symbol('MenuGroup')

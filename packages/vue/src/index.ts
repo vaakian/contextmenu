@@ -1,4 +1,5 @@
 export * from './hook'
 export * from './component'
+export * from './types'
 export { default as MenuItem } from './MenuItem'
 export { default as MenuGroup } from './MenuGroup'
