@@ -124,6 +124,9 @@ export class MenuItem {
     // append it to the DOM
     this.element.append(subMenu.element)
 
+    // tag it aware of where it's in
+    subMenu.parentMenuItem = this
+
     this.registerSubMenu()
   }
 
@@ -149,3 +152,5 @@ export class MenuItem {
     this.element.remove() // remove from the DOM
   }
 }
+
+export type MenuItemInstance = InstanceType<typeof MenuItem>

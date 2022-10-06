@@ -74,6 +74,7 @@ const ctxMenu = useContextMenu(menuRef)
 ## Advanced usage
 
 ### 1) Nested sub menu
+
 You can easily create nested sub menu by using `MenuGroup` and `MenuItem` component.
 
 ```vue
@@ -115,3 +116,30 @@ import { ContextMenu, MenuGroup, MenuItem } from '@contextmenu/vue'
 </Area>
 
 <NestedMenu z-20/>
+
+### 2) Get access internal native instance
+You can easily access **<u>native instance</u>**(which is used internally) by using `v-model` to gain more controllability of it.
+```vue{7,10,15,18}
+<script setup lang="ts">
+import { ref } from 'vue'
+import type { MenuGroupInstance } from '@contextmenu/core'
+import { ContextMenu, MenuGroup, MenuItem } from '@contextmenu/vue'
+
+// `groupInstance.value` is the native instance
+const groupInstance = ref<MenuGroupInstance>()
+
+// `itemInstance.value` is the native instance
+const itemInstance = ref<MenuItemInstance>()
+</script>
+
+<template>
+  <ContextMenu>
+    <MenuGroup v-model="groupInstance">
+      <MenuItem>Item 1</MenuItem>
+      <MenuItem>Item 2</MenuItem>
+      <MenuItem v-model="itemInstance">Item3</MenuItem>
+    </MenuGroup>
+  </ContextMenu>
+</template>
+
+```

@@ -27,6 +27,11 @@ export class MenuGroup {
    * The Offset(left, top) to the parentMenu
    */
   readonly offset: SubMenuOffset
+
+  /**
+   * Parent menu item
+   */
+  parentMenuItem?: MenuItem
   constructor(
     initialItems: MenuItem[] = [],
     options: MenuGroupOptions = {},
@@ -77,6 +82,8 @@ export class MenuGroup {
     this.menuItems.forEach(item => item.dispose())
     this.menuItems.clear()
     this.element.remove()
+    // same as `detach` in menuItem
+    this.parentMenuItem?.removeSubMenu()
   }
 }
 
@@ -91,3 +98,4 @@ function mergeDefaultOffset(offset: Partial<SubMenuOffset> = {}) {
     top,
   }
 }
+export type MenuGroupInstance = InstanceType<typeof MenuGroup>

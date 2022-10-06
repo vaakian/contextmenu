@@ -195,3 +195,4 @@ export const createContextMenu = (
   return new ContextMenu(...args)
 }
 
+export type ContextMenuInstance = InstanceType<typeof ContextMenu>
