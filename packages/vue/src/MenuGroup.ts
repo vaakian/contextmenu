@@ -16,6 +16,7 @@ export default defineComponent<{
 
     const parentItem: MenuItem | undefined = inject(MenuItemInjectionKey)
 
+
     watch(
       () => unref(targetRef),
       (el) => {

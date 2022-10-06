@@ -4,6 +4,7 @@ import { useContextMenu } from '@contextmenu/vue'
 import Menu from './components/Menu.vue'
 import NestedMenu from './components/NestedMenu.vue'
 
+
 const menuRef = ref<HTMLElement>()
 const targetRef = ref<HTMLElement>()
 
@@ -25,6 +26,7 @@ const ctx = useContextMenu(menuRef, {
   >
     TARGET
   </div>
+
 
   <NestedMenu />
 </template>
