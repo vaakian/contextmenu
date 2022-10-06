@@ -47,7 +47,7 @@ import { ContextMenu, MenuGroup, MenuItem } from '@contextmenu/vue'
   @apply bg-$vp-c-bg overflow-hidden shadow-xl rounded-md b-1 b-color-gray-400/30;
 }
 .item {
-    @apply hover-bg-$vp-c-bg-mute hover-color-$vp-c-brand color-$vp-c-text-2 cursor-pointer px-2 py-1 rounded capitalize;
+    @apply hover-bg-$vp-c-bg-mute hover-color-$vp-c-brand color-$vp-c-text-2 cursor-pointer px-2 py-1 capitalize;
 }
 .item > * {
   color: initial;

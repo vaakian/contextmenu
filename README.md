@@ -43,6 +43,7 @@
   - [ ] `v-directive` usage
   - [x] `useContextMenu` hook
   - [x] `<ContextMenu />` component
+  - [x] `<MenuGroup />` and `<MenuItem />` component for creating nested menu
 
 - [x] React
   - [x] `useContextMenu` hook
@@ -90,7 +91,7 @@ import { ContextMenu } from '@contextmenu/vue'
 ```
 
 2. in React
-```tsx
+```jsx
 import { ContextMenu } from '@contextmenu/react'
 
 function App() {

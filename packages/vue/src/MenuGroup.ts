@@ -1,14 +1,20 @@
 import type { MenuItem } from '@contextmenu/core'
 import { MenuGroup } from '@contextmenu/core'
 import type { StylableElement } from '@contextmenu/shared'
-import { defineComponent, h, inject, provide, ref, unref, watch } from 'vue-demi'
+import type { InjectionKey } from 'vue-demi'
+import { defineComponent, h, inject, onUnmounted, provide, ref, unref, watch } from 'vue-demi'
+import { MenuItemInjectionKey } from './MenuItem'
 
-export default defineComponent({
-  setup(props, { slots }) {
+export const MenuGroupInjectionKey: InjectionKey<MenuGroup> = Symbol('MenuGroup')
+
+export default defineComponent<{
+  modelValue?: MenuGroup | undefined | null
+}>({
+  setup(props, { slots, emit }) {
     const instance = new MenuGroup()
     const targetRef = ref<StylableElement>()
 
-    const parentItem: MenuItem | undefined = inject('parentMenuItem')
+    const parentItem: MenuItem | undefined = inject(MenuItemInjectionKey)
 
     watch(
       () => unref(targetRef),
@@ -21,8 +27,15 @@ export default defineComponent({
         }
       },
     )
+    // get instance using v-model="instance"
+    emit('update:modelValue', instance)
+    // get instance using inject()
+    provide(MenuGroupInjectionKey, instance)
 
-    provide('parentMenuGroup', instance)
+    // cleanup
+    onUnmounted(() => {
+      instance.dispose()
+    })
 
     return () => {
       return h('div', { ...props, ref: targetRef }, slots.default?.())
