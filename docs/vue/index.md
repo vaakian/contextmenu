@@ -12,9 +12,10 @@
 # Vue usage
 
 
-:TODO
+## Table of Contents
 
-### Installation
+[[TOC]]
+## Installation
 
 ```shell
 # npm
@@ -25,7 +26,7 @@ pnpm i @contextmenu/vue
 yarn add @contextmenu/vue
 ```
 
-### Component usage
+## Component usage
 It's easier using `ContextMenu` component if you don't need extra control of it.
 ```Vue{6-8}
 <script setup lang="ts">
@@ -34,6 +35,24 @@ import { ContextMenu } from '@contextmenu/vue'
 
 <template>
   <ContextMenu>
+    Place your context menu here.
+  </ContextMenu>
+</template>
+```
+
+Additionally, you can specify the target element as well as **hook usage** by passing `options` to the props.
+```vue{4,8,11}
+<script setup lang="ts">
+import { ContextMenu } from '@contextmenu/vue'
+import { ref } from 'vue'
+const target = ref(null)
+</script>
+
+<template>
+  <div ref="target">
+    right click on me
+  </div>
+  <ContextMenu :target="target">
     Place your context menu here.
   </ContextMenu>
 </template>
@@ -50,7 +69,7 @@ import { ContextMenu } from '@contextmenu/vue'
   <div class="bg-$vp-c-bg overflow-hidden shadow-xl rounded-md b-1 b-color-gray-400/30 p-2">You got me!</div>
 </ContextMenu>
 
-### Hook usage
+## Hook usage
 
 Use `useContextMenu` hook to programmatically create a menu.
 
@@ -74,7 +93,9 @@ const ctxMenu = useContextMenu(menuRef)
 ## Advanced usage
 
 ### 1) Nested sub menu
-
+::: warning
+The `MenuGroup` and `MenuItem` component **DOES NOT** provide any styles. You need to style them yourself.
+:::
 You can easily create nested sub menu by using `MenuGroup` and `MenuItem` component.
 
 ```vue

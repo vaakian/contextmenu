@@ -1,4 +1,6 @@
-import type { StylableElement } from '@contextmenu/shared'
+import type { Fn, StylableElement } from '@contextmenu/shared'
+import { defaultWindow, isClient, noop } from '@contextmenu/shared'
+import { _addEventListener } from '../eventListener'
 import type { MenuItem } from '.'
 
 export interface SubMenuOffset {
@@ -13,10 +15,18 @@ export interface MenuGroupOptions {
 }
 
 export class MenuGroup {
+  private _element: StylableElement = document.createElement('div')
   /**
    * The root wrapper Element
    */
-  element: StylableElement = document.createElement('div')
+  get element() {
+    return this._element
+  }
+
+  set element(el) {
+    this._element = el
+    this.register()
+  }
 
   /**
    * Current menuItems
@@ -32,6 +42,17 @@ export class MenuGroup {
    * Parent menu item
    */
   parentMenuItem?: MenuItem
+
+  /**
+   * Unregister all event listeners
+   */
+  cleanup: Fn = noop
+
+  /**
+   * Menu group
+   * @param initialItems
+   * @param options
+   */
   constructor(
     initialItems: MenuItem[] = [],
     options: MenuGroupOptions = {},
@@ -84,6 +105,29 @@ export class MenuGroup {
     this.element.remove()
     // same as `detach` in menuItem
     this.parentMenuItem?.removeSubMenu()
+
+    this.cleanup()
+  }
+
+  /**
+   * @internal
+   * @returns
+   */
+  register() {
+    if (!isClient)
+      return
+
+    const hide = () => {
+      // only hide it when it's a sub menu
+      if (this.parentMenuItem)
+        this.element.style.visibility = 'hidden'
+    }
+    const unregister = _addEventListener(defaultWindow!, 'scroll', hide)
+    this.cleanup = () => {
+      unregister()
+      this.cleanup = noop
+    }
+    return unregister
   }
 }
 

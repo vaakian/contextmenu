@@ -23,7 +23,7 @@ function App() {
   return (
     <div>
       <ContextMenu>
-        Place your contextmenu here.
+        Place your context menu here.
       </ContextMenu>
       ...
     </div>

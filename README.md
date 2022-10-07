@@ -64,18 +64,18 @@
 ## Installation
 
 ```bash
-# npm
-npm i @contexmenu/core
+# native JavaScript
+npm i @contextmenu/core
 
-# pnpm
-pnpm add @contexmenu/core
+# vue
+npm i @contextmenu/vue
 
-# yarn
-yarn add @contexmenu/core
+# react
+npm i @contextmenu/react
 ```
 
 ## Quick example
-Show case using `ContextMenu` component creating a context menu.
+Use `ContextMenu` component to create a context menu.
 
 1. in Vue setup
 ```html

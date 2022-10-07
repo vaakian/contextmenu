@@ -16,4 +16,6 @@
   --vp-c-text-light-2: rgba(56 56 56 / 70%);
   /* fix contrast: lang name on gray code block */
   --vp-c-text-dark-3: rgba(180, 180, 180, 0.7);
+  /* line highlight */
+  --vp-code-line-highlight-color: rgba(0, 0, 0, 0.2);
 }
