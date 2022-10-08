@@ -25,5 +25,5 @@ export function resolveUnref<T>(r: MaybeComputedRef<T>): T {
     : unref(r)
 }
 
-export const MenuItemInjectionKey: InjectionKey<MenuItemInstance> = Symbol('MenuGroup')
+export const MenuItemInjectionKey: InjectionKey<MenuItemInstance> = Symbol('MenuItem')
 export const MenuGroupInjectionKey: InjectionKey<MenuGroupInstance> = Symbol('MenuGroup')
