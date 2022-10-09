@@ -17,7 +17,7 @@ export type MaybeReadonlyRef<T> = (() => T) | ComputedRef<T>
 
 export type MaybeComputedRef<T> = MaybeReadonlyRef<T> | MaybeRef<T>
 
-export type MayBeElementRef<T extends Element = StylableElement> = MaybeRef<T | undefined>
+export type MayBeElementRef<T extends Element = StylableElement> = MaybeRef<T | undefined | null>
 
 export function resolveUnref<T>(r: MaybeComputedRef<T>): T {
   return typeof r === 'function'

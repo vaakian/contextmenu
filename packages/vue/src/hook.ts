@@ -1,4 +1,4 @@
-import { type Ref, effectScope, onUnmounted, ref, shallowRef, watch } from 'vue-demi'
+import { type Ref, effectScope, getCurrentInstance, onUnmounted, ref, shallowRef, watch } from 'vue-demi'
 import type { ContextMenu, ContextMenuOptions } from '@contextmenu/core'
 import { createContextMenu } from '@contextmenu/core'
 import { noop } from '@contextmenu/shared'
@@ -74,39 +74,43 @@ export const useContextMenu = (
 
   const scope = effectScope()
   scope.run(() => {
-    watch(() => [
-      unrefElement(menu),
-      unrefElement(target),
-    ], ([_menu, _target]) => {
-      if (!_menu)
-        return
+    watch(
+      () => [
+        unrefElement(menu),
+        unrefElement(target),
+      ],
+      ([_menu, _target]) => {
+        if (!_menu)
+          return
 
-      // hasTarget if target ref specified
-      // maybe a ref<undefined>, so can't identify it by just `_target`
-      const hasTarget = !!target
+        // hasTarget if target ref specified
+        // maybe a ref<undefined>, so can't identify it by just `_target`
+        const hasTarget = !!target
 
-      // target haven't initialized yet
-      if (hasTarget && !_target)
-        return
+        // target haven't initialized yet
+        if (hasTarget && !_target)
+          return
 
-      const hideOnClick = resolveUnref(options.hideOnClick)
+        const hideOnClick = resolveUnref(options.hideOnClick)
 
-      instance.value = createContextMenu(_menu, {
-        ...options,
-        hideOnClick,
-        target: hasTarget ? _target : undefined,
-        // spy
-        onVisibleChange: (v) => {
-          options.onVisibleChange?.(v)
-          visible.value = v
-        },
-      })
+        instance.value = createContextMenu(_menu, {
+          ...options,
+          hideOnClick,
+          target: hasTarget ? _target : undefined,
+          // spy
+          onVisibleChange: (v) => {
+            options.onVisibleChange?.(v)
+            visible.value = v
+          },
+        })
 
-      cleanup = () => {
-        instance.value?.cleanup()
-        cleanup = noop
-      }
-    })
+        cleanup = () => {
+          instance.value?.cleanup()
+          cleanup = noop
+        }
+      },
+      { immediate: true },
+    )
 
     watch(() => enabled.value, (enabled) => {
       if (instance.value)
@@ -120,7 +124,9 @@ export const useContextMenu = (
     cleanup()
   }
 
-  onUnmounted(stop)
+  // do nothing if there's no active vue instance
+  if (getCurrentInstance())
+    onUnmounted(stop)
 
   return {
     hide: () => instance.value?.hide?.(),
