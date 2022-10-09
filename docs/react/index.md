@@ -15,7 +15,7 @@ yarn add @contextmenu/react
 
 
 ### Component usage
-It's easier to create using `ContextMenu` component if you don't need extra control of it.
+It's easier using `ContextMenu` component if you don't need extra control of it.
 ```tsx{6-8}
 import { ContextMenu } from '@contextmenu/react'
 

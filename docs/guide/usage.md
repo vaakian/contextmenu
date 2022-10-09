@@ -1,12 +1,12 @@
 # Usage
 
 ## How it works
-Firstly, you need to get the idea of how a `context menu` works, there are two <u>elements</u> involved when creating a `context menu`:
+Firstly, you need to get the idea of how a `context menu` is created, there are two <u>elements</u> involved when creating a `context menu`:
 
 1. An **menu** <u>element</u> as the `context menu`
 2. An **target** <u>element</u> that the `context menu` applies to, you would mostly **right click** on it.
 
-## example
+## Example
 
 ```typescript
 import { createContextMenu } from '@contextmenu/core'

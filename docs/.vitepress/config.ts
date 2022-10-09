@@ -42,8 +42,8 @@ export default defineConfig({
           { text: 'Installation', link: '/vue/' },
           { text: 'Component', link: '/vue/component' },
           { text: 'Hook', link: '/vue/hook' },
-          { text: 'Directive', link: 'vue/directive' },
-          { text: 'Advanced', link: 'vue/advanced' },
+          { text: 'Directive', link: '/vue/directive' },
+          { text: 'Advanced', link: '/vue/advanced' },
         ],
       },
       {
@@ -57,7 +57,14 @@ export default defineConfig({
     ],
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Guide', link: '/guide/' },
+      {
+        text: 'Guide',
+        items: [
+          { text: 'core', link: '/guide/' },
+          { text: 'Vue', link: '/vue/' },
+          { text: 'React', link: '/react/' },
+        ],
+      },
     ],
   },
 })
