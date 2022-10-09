@@ -13,6 +13,7 @@
     "types": ["vitest/globals"],
     "jsx": "preserve",
     "experimentalDecorators": true,
+    "noEmit": true,
     "paths": {
       // gain typescript inference
       "@contextmenu/core": ["./packages/core/src/index.ts"],
@@ -33,13 +34,18 @@
     "playground/**/*.vue",
     "meta",
     "vitest.config.ts",
-    "tests/**/*",
-    "scripts/*",
+    "tests/**/*.ts",
+    "scripts/*.ts",
     "docs"
   ],
   "exclude": [
     "node_modules",
     "**/**/dist",
-    "**/**/*.md"
-  ]
+    "**/**/*.md",
+    "tests/**/*.d.ts"
+  ],
+  // "references": [
+  //   { "path": "./playground/react" },
+  //   { "path": "./packages/react" }
+  // ]
 }

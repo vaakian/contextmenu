@@ -2,22 +2,20 @@
   "name": "@contextmenu/docs",
   "version": "0.0.1",
   "description": "Docs of @contextmenu/*",
+  "author": "vaakian <vaakian@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "docs:dev": "vitepress dev .",
     "docs:build": "vitepress build .",
     "docs:serve": "vitepress serve ."
   },
-  "author": "vaakian <vaakian@gmail.com>",
-  "license": "MIT",
-  "dependencies": {
-    "vitepress": "1.0.0-alpha.18",
-    "vue": "^3.2.40"
-  },
   "devDependencies": {
-    "@unocss/preset-attributify": "^0.45.15",
-    "@unocss/preset-icons": "^0.45.15",
-    "@unocss/preset-uno": "^0.45.15",
-    "@unocss/transformer-directives": "^0.45.26",
-    "unocss": "^0.45.15"
+    "@unocss/preset-attributify": "^0.45.29",
+    "@unocss/preset-icons": "^0.45.29",
+    "@unocss/preset-uno": "^0.45.29",
+    "@unocss/transformer-directives": "^0.45.29",
+    "unocss": "^0.45.29",
+    "vitepress": "1.0.0-alpha.19",
+    "vue": "^3.2.40"
   }
 }

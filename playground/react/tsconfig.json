@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "composite": true,
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
@@ -14,7 +15,7 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": false,
     "jsx": "react-jsx",
     // without overriding `react`
     "paths": {
@@ -22,7 +23,7 @@
       "@contextmenu/vue": ["../../packages/vue/src/index.ts"],
       "@contextmenu/react": ["../../packages/react/src/index.ts"],
       "@contextmenu/shared": ["../../packages/shared/src/index.ts"],
-      "@contextmenu/angular": ["../../packages/angular/src/index.ts"],
+      "@contextmenu/angular": ["../../packages/angular/src/index.ts"]
     }
   },
   "include": ["src"],
