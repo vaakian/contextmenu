@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useContextMenu } from '@contextmenu/vue'
+import { useContextMenu, vContextMenu } from '@contextmenu/vue'
 import Menu from './components/Menu.vue'
 import NestedMenu from './components/NestedMenu.vue'
 
-
-const menuRef = ref<HTMLElement>()
-const targetRef = ref<HTMLElement>()
+const menuRef = ref<HTMLElement | null>(null)
+const targetRef = ref<HTMLElement | null>(null)
 
 const hideOnClick = ref(true)
 
@@ -14,6 +13,8 @@ const ctx = useContextMenu(menuRef, {
   target: targetRef,
   hideOnClick,
 })
+
+const directiveRef = ref<HTMLElement | null>(null)
 </script>
 
 <template>
@@ -27,6 +28,14 @@ const ctx = useContextMenu(menuRef, {
     TARGET
   </div>
 
+  <div
+    ref="directiveRef"
+    class="w-20 h-20 bg-red"
+  >
+    TARGET2-Directive
+  </div>
+  <!-- the volar problem -->
+  <Menu v-contextMenu="{ target: () => directiveRef }" />
 
   <NestedMenu />
 </template>

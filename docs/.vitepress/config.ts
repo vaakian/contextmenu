@@ -39,15 +39,17 @@ export default defineConfig({
       {
         text: 'Vue',
         items: [
-          { text: 'Install', link: '/vue/#installation' },
-          { text: 'Component', link: '/vue/#component-usage' },
-          { text: 'Hook', link: '/vue/#hook-usage' },
+          { text: 'Installation', link: '/vue/' },
+          { text: 'Component', link: '/vue/component' },
+          { text: 'Hook', link: '/vue/hook' },
+          { text: 'Directive', link: 'vue/directive' },
+          { text: 'Advanced', link: 'vue/advanced' },
         ],
       },
       {
         text: 'React',
         items: [
-          { text: 'Install', link: '/react/#installation' },
+          { text: 'Installation', link: '/react/#installation' },
           { text: 'Component', link: '/react/#component-usage' },
           { text: 'Hook', link: '/react/#hook-usage' },
         ],

@@ -31,7 +31,7 @@ features:
     details:  Use opted-in UI component or handle everything style yourself.
     icon: 🎨
   - title: Fully tree-shakeable
-    details: Only bundles what your need.
+    details: Only bundles what you need.
     icon: 🎄
   - title: Type strong
     details: Fully written in TypeScript, everything is typed.

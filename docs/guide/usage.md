@@ -68,8 +68,26 @@ ContextMenu => MenuGroup{ rootElement, MenuItems }
 You can use `createNestedMenu` function to do that, just provide a valid `descriptor` that describes what your menu looks like.
 
 ### DEMO
-```ts
-const subMenu1 = document.createElement('div')
+HTML structure
+```html
+<div id="group">
+  <div id="item1">Item1</div>
+  <div id="item2">Item2</div>
+  <div id="item3">
+    <p>Item3</p>
+    <div id="nestedGroup">
+      <div id="item1">Nested1</div>
+      <div id="item2">Nested2</div>
+    </div>
+  </div>
+</div>
+```
+
+JavaScript code
+```js
+import { createNestedMenu } from '@contextmenu/core'
+
+const subMenu = document.createElement('div')
 subMenu1.innerHTML = '<li>Nested1</li>'
 + '<li>Nested2</li>'
 + '<li>Nested3</li>'
@@ -80,8 +98,8 @@ const ctx = createNestedMenu({
   el: '#group',
   items: [
     { el: '#item1' },
-    { el: '#item2', subMenu: { el: subMenu1 } },
-    { el: '#item3', subMenu: { el: '#subMenu2' } },
+    { el: '#item2', subMenu: { el: subMenu } },
+    { el: '#item3', subMenu: { el: '#nestedGroup' } },
   ],
 })
 ```
