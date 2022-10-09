@@ -58,7 +58,7 @@ import { ContextMenu, MenuGroup, MenuItem } from '@contextmenu/vue'
   right click any where on the page
 </Area>
 
-<NestedMenu z-20/>
+<NestedMenu z-20 />
 
 ## Access internal native instance
 You can easily access **<u>native instance</u>**(which is used internally) by using `v-model` to get more controllability.
