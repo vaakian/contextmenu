@@ -26,7 +26,7 @@ describe('contextMenu', () => {
       ctx = createContextMenu(menuElement)
     })
     it('should be initialized', async () => {
-      expect(ctx.menuElement).toBe(menuElement)
+      expect(ctx.element).toBe(menuElement)
       expectToBeHidden(menuElement)
       expect(menuElement.style!.position).toBe('fixed')
       expect(document.body.contains(menuElement)).toBeTruthy()
@@ -85,7 +85,7 @@ describe('contextMenu', () => {
       element.id = 'menu'
       const ctx = createContextMenu('#menu')
 
-      expect(ctx.menuElement).toBe(element)
+      expect(ctx.element).toBe(element)
     })
   })
 })

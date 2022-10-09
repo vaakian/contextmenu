@@ -1,6 +1,7 @@
 import type { Fn, Position, StylableElement } from '@contextmenu/shared'
 import { defaultDocument, defaultWindow, isClient, isStylableElement } from '@contextmenu/shared'
 import { _addEventListener } from './eventListener'
+import type { MenuGroup } from './menu'
 import { calculateOffset } from './utils'
 
 export type OffsetType = number | string | null
@@ -49,11 +50,12 @@ export class ContextMenu {
    */
   enabled = true
 
-  public readonly menuElement!: StylableElement
-  public readonly targetElement!: EventTarget
+  readonly element!: StylableElement
+  readonly targetElement!: EventTarget
+  menuGroup?: MenuGroup
   constructor(
     menu: StylableElement | string,
-    public readonly options: ContextMenuOptions = {},
+    readonly options: ContextMenuOptions = {},
   ) {
     // ssr
     if (!isClient)
@@ -66,7 +68,7 @@ export class ContextMenu {
 
     const menuElement = typeof menu === 'string' ? document.querySelector(menu) : menu
     if (menuElement && isStylableElement(menuElement))
-      this.menuElement = menuElement
+      this.element = menuElement
 
     options.hideOnClick = options.hideOnClick ?? true
 
@@ -74,20 +76,20 @@ export class ContextMenu {
   }
 
   private initMenuElement() {
-    this.menuElement.style.setProperty('position', 'fixed')
-    this.menuElement.style.setProperty('visibility', 'hidden')
+    this.element.style.setProperty('position', 'fixed')
+    this.element.style.setProperty('visibility', 'hidden')
 
-    if (!defaultDocument!.contains(this.menuElement))
-      defaultDocument!.body.appendChild(this.menuElement)
+    if (!defaultDocument!.contains(this.element))
+      defaultDocument!.body.appendChild(this.element)
 
     this.register()
   }
 
   setVisibility(v: 'visible' | 'hidden') {
-    const previousVisibility = this.menuElement.style.getPropertyValue('visibility')
+    const previousVisibility = this.element.style.getPropertyValue('visibility')
     if (previousVisibility !== v) {
       this.options.onVisibleChange?.(v === 'visible')
-      this.menuElement.style.setProperty('visibility', v)
+      this.element.style.setProperty('visibility', v)
     }
   }
 
@@ -100,7 +102,7 @@ export class ContextMenu {
    */
   patchOffset(offset: Partial<Offset>) {
     for (const [key, value] of Object.entries(offset))
-      this.menuElement.style.setProperty(key, value === null ? null : `${value}px`)
+      this.element.style.setProperty(key, value === null ? null : `${value}px`)
   }
 
   /**
@@ -122,15 +124,15 @@ export class ContextMenu {
    * @returns
    */
   private register() {
-    if (!(defaultWindow && this.menuElement))
+    if (!(defaultWindow && this.element))
       return
 
     const hide = () => this.hide()
 
     const updateOffset = (mousePosition: Position) => {
       const menuSize = {
-        width: this.menuElement.clientWidth,
-        height: this.menuElement.clientHeight,
+        width: this.element.clientWidth,
+        height: this.element.clientHeight,
       }
       const windowSize = {
         width: defaultDocument!.documentElement.clientWidth,
@@ -173,8 +175,8 @@ export class ContextMenu {
       _addEventListener(defaultWindow!, 'scroll', hide),
       _addEventListener(defaultWindow!, 'blur', hide),
       _addEventListener(defaultWindow!, 'resize', hide),
-      _addEventListener(this.menuElement, 'click', menuClickHandler),
-      _addEventListener(this.menuElement, 'contextmenu', (e) => {
+      _addEventListener(this.element, 'click', menuClickHandler),
+      _addEventListener(this.element, 'contextmenu', (e) => {
         // no action on right clicking on itself.
         e.preventDefault()
         e.stopPropagation()
