@@ -1,7 +1,8 @@
 import './style.css'
-import { setupGlobalMenu, setupTargetMenu } from './menu'
+import { /* setupGlobalMenu,  */setupNestedMenu, setupTargetMenu } from './menu'
 
-const ctxGlobal = setupGlobalMenu()
+// const ctxGlobal = setupGlobalMenu()
+const ctxGlobal = setupNestedMenu()
 const ctxTarget = setupTargetMenu()
 
 // debug

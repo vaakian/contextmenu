@@ -42,6 +42,7 @@ h1 {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  height: 150vh;
 }
 
 .logo {
@@ -113,4 +114,22 @@ button:focus-visible {
 
 .nested-menu > div:hover {
   background-color: #ddd;
+}
+
+div[id^="item"] {
+  border-block: 1px solid red;
+}
+
+div[id^="item"]:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+
+div[id^="item"] >*:hover {
+  cursor: initial;
+}
+
+div[id^="group"] {
+  text-align: center;
+  border: 1px solid gray;
 }

@@ -29,7 +29,7 @@ yarn add @contextmenu/vue
 ## Component usage
 It's easier using `ContextMenu` component if you don't need extra control of it.
 ```Vue{6-8}
-<script setup lang="ts">
+<script setup>
 import { ContextMenu } from '@contextmenu/vue'
 </script>
 
@@ -42,7 +42,7 @@ import { ContextMenu } from '@contextmenu/vue'
 
 Additionally, you can specify the target element as well as **hook usage** by passing `options` to the props.
 ```vue{4,8,11}
-<script setup lang="ts">
+<script setup>
 import { ContextMenu } from '@contextmenu/vue'
 import { ref } from 'vue'
 const target = ref(null)
@@ -74,7 +74,7 @@ const target = ref(null)
 Use `useContextMenu` hook to programmatically create a menu.
 
 ```Vue{5,6,10-12}
-<script setup lang="ts">
+<script setup>
 import { ref } from 'vue'
 import { useContextMenu } from '@contextmenu/vue'
 
@@ -99,7 +99,7 @@ The `MenuGroup` and `MenuItem` component **DOES NOT** provide any styles. You ne
 You can easily create nested sub menu by using `MenuGroup` and `MenuItem` component.
 
 ```vue
-<script setup lang="ts">
+<script setup>
 import { ContextMenu, MenuGroup, MenuItem } from '@contextmenu/vue'
 </script>
 
@@ -141,7 +141,7 @@ import { ContextMenu, MenuGroup, MenuItem } from '@contextmenu/vue'
 ### 2) Get access internal native instance
 You can easily access **<u>native instance</u>**(which is used internally) by using `v-model` to gain more controllability of it.
 ```vue{7,10,15,18}
-<script setup lang="ts">
+<script setup>
 import { ref } from 'vue'
 import type { MenuGroupInstance } from '@contextmenu/core'
 import { ContextMenu, MenuGroup, MenuItem } from '@contextmenu/vue'

@@ -86,3 +86,9 @@ export function calculateSubMenuOffset(
     { overflowX, overflowY },
   )
 }
+
+export function resolveElement<T extends Element>(el: string | T) {
+  if (typeof el === 'string')
+    return document.querySelector(el) as T
+  return el
+}

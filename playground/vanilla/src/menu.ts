@@ -1,4 +1,4 @@
-import { MenuGroup, MenuItem, createContextMenu } from '@contextmenu/core'
+import { MenuGroup, MenuItem, createContextMenu, createNestedMenu } from '@contextmenu/core'
 
 // function initGlobalMenuElement() {
 //   document.querySelector<HTMLDivElement>('#app')!.append(createElement(`
@@ -15,9 +15,9 @@ export function setupGlobalMenu() {
   // initGlobalMenuElement()
   // const menu = document.getElementById('globalMenu')!
 
-  const nestedMenu = createNestedMenu()
+  const nestedMenu = _createNestedMenu()
   nestedMenu.element.classList.add('nested-menu')
-  const subMenu = createNestedMenu('nested')
+  const subMenu = _createNestedMenu('nested')
   subMenu.element.classList.add('nested-menu')
   const items = [...nestedMenu.menuItems.values()]
 
@@ -57,7 +57,7 @@ export function createElement(template: string) {
   return container.firstElementChild!
 }
 
-function createNestedMenu(prefix = 'item') {
+function _createNestedMenu(prefix = 'item') {
   const menu = new MenuGroup(undefined, {
     offset: {
       left: 20,
@@ -74,4 +74,38 @@ function createNestedMenu(prefix = 'item') {
   menu.add(...items)
 
   return menu
+}
+
+function initNestedMenuElement() {
+  document.querySelector<HTMLDivElement>('#app')!.append(createElement(`
+    <div>
+      <div id="group">
+        <div id="item1">item1</div>
+        <div id="item2">item2</div>
+        <div id="item3">
+          item3
+          <div id="group_1">
+          Hello
+          </div>
+        </div>
+      </div>
+    </div>
+`))
+}
+
+export function setupNestedMenu() {
+  initNestedMenuElement()
+
+  const subMenu1 = document.createElement('div')
+  subMenu1.innerHTML = '<li>OK!</li><li>OK!</li><li>OK!</li>'
+  subMenu1.id = 'group_2'
+
+  return createNestedMenu({
+    el: '#group',
+    items: [
+      { el: '#item1' },
+      { el: '#item2', subMenu: { el: subMenu1 } },
+      { el: '#item3', subMenu: { el: '#group_1' } },
+    ],
+  })
 }

@@ -4,10 +4,10 @@ import type { StylableElement } from '@contextmenu/shared'
 import type { MenuGroupInstance, MenuItemInstance } from '@contextmenu/core'
 export interface RenderableComponent {
   /**
-     * The element that the component should be rendered as
-     *
-     * @default 'div'
-     */
+   * The element that the component should be rendered as
+   *
+   * @default 'div'
+   */
   as?: Object | string
 }
 

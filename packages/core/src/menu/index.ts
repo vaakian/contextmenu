@@ -1,2 +1,3 @@
-export { MenuGroup } from './menuGroup'
-export { MenuItem } from './menuItem'
+export * from './menuGroup'
+export * from './menuItem'
+export * from './createNestedMenu'
