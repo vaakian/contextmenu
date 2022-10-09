@@ -34,7 +34,7 @@ const ctxMenu = createContextMenu(menu)
 ```
 
 
-## Demo
+### Demo
 <script setup>
 import { ref } from 'vue'
 import { useContextMenu } from '@contextmenu/vue'
@@ -53,6 +53,57 @@ console.log(ctx)
 right click on me
 </Area>
 <Menu ref="menuRef" />
+
+## Nested Menu
+
+The `ContextMenu` caries an <u>element</u> as the menu that pops up while triggering `contextmenu` event (mostly by right clicking), the <u>element</u> could be your custom DOM, or, the built-in nested menu `MenuGroup`.
+
+The structure may look like:
+```shell
+ContextMenu => A custom DOM element
+# or
+ContextMenu => MenuGroup{ rootElement, MenuItems }
+```
+
+You can use `createNestedMenu` function to do that, just provide a valid `descriptor` that describes what your menu looks like.
+
+### DEMO
+```ts
+const subMenu1 = document.createElement('div')
+subMenu1.innerHTML = '<li>Nested1</li>'
++ '<li>Nested2</li>'
++ '<li>Nested3</li>'
+
+const ctx = createNestedMenu({
+  // `el` could be a CSS selector or a real DOM.
+  // You must ensure the DOM of the selector exists if providing a selector.
+  el: '#group',
+  items: [
+    { el: '#item1' },
+    { el: '#item2', subMenu: { el: subMenu1 } },
+    { el: '#item3', subMenu: { el: '#subMenu2' } },
+  ],
+})
+```
+
+### Type Definition
+```ts
+export function createNestedMenu(
+  descriptor: NestedMenu,
+  options?: ContextMenuOptions
+): ContextMenu
+
+export type NestedMenuElement = string | StylableElement
+
+export interface NestedMenu {
+  el: NestedMenuElement
+  items?: {
+    el: NestedMenuElement
+    subMenu?: NestedMenu
+  }[]
+}
+
+```
 
 ## Framework support
 The description introduces the basic idea and it's used in native javascript, we also provide high level framework preset:

@@ -15,6 +15,22 @@ npm i @contextmenu/core
 
 ## CDN
 
-```javascript
+### Native JavaScript
+
+```html
 <script src="https://unpkg.com/@contextmenu/core"></script>
+```
+
+### Vue
+You should add `@contextmenu/core` to your page as well.
+```html
+<script src="https://unpkg.com/@contextmenu/core"></script>
+<script src="https://unpkg.com/@contextmenu/vue"></script>
+```
+
+### React
+Same as Vue, you should add `@contextmenu/core` to your page as well.
+```html
+<script src="https://unpkg.com/@contextmenu/core"></script>
+<script src="https://unpkg.com/@contextmenu/react"></script>
 ```

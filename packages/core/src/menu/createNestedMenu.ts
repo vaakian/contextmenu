@@ -1,5 +1,6 @@
 // TODO: Add test cases
 import type { StylableElement } from '@contextmenu/shared'
+import type { ContextMenuOptions } from '../contextMenu'
 import { createContextMenu } from '../contextMenu'
 import { resolveElement } from '../utils'
 import { MenuGroup } from './menuGroup'
@@ -53,7 +54,7 @@ export function createNestedMenuGroup(descriptor: NestedMenu) {
  * @param options
  * @returns
  */
-export function createNestedMenu(descriptor: NestedMenu, options?: Parameters<typeof createContextMenu>[1]) {
+export function createNestedMenu(descriptor: NestedMenu, options?: ContextMenuOptions) {
   const group = createNestedMenuGroup(descriptor)
   const ctx = createContextMenu(group.element, options)
   ctx.menuGroup = group
