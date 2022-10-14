@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, shallowRef } from 'vue'
 import { useContextMenu, vContextMenu } from '@contextmenu/vue'
+import type { StylableElement } from '@contextmenu/shared'
 import Menu from './components/Menu.vue'
 import NestedMenu from './components/NestedMenu.vue'
 
-const menuRef = ref<HTMLElement | null>(null)
-const targetRef = ref<HTMLElement | null>(null)
+const menuRef = ref<StylableElement | null>(null)
+const targetRef = ref<StylableElement | null>(null)
 
 const hideOnClick = ref(true)
 
@@ -35,8 +36,7 @@ const directiveRef = ref<HTMLElement | null>(null)
     TARGET2-Directive
   </div>
   <!-- the volar problem -->
-  <Menu v-contextMenu="{ target: () => directiveRef }" />
-
+  <Menu v-contextMenu="{ target: directiveRef }" />
   <NestedMenu />
 </template>
 

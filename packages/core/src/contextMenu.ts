@@ -67,8 +67,13 @@ export class ContextMenu {
     this.targetElement = targetElement!
 
     const menuElement = typeof menu === 'string' ? document.querySelector(menu) : menu
-    if (menuElement && isStylableElement(menuElement))
-      this.element = menuElement
+
+    if (menuElement && !isStylableElement(menuElement)) {
+      console.warn('unable to use an un-stylable element as context menu')
+      return
+    }
+
+    this.element = menuElement!
 
     options.hideOnClick = options.hideOnClick ?? true
 

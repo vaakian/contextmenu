@@ -1,48 +1,45 @@
 import type { ContextMenu } from '@contextmenu/core'
 import type { StylableElement } from '@contextmenu/shared'
-import { isStylableElement } from '@contextmenu/shared'
-import type { Directive } from 'vue-demi'
-import { watch } from 'vue-demi'
+import type { Directive, Ref, ShallowRef } from 'vue-demi'
+import { ref } from 'vue-demi'
 import type { UseContextMenuOptions } from './hook'
 import { useContextMenu } from './hook'
-import type { MayBeElementRef } from './types'
 
 /** @description element => ContextMenu */
-const ctxMap = new WeakMap<StylableElement, ContextMenu>()
+const ctxMap = new WeakMap<StylableElement, ShallowRef<ContextMenu | undefined>>()
+
+/** @description element => ref<element> */
+const targetMap = new WeakMap<StylableElement, Ref>()
 
 export interface DirectiveOptions extends Omit<UseContextMenuOptions, 'target'> {
   /**
    * The `target` that the menu applies to
-   * because the limitation of Vue directives,
-   * you have to provide a function that returns the `target`.
    */
-  target: () => MayBeElementRef
+  target: StylableElement | undefined | null
 }
 
 export const vContextMenu: Directive<StylableElement, DirectiveOptions | undefined> = {
-  mounted(el, { value: options }) {
-    if (!isStylableElement(el)) {
-      console.warn('unable to apply context menu on an un-stylable element')
-      return
+  mounted(el, { value }) {
+    const hookOptions: UseContextMenuOptions = { ...value }
+    if (typeof value?.target !== 'undefined') {
+      // store the target as a `ref`
+      // to update it in `update` hook
+      hookOptions.target = ref(value?.target as unknown as undefined)
+      targetMap.set(el, hookOptions.target)
     }
 
-    const hookOptions = options
-      ? {
-          ...options,
-          target: options.target(),
-        }
-      : undefined
+    const ctx = useContextMenu(el, hookOptions)
 
-    const { instance } = useContextMenu(el, hookOptions)
-    watch(
-      () => instance.value,
-      (ctx) => {
-        if (ctx)
-          ctxMap.set(el, ctx)
-      },
-    )
+    ctxMap.set(el, ctx.instance)
   },
-  unmounted(el) {
-    ctxMap.get(el)?.cleanup()
+  updated(el, { value }) {
+    const targetRef = targetMap.get(el)
+    if (!targetRef)
+      return
+    // update element ref
+    targetRef.value = value?.target
+  },
+  beforeUnmount(el) {
+    ctxMap.get(el)?.value?.cleanup()
   },
 }
