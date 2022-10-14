@@ -1,16 +1,7 @@
 <!-- eslint-disable no-console -->
 <script setup lang="ts">
-import type { MenuGroupInstance, MenuItemInstance } from '@contextmenu/core'
 import { ContextMenu, MenuGroup, MenuItem } from '@contextmenu/vue'
-import { ref, watchEffect } from 'vue'
-
-const groupInstance = ref<MenuGroupInstance>()
-const itemInstance = ref<MenuItemInstance>()
-
-watchEffect(() => {
-  console.log(groupInstance.value)
-  console.log(itemInstance.value)
-})
+import { ref } from 'vue'
 
 const showSub = ref(true)
 </script>
@@ -22,14 +13,14 @@ const showSub = ref(true)
     </button>
   </div>
   <ContextMenu>
-    <MenuGroup v-model="groupInstance" class="menu">
+    <MenuGroup class="menu">
       <MenuItem class="item">
         Item 1
       </MenuItem>
       <MenuItem class="item">
         Item 2
       </MenuItem>
-      <MenuItem v-model="itemInstance" class="item">
+      <MenuItem class="item">
         SubMenu1
         <!-- sub menu content -->
         <MenuGroup v-if="showSub" class="menu">

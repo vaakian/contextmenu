@@ -1,35 +1,32 @@
-import { MenuItem } from '@contextmenu/core'
+import { configureMenuItem } from '@contextmenu/core'
 import type { StylableElement } from '@contextmenu/shared'
-import { defineComponent, h, inject, onUnmounted, provide, ref, unref, watch } from 'vue-demi'
-import { MenuGroupInjectionKey, MenuItemInjectionKey } from './types'
+import { noop } from '@contextmenu/shared'
+import { defineComponent, h, onUnmounted, ref, watch } from 'vue-demi'
+import { unrefElement } from './utils'
 
 export default defineComponent<{
-  modelValue?: MenuItem | undefined | null
+  // modelValue?: MenuItem | undefined | null
 }>({
-  setup(props, { slots, emit }) {
-    const instance = new MenuItem()
+  setup(props, { slots }) {
     const itemRef = ref<StylableElement>()
 
-    const parentMenuGroup = inject(MenuGroupInjectionKey)
-
+    let cleanup = noop
     watch(
-      () => unref(itemRef),
+      () => unrefElement(itemRef),
       (el) => {
-        if (el) {
-          instance.element = el
-          if (parentMenuGroup)
-            instance.attach(parentMenuGroup)
-        }
+        cleanup()
+
+        if (el)
+          cleanup = configureMenuItem(el).unregisterMouseEvent
       },
     )
 
     // get instance using v-model="instance"
-    emit('update:modelValue', instance)
-    provide(MenuItemInjectionKey, instance)
+    // emit('update:modelValue', instance)
 
     // cleanup
     onUnmounted(() => {
-      instance.dispose()
+      cleanup()
     })
 
     return () => {
