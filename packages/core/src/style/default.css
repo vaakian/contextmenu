@@ -1,0 +1,6 @@
+/* TODO: inject this in @contextmenu/core */
+*[data-is-menu-item=""] > *[data-is-menu-group=""] {
+  position: fixed !important;
+  /* hidden by default */
+  visibility: hidden;
+}

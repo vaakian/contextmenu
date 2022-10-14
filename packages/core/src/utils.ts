@@ -1,6 +1,6 @@
 import type { Position, Size } from '@contextmenu/shared'
 import type { Offset, OffsetType } from './contextMenu'
-import type { MenuGroup, MenuItem } from './menu'
+// import type { MenuGroup, MenuItem } from './menu'
 
 /**
  * Calculate the `position: fixed/absolute` position offset of {@link menuSize}
@@ -18,7 +18,10 @@ export function calculateOffset(
     overflowX: boolean
     overflowY: boolean
   },
-): Offset {
+): Offset & {
+    overflowX: boolean
+    overflowY: boolean
+  } {
   let [left, top, right, bottom]: OffsetType[] = [mousePosition.x, mousePosition.y, null, null]
 
   const { overflowX, overflowY } = specifiedOverflow ?? checkOverflow(mousePosition, menuSize, containerSize)
@@ -34,6 +37,8 @@ export function calculateOffset(
     right,
     top,
     bottom,
+    overflowX,
+    overflowY,
   }
 }
 
@@ -43,6 +48,10 @@ function checkOverflow(mousePosition: Position, menuSize: Size, containerSize: S
   return { overflowX, overflowY }
 }
 
+interface ContainElement {
+  element: Element
+}
+
 /**
  * Determine the position of a sub menu
  * @param menuItem
@@ -50,8 +59,8 @@ function checkOverflow(mousePosition: Position, menuSize: Size, containerSize: S
  * @param containerSize
  */
 export function calculateSubMenuOffset(
-  menuItem: MenuItem,
-  subMenu: MenuGroup,
+  menuItem: ContainElement,
+  subMenu: ContainElement,
   containerSize: Size,
 ) {
   const itemRect = menuItem.element.getBoundingClientRect()

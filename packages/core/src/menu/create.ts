@@ -3,8 +3,8 @@ import type { StylableElement } from '@contextmenu/shared'
 import type { ContextMenuOptions } from '../contextMenu'
 import { createContextMenu } from '../contextMenu'
 import { resolveElement } from '../utils'
-import { MenuGroup } from './menuGroup'
-import { MenuItem } from './menuItem'
+import { configureMenuGroup } from './menuGroup'
+import { configureMenuItem } from './menuItem'
 export type NestedMenuElement = string | StylableElement
 
 export interface NestedMenu {
@@ -25,27 +25,25 @@ export interface NestedMenu {
 export function createNestedMenuGroup(descriptor: NestedMenu) {
   const { el: elOrSelector, items = [] } = descriptor
   const el = resolveElement<StylableElement>(elOrSelector)
-  const groupInstance = new MenuGroup()
-  if (!el)
-    return groupInstance
 
-  groupInstance.element = el
+  configureMenuGroup(el)
 
-  items.forEach(({ el: elOrSelector, subMenu }) => {
-    const el = resolveElement<StylableElement>(elOrSelector)
-    if (!el)
-      return
+  // run at next render,
+  // so that `configureMenuItem` can access the configured `MenuGroup` correctly.
+  queueMicrotask(() => {
+    items.forEach((item) => {
+      const itemElement = resolveElement<StylableElement>(item.el)
+      configureMenuItem(itemElement)
 
-    const itemInstance = new MenuItem()
-    itemInstance.element = el
-
-    if (subMenu)
-      itemInstance.setSubMenu(createNestedMenuGroup(subMenu))
-
-    groupInstance.add(itemInstance)
+      if (item.subMenu) {
+        const subMenuElement = createNestedMenuGroup(item.subMenu)
+        // append if not inside it
+        itemElement.append(subMenuElement)
+      }
+    })
   })
 
-  return groupInstance
+  return el
 }
 
 /**
@@ -55,8 +53,6 @@ export function createNestedMenuGroup(descriptor: NestedMenu) {
  * @returns
  */
 export function createNestedMenu(descriptor: NestedMenu, options?: ContextMenuOptions) {
-  const group = createNestedMenuGroup(descriptor)
-  const ctx = createContextMenu(group.element, options)
-  ctx.menuGroup = group
-  return ctx
+  const rootGroupElement = createNestedMenuGroup(descriptor)
+  return createContextMenu(rootGroupElement, options)
 }

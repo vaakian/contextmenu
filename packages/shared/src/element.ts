@@ -8,7 +8,11 @@ export interface Position {
   y: number
 }
 
-export type StylableElement = HTMLElement | SVGAElement
+// export type StylableElement = HTMLElement | SVGAElement
+export interface StylableElement extends Element {
+  style: ElementCSSInlineStyle['style']
+  dataset: DOMStringMap
+}
 
 export const isStylableElement = (el: Element): el is StylableElement => {
   return el instanceof HTMLElement || el instanceof SVGAElement

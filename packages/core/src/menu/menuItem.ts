@@ -1,156 +1,85 @@
-import type { Fn, StylableElement } from '@contextmenu/shared'
-import { defaultWindow, hideStylableElement, noop, showStylableElement } from '@contextmenu/shared'
+import type { StylableElement } from '@contextmenu/shared'
+import { defaultWindow, hideStylableElement, isStylableElement, showStylableElement } from '@contextmenu/shared'
 import { _addEventListener } from '../eventListener'
 import { calculateSubMenuOffset } from '../utils'
-import type { MenuGroup } from '.'
 
-export class MenuItem {
-  /**
-   * The root wrapper Element
-   */
-  element: StylableElement = document.createElement('div')
+export const configureMenuItem = (element: StylableElement) => {
+  // just tag it, no value needed.
+  element.dataset.isMenuItem = ''
 
-  /**
-   * The parent menu group
-   */
-  parentMenu: MenuGroup | null = null
+  const unregisterMouseEvent = registerMouseEvent(element)
 
-  /**
-   * Unregister mouse event listener
-   */
-  cleanup: Fn = noop
+  queueMicrotask(() => {
+    hideSubMenu(element)
+    setSubMenuPositioning(element)
+  })
 
-  /**
-   * MenuItem
-   * @param subMenu
-   */
-  subMenu: MenuGroup | null = null
-  constructor(
-    initialSubMenu?: MenuGroup | null,
-  ) {
-    this.element.style.position = 'relative'
-
-    if (initialSubMenu)
-      this.setSubMenu(initialSubMenu)
-  }
-
-  /**
-   * @internal
-   * Initialize trigger events
-   *
-   * @returns unregister fn
-   */
-  private registerSubMenu() {
-    // cleanup first
-    this.cleanup()
-
-    // do nothing if there's no subMenu
-    if (!this.subMenu)
-      return noop
-
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const menuItem = this
-    const subMenu = this.subMenu
-    const subMenuElement = this.subMenu.element
-
-    hideStylableElement(subMenuElement)
-
-    // initialize style
-    subMenuElement.style.position = 'fixed'
-    // subMenuElement.style.transform = `translateX(${subMenu.offset.left}px, ${subMenu.offset.top}px)`
-
-    const cleanups = [
-      _addEventListener(
-        this.element,
-        'mouseenter',
-        () => {
-          // 1. determine the position.
-          const position = calculateSubMenuOffset(
-            menuItem,
-            subMenu,
-            {
-              width: defaultWindow!.document.documentElement.clientWidth,
-              height: defaultWindow!.document.documentElement.clientHeight,
-            },
-          )
-          // 2. set it.
-          for (const [key, value] of Object.entries(position))
-            subMenuElement.style.setProperty(key, typeof value === 'number' ? `${value}px` : value)
-
-          // 3. show it.
-          showStylableElement(subMenuElement)
-        },
-      ),
-      _addEventListener(
-        this.element,
-        'mouseleave',
-        () => hideStylableElement(subMenuElement),
-      ),
-      _addEventListener(
-        this.element,
-        'click',
-        () => hideStylableElement(subMenuElement),
-      ),
-    ]
-    this.cleanup = () => {
-      hideStylableElement(subMenuElement)
-      cleanups.forEach(f => f())
-      // reset
-      this.cleanup = noop
-    }
-  }
-
-  /**
-   * Attach to a MenuGroup
-   */
-  attach(menu: MenuGroup) {
-    menu.add(this)
-  }
-
-  /**
-   * Detach from current MenuGroup
-   */
-  detach() {
-    this.parentMenu?.remove(this)
-  }
-
-  /**
-   * Set a new sub menu
-   * @param subMenu
-   */
-  setSubMenu(subMenu: MenuGroup) {
-    this.subMenu = subMenu
-
-    // append it to the DOM
-    this.element.append(subMenu.element)
-
-    // tag it aware of where it's in
-    subMenu.parentMenuItem = this
-
-    this.registerSubMenu()
-  }
-
-  /**
-   * Remove existing sub menu
-   */
-  removeSubMenu() {
-    this.cleanup()
-
-    // remove it from the DOM
-    this.subMenu?.element.remove()
-
-    this.subMenu = null
-  }
-
-  dispose() {
-    // dispose sub menu,
-    // so that we could cause a chained dispose.
-    this.subMenu?.dispose()
-
-    this.removeSubMenu() // remove sub menu
-    this.detach() // remove from parent menu
-    this.element.remove() // remove from the DOM
+  return {
+    unregisterMouseEvent,
   }
 }
 
-export type MenuItemInstance = InstanceType<typeof MenuItem>
+/**
+ * Register mouse event
+ * @param element
+ * @returns
+ */
+function registerMouseEvent(element: StylableElement) {
+  const show = () => showSubMenu(element)
+  const hide = () => hideSubMenu(element)
+
+  const cleanups = [
+    _addEventListener(element, 'mouseenter', show),
+    _addEventListener(element, 'mouseleave', hide),
+    _addEventListener(element, 'click', hide),
+    _addEventListener(defaultWindow!, 'scroll', hide),
+  ]
+
+  return () => cleanups.forEach(cleanup => cleanup())
+}
+
+function getSubMenu(element: StylableElement) {
+  return element.querySelector('*[data-is-menu-group=""]')
+}
+
+function hideSubMenu(element: StylableElement) {
+  const subMenu = getSubMenu(element)
+  if (!subMenu || !isStylableElement(subMenu))
+    return
+
+  hideStylableElement(subMenu)
+}
+
+function showSubMenu(element: StylableElement) {
+  const subMenu = getSubMenu(element)
+  if (!subMenu || !isStylableElement(subMenu))
+    return
+  // TODO: determine the position
+
+  // 1. determine the position.
+  const position = calculateSubMenuOffset(
+    { element },
+    { element: subMenu },
+    {
+      width: defaultWindow!.document.documentElement.clientWidth,
+      height: defaultWindow!.document.documentElement.clientHeight,
+    },
+  )
+
+  // 2. set it.
+  for (const [key, value] of Object.entries(position))
+    subMenu.style.setProperty(key, typeof value === 'number' ? `${value}px` : value)
+
+  // 3. tag overflow state
+  subMenu.dataset.overflowX = position.overflowX ? 'true' : 'false'
+  subMenu.dataset.overflowY = position.overflowY ? 'true' : 'false'
+
+  // 3. show it.
+  showStylableElement(subMenu)
+}
+
+function setSubMenuPositioning(element: StylableElement) {
+  const subMenu = getSubMenu(element)
+  if (subMenu && isStylableElement(subMenu))
+    subMenu.style.position = 'fixed'
+}
