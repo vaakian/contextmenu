@@ -61,7 +61,7 @@ import { ContextMenu, MenuGroup, MenuItem } from '@contextmenu/vue'
 <NestedMenu z-20 />
 
 ## Access internal native instance
-You can easily access **<u>native instance</u>**(which is used internally) by using `v-model` to get more controllability.
+You can easily access **<u>native p</u>**(which is used internally) by using `v-model` to get more controllability.
 ```vue{7,10,15,18}
 <script setup>
 import { ref } from 'vue'

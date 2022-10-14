@@ -20,21 +20,19 @@ import { vContextMenu } from '@contextmenu/vue'
 
 ### With options
 
-:::info
-Due to the limitation of Vue, you should provide a function returns the `target`.
-:::
+Pass options same as `useContextMenu`.
 ```vue{4,11}
 <script setup>
 import { vContextMenu } from '@contextmenu/vue'
 import { ref } from 'vue'
-const target = ref(null)
+const targetRef = ref(null)
 </script>
 
 <template>
   <div ref="target">
     right click on me.
   </div>
-  <div v-contextMenu="{ target: () => target }">
+  <div v-contextMenu="{ target: targetRef }">
     place context menu content here.
   </div>
 </template>
