@@ -1,7 +1,6 @@
 import type { Fn, Position, StylableElement } from '@contextmenu/shared'
 import { defaultDocument, defaultWindow, isClient, isStylableElement } from '@contextmenu/shared'
 import { _addEventListener } from './eventListener'
-import type { MenuGroup } from './menu'
 import { calculateOffset } from './utils'
 
 export type OffsetType = number | string | null
@@ -52,7 +51,6 @@ export class ContextMenu {
 
   readonly element!: StylableElement
   readonly targetElement!: EventTarget
-  menuGroup?: MenuGroup
   constructor(
     menu: StylableElement | string,
     readonly options: ContextMenuOptions = {},

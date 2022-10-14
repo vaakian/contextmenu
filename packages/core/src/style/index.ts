@@ -1,4 +1,4 @@
-import { defaultWindow } from '@contextmenu/shared'
+import { defaultWindow, isClient } from '@contextmenu/shared'
 
 // import css from './default.css'
 const css = `
@@ -10,12 +10,20 @@ const css = `
 }
 `
 
+function createStyleTag() {
+  let tag: HTMLStyleElement = null as unknown as HTMLStyleElement
+  if (isClient) {
+    tag = document.createElement('style')
+    tag.textContent = css
+    tag.setAttribute('type', 'text-css')
+  }
+  return tag
+}
+
 // make singleton styleTag to avoid duplicate appending.
-const styleTag = document.createElement('style')
-styleTag.textContent = css
-styleTag.setAttribute('type', 'text-css')
+const styleTag = /* #__PURE__ */ createStyleTag()
 
 export const injectDefaultStyle = () => {
-  if (defaultWindow)
-    defaultWindow.document.head.append(styleTag)
+  if (isClient)
+    defaultWindow!.document.head.append(styleTag)
 }

@@ -46,7 +46,6 @@ const targetRef = ref(null)
 const menuRef = ref(null)
 
 const ctx = useContextMenu(menuRef, { target: targetRef })
-console.log(ctx)
 </script>
 
 <Area ref="targetRef">
