@@ -6,7 +6,7 @@ export default defineConfig({
   markdown: {
     theme: 'github-dark',
   },
-  cleanUrls: 'with-subfolders',
+  cleanUrls: 'without-subfolders',
   themeConfig: {
     siteTitle: '@contextmenu',
     algolia: {
@@ -32,14 +32,14 @@ export default defineConfig({
         text: 'Guide',
         items: [
           { text: 'Get started', link: '/guide/' },
-          { text: 'Usage', link: '/guide/usage' },
-          { text: 'API', link: '/guide/api' },
+          { text: 'Usage', link: '/guide/usage/' },
+          { text: 'API', link: '/guide/api/' },
         ],
       },
       {
         text: 'Vue',
         items: [
-          { text: 'Installation', link: '/vue/' },
+          { text: 'Installation', link: '/vue' },
           { text: 'Component', link: '/vue/component' },
           { text: 'Hook', link: '/vue/hook' },
           { text: 'Directive', link: '/vue/directive' },
