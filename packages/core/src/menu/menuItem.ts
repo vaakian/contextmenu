@@ -1,5 +1,5 @@
 import type { StylableElement } from '@contextmenu/shared'
-import { defaultWindow, hideStylableElement, isStylableElement, showStylableElement } from '@contextmenu/shared'
+import { defaultWindow, hideStylableElement, isStylableElement, schedular, showStylableElement } from '@contextmenu/shared'
 import { _addEventListener } from '../eventListener'
 import { calculateSubMenuOffset } from '../utils'
 
@@ -9,7 +9,7 @@ export const configureMenuItem = (element: StylableElement) => {
 
   const unregisterMouseEvent = registerMouseEvent(element)
 
-  queueMicrotask(() => {
+  schedular(() => {
     hideSubMenu(element)
     setSubMenuPositioning(element)
   })

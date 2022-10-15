@@ -7,13 +7,12 @@ import { injectDefaultStyle } from '../style'
  */
 export function configureMenuGroup(element: StylableElement) {
   injectDefaultStyle()
+
   element.dataset.isMenuGroup = ''
-  const menuItems = getMenuItems(element)
-  return () => {
-    return menuItems
-  }
+
+  return () => {}
 }
 
-function getMenuItems(element: StylableElement) {
+export function getMenuItems(element: StylableElement) {
   return element.querySelectorAll('*[data-is-menu-item=""]')
 }

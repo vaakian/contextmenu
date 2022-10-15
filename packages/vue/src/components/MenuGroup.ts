@@ -2,7 +2,7 @@ import { configureMenuGroup } from '@contextmenu/core'
 import type { StylableElement } from '@contextmenu/shared'
 import { noop } from '@contextmenu/shared'
 import { defineComponent, h, onUnmounted, ref, watch } from 'vue-demi'
-import { unrefElement } from './utils'
+import { unrefElement } from '../utils'
 
 export default defineComponent<{
   // modelValue?: MenuGroup | undefined | null

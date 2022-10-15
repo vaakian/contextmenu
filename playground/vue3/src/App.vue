@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, shallowRef } from 'vue'
+import { ref } from 'vue'
 import { useContextMenu, vContextMenu } from '@contextmenu/vue'
 import type { StylableElement } from '@contextmenu/shared'
 import Menu from './components/Menu.vue'
@@ -7,7 +7,6 @@ import NestedMenu from './components/NestedMenu.vue'
 
 const menuRef = ref<StylableElement | null>(null)
 const targetRef = ref<StylableElement | null>(null)
-
 const hideOnClick = ref(true)
 
 const ctx = useContextMenu(menuRef, {

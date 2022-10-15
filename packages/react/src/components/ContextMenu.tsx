@@ -1,13 +1,13 @@
 import type { StylableElement } from '@contextmenu/shared'
 import React, { useRef } from 'react'
-import type { UseContextMenuOptions } from './hook'
-import { useContextMenu } from './hook'
+import type { UseContextMenuOptions } from '../hook'
+import { useContextMenu } from '../hook'
 
 interface IContextMenuProps extends UseContextMenuOptions {
   /**
    * The root element tag as a warper.
    */
-  as?: string
+  as?: StylableElement['tagName']
 
   /**
    * The menu element.

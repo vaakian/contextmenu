@@ -2,15 +2,15 @@ import type { Ref } from 'vue-demi'
 import { defineComponent, h, reactive, ref, toRef } from 'vue-demi'
 import type { StylableElement } from '@contextmenu/shared'
 import type { ContextMenuInstance } from '@contextmenu/core'
-import type { RenderableComponent } from './types'
-import type { UseContextMenuOptions } from './hook'
-import { useContextMenu } from './hook'
+import type { RenderableComponent } from '../types'
+import type { UseContextMenuOptions } from '../hook'
+import { useContextMenu } from '../hook'
 
 export interface ContextMenuProps extends UseContextMenuOptions, RenderableComponent {
   modelValue?: ContextMenuInstance | null | undefined
 }
 
-export const ContextMenu = defineComponent<ContextMenuProps>({
+export default defineComponent<ContextMenuProps>({
   name: 'ContextMenu',
   props: ['hideOnClick', 'onContextMenu', 'as', 'target'] as unknown as undefined,
   setup(props, { slots }) {

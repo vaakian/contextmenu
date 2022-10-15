@@ -5,6 +5,15 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    exclude: [
+      // default
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/cypress/**',
+      '**/.{idea,git,cache,output,temp}/**',
+      // newly added
+      '**/v0x_*.{test,spec}.{js,ts}',
+    ],
   },
   resolve: {
     alias: {

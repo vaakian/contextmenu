@@ -37,3 +37,16 @@ features:
     details: Fully written in TypeScript, everything is typed.
     icon: 💪
 ---
+
+<script>
+
+const fn = () => {
+    setTimeout(() => {
+      const clip = document.getElementsByClassName('clip')[0]
+      console.log(clip)
+      clip.innerHTML = '<span style="-webkit-text-fill-color: #ccc;">@</span>context<span style="-webkit-text-fill-color: #4ca5c8f2">menu</span>'
+    })
+}
+
+fn()
+</script>
