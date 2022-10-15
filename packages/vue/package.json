@@ -1,7 +1,7 @@
 {
   "name": "@contextmenu/vue",
   "type": "module",
-  "version": "0.0.6-beta.4",
+  "version": "0.0.6",
   "packageManager": "pnpm@7.9.0",
   "description": "",
   "author": "vaakian <vaakian@gmail.com>",
