@@ -39,4 +39,6 @@ export const defaultDocument = /* #__PURE__ */ isClient ? window.document : unde
 export const defaultNavigator = /* #__PURE__ */ isClient ? window.navigator : undefined
 export const defaultLocation = /* #__PURE__ */ isClient ? window.location : undefined
 
-export const schedular = /* #__PURE__ */ defaultWindow!.queueMicrotask || defaultWindow!.setTimeout
+export const schedular = /* #__PURE__ */ isClient
+  ? defaultWindow!.queueMicrotask || defaultWindow!.setTimeout
+  : () => {}
