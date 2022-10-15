@@ -6,6 +6,7 @@
   publish = ".vitepress/dist"
   command = "npx pnpm i --store=node_modules/.pnpm-store && npm run docs:build"
 
+# `/vue/component/` or `/vue/component` => `/vue/component/index.html`
 [[redirects]]
   from = "/*"
   to = "/index.html"
