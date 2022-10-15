@@ -58,7 +58,7 @@ import { vContextMenu as vCtx } from '@contextmenu/vue'
 
 ## Used globally
 
-Register the `vContextMenu` directive in your `main.ts` / `main.js` App entry file, then you can use it same as [template usage](/vue/#usage-in-templates).
+Register the `vContextMenu` directive in your `main.ts` / `main.js` App entry file, then you can use it same as [template usage](/vue/directive#used-in-templates).
 
 :::danger Caveat
 You will lose TypeScript hints with global usage.

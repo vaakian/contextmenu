@@ -15,7 +15,7 @@
     "@unocss/preset-uno": "^0.45.29",
     "@unocss/transformer-directives": "^0.45.29",
     "unocss": "^0.45.29",
-    "vitepress": "1.0.0-alpha.19",
+    "vitepress": "1.0.0-alpha.20",
     "vue": "^3.2.40"
   }
 }
