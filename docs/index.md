@@ -41,6 +41,7 @@ features:
 <script>
 
 const fn = () => {
+  if (typeof window === 'undefined') return
     setTimeout(() => {
       const clip = document.getElementsByClassName('clip')[0]
       console.log(clip)
