@@ -1,6 +1,7 @@
-import { ContextMenu, useContextMenu } from '@contextmenu/react'
+import { useContextMenu } from '@contextmenu/react'
 import React, { forwardRef, useCallback, useRef, useState } from 'react'
 import './App.css'
+import GlobalMenu from './GlobalMenu'
 
 const BooleanString = ({ value }: { value: boolean }) => {
   return (
@@ -14,11 +15,11 @@ const Menu = React.memo(
   forwardRef<HTMLDivElement>(
     (_props, ref) => {
       return (
-    <div className="menu" ref={ref}>
-      <div>Item 1</div>
-      <div>Item 2</div>
-      <div>Item 3</div>
-    </div>
+        <div className="menu" ref={ref}>
+          <div>Item 1</div>
+          <div>Item 2</div>
+          <div>Item 3</div>
+        </div>
       )
     },
   ),
@@ -45,6 +46,7 @@ function App() {
   return (
     <div>
       <Menu ref={menu} />
+      <GlobalMenu />
       <div className="target" ref={target}>
         <h3>target</h3>
       </div>
@@ -62,12 +64,14 @@ function App() {
         <span>hideOnClick {'=>'} </span>
         <BooleanString value={hideOnClick} />
         </button>
-      <ContextMenu
+
+        {/* custom element not using `MenuGroup` */}
+      {/* <ContextMenu
         onContextMenu={onContextMenu}
         hideOnClick={hideOnClick}
       >
         <div>OK!</div>
-      </ContextMenu>
+      </ContextMenu> */}
     </div>
   )
 }
