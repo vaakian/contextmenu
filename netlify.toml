@@ -12,7 +12,6 @@
   status = 200
 
 [[redirects]]
-  from = "/*/"
-  to = "/:splat"
-  status = 301
-  force = true
+  from = "/*"
+  to = "/:splat/"
+  status = 200
