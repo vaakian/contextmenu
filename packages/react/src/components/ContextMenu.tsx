@@ -3,23 +3,26 @@ import React, { useRef } from 'react'
 import type { UseContextMenuOptions } from '../hook'
 import { useContextMenu } from '../hook'
 
-interface IContextMenuProps extends UseContextMenuOptions {
-  /**
-   * The root element tag as a warper.
-   */
-  as?: StylableElement['tagName']
-
-  /**
-   * The menu element.
-   */
-  children: React.ReactNode
+interface IContextMenuProps
+  extends UseContextMenuOptions,
+  React.PropsWithChildren,
+  Omit<React.ComponentProps<'div'>, 'onContextMenu'> {
 }
 
 const ContextMenu = (props: IContextMenuProps) => {
-  const { as, children } = props
+  const { children } = props
   const menu = useRef<StylableElement>(null)
   /* const ctx =  */useContextMenu(menu, props)
-  return React.createElement(as || 'div', { ref: menu }, children)
+  return React.createElement(
+    'div',
+    {
+      ...props,
+      ref: menu,
+      // TODO: resolve naming conflict
+      onContextMenu: undefined,
+    },
+    children,
+  )
 }
 
 export { ContextMenu }

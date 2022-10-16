@@ -1,8 +1,12 @@
 import { configureMenuGroup } from '@contextmenu/core'
 import React, { useEffect, useRef } from 'react'
+export interface MenuGroupProps extends
+  React.PropsWithChildren,
+  React.ComponentProps<'div'> {
+}
 
 export const MenuGroup = (
-  { children, ...otherProps }: React.PropsWithChildren,
+  { children, ...otherProps }: MenuGroupProps,
 ) => {
   const groupRef = useRef<HTMLDivElement>(null)
 

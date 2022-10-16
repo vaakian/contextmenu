@@ -1,7 +1,16 @@
 import { configureMenuItem } from '@contextmenu/core'
 import React, { useEffect, useRef } from 'react'
 
-export const MenuItem = (props: React.PropsWithChildren) => {
+export interface MenuItemProps extends
+  React.PropsWithChildren,
+  // Enable native props like `className` / `style` or any native event
+  React.ComponentProps<'div'> {
+  // custom props to be added
+}
+
+export const MenuItem = (
+  { children, ...otherProps }: MenuItemProps,
+) => {
   const itemRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -14,8 +23,8 @@ export const MenuItem = (props: React.PropsWithChildren) => {
   }, [itemRef.current])
 
   return (
-    <div {...props} ref={itemRef}>
-      {props.children}
+    <div {...otherProps} ref={itemRef}>
+      {children}
     </div>
   )
 }
