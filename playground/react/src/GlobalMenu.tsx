@@ -1,17 +1,27 @@
 import { ContextMenu, MenuGroup, MenuItem } from '@contextmenu/react'
+import { memo, useRef } from 'react'
 
 function CustomMenu() {
   return (
-    <div>
-      Welcome Man!
+    <div style={{
+      borderRadius: '5px',
+      width: 100,
+      height: 120,
+      paddingTop: 20,
+      backgroundColor: '#efd7d7',
+    }}>
+      Welcome!🎉
     </div>
   )
 }
 
-export default function GlobalMenu() {
-  return (
+const GlobalMenu = memo(
+  () => {
+    // access the wrapper
+    const ref = useRef<HTMLDivElement>(null)
+    return (
     <ContextMenu>
-      <MenuGroup>
+      <MenuGroup ref={ref}>
         <MenuItem>Item1</MenuItem>
         <MenuItem>Item2</MenuItem>
         <MenuItem>
@@ -29,5 +39,9 @@ export default function GlobalMenu() {
         </MenuItem>
       </MenuGroup>
     </ContextMenu>
-  )
-}
+    )
+  },
+)
+GlobalMenu.displayName = 'GlobalMenu'
+
+export default GlobalMenu

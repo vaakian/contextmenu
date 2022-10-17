@@ -1,14 +1,22 @@
 import { configureMenuGroup } from '@contextmenu/core'
-import React, { useEffect, useRef } from 'react'
+import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
 export interface MenuGroupProps extends
   React.PropsWithChildren,
   React.ComponentProps<'div'> {
 }
 
-export const MenuGroup = (
-  { children, ...otherProps }: MenuGroupProps,
+export const MenuGroup = forwardRef<HTMLDivElement, MenuGroupProps>((
+  { children, ...otherProps },
+  ref,
 ) => {
   const groupRef = useRef<HTMLDivElement>(null)
+
+  // forward ref value
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(
+    ref,
+    () => groupRef.current,
+    [groupRef.current],
+  )
 
   useEffect(() => {
     const groupElement = groupRef.current
@@ -22,4 +30,6 @@ export const MenuGroup = (
       {children}
     </div>
   )
-}
+})
+
+MenuGroup.displayName = 'MenuGroup'
