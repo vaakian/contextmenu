@@ -19,7 +19,7 @@ export interface ContextMenuOptions {
    * @param e the MouseEvent of 'contextmenu' event
    * @returns `true` to cancel the menu from popping up
    */
-  onContextMenu?(e: MouseEvent): boolean | void
+  onBeforePopup?(e: MouseEvent): boolean | void
 
   /**
    * Fires when visibility of the menu changes.
@@ -159,7 +159,7 @@ export class ContextMenu {
       if (!this.enabled)
         return
 
-      if (this.options?.onContextMenu?.(e))
+      if (this.options?.onBeforePopup?.(e))
         return
 
       e.preventDefault()

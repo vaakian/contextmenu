@@ -6,7 +6,7 @@ import { useContextMenu } from '../hook'
 interface IContextMenuProps
   extends UseContextMenuOptions,
   React.PropsWithChildren,
-  Omit<React.ComponentProps<'div'>, 'onContextMenu'> {
+  React.ComponentProps<'div'> {
 }
 
 const ContextMenu = (props: IContextMenuProps) => {
@@ -18,8 +18,6 @@ const ContextMenu = (props: IContextMenuProps) => {
     {
       ...props,
       ref: menu,
-      // TODO: resolve naming conflict
-      onContextMenu: undefined,
     },
     children,
   )

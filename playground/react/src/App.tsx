@@ -33,7 +33,7 @@ function App() {
   const menu = useRef<HTMLDivElement>(null)
   const target = useRef<HTMLDivElement>(null)
 
-  const onContextMenu = useCallback((e: MouseEvent) => {
+  const onBeforePopup = useCallback((e: MouseEvent) => {
     // eslint-disable-next-line no-console
     console.log(e.target)
   }, [])
@@ -41,7 +41,7 @@ function App() {
   const ctx = useContextMenu(menu, {
     hideOnClick,
     target,
-    onContextMenu,
+    onBeforePopup,
   })
   return (
     <div>
@@ -67,7 +67,7 @@ function App() {
 
         {/* custom element not using `MenuGroup` */}
       {/* <ContextMenu
-        onContextMenu={onContextMenu}
+        onBeforePopup={onBeforePopup}
         hideOnClick={hideOnClick}
       >
         <div>OK!</div>

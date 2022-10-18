@@ -67,14 +67,14 @@ describe('contextMenu', () => {
       expectToBeVisible(menuElement)
     })
 
-    it('should trigger onContextMenu', () => {
-      const onContextMenu = vitest.fn()
+    it('should trigger onBeforePopup', () => {
+      const onBeforePopup = vitest.fn()
       const event = new MouseEvent('contextmenu')
-      ctx.options.onContextMenu = onContextMenu
+      ctx.options.onBeforePopup = onBeforePopup
 
       dispatchEvent(event)
 
-      expect(onContextMenu).toBeCalledWith(event)
+      expect(onBeforePopup).toBeCalledWith(event)
     })
   })
 
