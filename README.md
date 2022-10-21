@@ -35,12 +35,13 @@
 
 ### Current Progress
 - [x] Core
-  - [x] Basic top level menu using custom element
+  - [x] Basic top-level menu using the custom element
   - [x] Deeply nested menu
+  - [x] Declarative API
   - [ ] Animation
 
 - [x] Vue (both Vue2 & Vue3, empowered by [Vue Demi](https://github.com/vueuse/vue-demi))
-  - [ ] `v-directive` usage
+  - [x] `v-directive` usage
   - [x] `useContextMenu` hook
   - [x] `<ContextMenu />` component
   - [x] `<MenuGroup />` and `<MenuItem />` component for creating nested menu
@@ -48,15 +49,16 @@
 - [x] React
   - [x] `useContextMenu` hook
   - [x] `<ContextMenu />` component
+  - [x] `<MenuGroup />` and `<MenuItem />` component
 
 - [ ] Angular(pending)
 
 - [ ] Vanilla JavaScript
   - [ ] Native `Web Component`
-  - [x] Plain JavaScript API
+  - [x] JavaScript API
 
-- [ ] Docs (coming soon!)
-  - [ ] Vitepress
+- [ ] Docs
+  - [x] Vitepress
   - [ ] Repl Playground
 
 - [x] `IIFE` format for `script` tag
@@ -75,9 +77,9 @@ npm i @contextmenu/react
 ```
 
 ## Quick example
-Use `ContextMenu` component to create a context menu.
+Use the `ContextMenu` component to create a context menu.
 
-1. in Vue setup
+1. Vue setup
 ```html
 <script setup lang="ts">
 import { ContextMenu } from '@contextmenu/vue'
@@ -90,7 +92,7 @@ import { ContextMenu } from '@contextmenu/vue'
 </template>
 ```
 
-2. in React
+2. React
 ```jsx
 import { ContextMenu } from '@contextmenu/react'
 
@@ -103,8 +105,26 @@ function App() {
 }
 ```
 
-Please refer to [documentations](https://contextmenu.netlify.app/) for more details.
+Please refer to the [documentation](https://contextmenu.netlify.app/) for more details.
 
+## Current NPM Version
+
+| package name | version |
+| ----------------- | ---------------- |
+| @contextmenu/core | [![@contextmenu-core][v-core]][url-core] |
+| @contextmenu/vue | [![@contextmenu-vue][v-vue]][url-vue] |
+| @contextmenu/react | [![@contextmenu-react][v-react]][url-react] |
+| @contextmenu/shared | [![@contextmenu-shared][v-shared]][url-shared] |
 ## License
 
 [MIT](./LICENSE) License © 2022 [vaakian](https://github.com/vaakian)
+
+
+[v-core]: https://img.shields.io/npm/v/@contextmenu/core?color=a1b858&label=%40contextmenu%2Fcore&style=plastic
+[v-vue]: https://img.shields.io/npm/v/@contextmenu/vue?color=a1b858&label=%40contextmenu%2Fvue&style=plastic
+[v-react]: https://img.shields.io/npm/v/@contextmenu/react?color=a1b858&label=%40contextmenu%2Freact&style=plastic
+[v-shared]: https://img.shields.io/npm/v/@contextmenu/shared?color=a1b858&label=%40contextmenu%2Fshared&style=plastic
+[url-core]: https://www.npmjs.com/package/@contextmenu/core
+[url-vue]: https://www.npmjs.com/package/@contextmenu/vue
+[url-react]: https://www.npmjs.com/package/@contextmenu/react
+[url-shared]: https://www.npmjs.com/package/@contextmenu/shared
