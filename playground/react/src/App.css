@@ -61,7 +61,7 @@
 .target {
   width: 200px;
   height: 200px;
-  background-color: rgba(97, 102, 101, 0.551);
+  background-color: #ddd;
   display: flex;
   justify-content: center;
   align-items: center;
