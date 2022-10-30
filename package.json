@@ -45,7 +45,8 @@
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "clean": "rimraf dist packages/*/dist",
-    "dev": "cd docs && nr docs:dev"
+    "dev": "cd docs && nr docs:dev",
+    "build:docs": "cd docs && nr docs:build"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.26.1",

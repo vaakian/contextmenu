@@ -39,7 +39,7 @@ export default defineConfig({
       {
         text: 'Vue',
         items: [
-          { text: 'Installation', link: '/vue' },
+          { text: 'Installation', link: '/vue/' },
           { text: 'Component', link: '/vue/component' },
           { text: 'Hook', link: '/vue/hook' },
           { text: 'Directive', link: '/vue/directive' },
