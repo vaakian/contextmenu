@@ -10,8 +10,9 @@ const styleList = ['default'] as const
 function buildCSS() {
   for (const style of styleList) {
     const file = path.resolve(__dirname, `../packages/core/src/style/${style}.scss`)
-    const targetFile = path.resolve(__dirname, `../packages/core/src/style/${style}.css`)
+    const targetFile = path.resolve(__dirname, `../packages/core/dist/${style}.css`)
     const result = sass.compile(file)
+    fs.ensureFileSync(targetFile)
     fs.writeFileSync(targetFile, result.css.toString())
   }
 }
