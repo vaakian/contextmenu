@@ -1,0 +1,66 @@
+/* TODO: inject this in @contextmenu/core */
+*[data-is-menu-item] > *[data-is-menu-group] {
+  position: fixed !important;
+  /* hidden by default */
+  visibility: hidden;
+}
+
+:root {
+  --cmi-padding: 2px 3px;
+  --cmi-color: #333;
+  --cmi-hover-color: unset;
+  --cmi-background: unset;
+  --cmi-border: unset;
+  --cmi-border-bottom: 1px solid #ccc;
+  --cmi-hover-background: #eee;
+
+  --cmg-border: 1px solid #ccc;
+  --cmg-padding: 0;
+  --cmg-background: white;
+  --cmg-border-radius: 5px;
+  --cmg-box-shadow: 0 12px 32px rgba(0, 0, 0, .1), 0 2px 6px rgba(0, 0, 0, .08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cmi-color: white;
+    --cmi-border-bottom: 1px solid rgba(84, 84, 84, 0.48);
+    --cmi-hover-background: #333;
+
+    --cmg-background: #242424;
+    --cmg-border: 1px solid rgba(84, 84, 84, 0.48);
+  }
+}
+
+div[data-is-menu-group] {
+  border: var(--cmg-border);
+  background: var(--cmg-background);
+  border-radius: var(--cmg-border-radius);
+  padding: var(--cmg-padding);
+  box-shadow: var(--cmg-box-shadow);
+}
+
+div[data-is-menu-item] {
+  padding: var(--cmi-padding);
+  color: var(--cmi-color);
+  border: var(--cmi-border);
+  border-bottom: var(--cmi-border-bottom);
+  cursor: pointer;
+
+  /* incase the item text is wrapped with a new tag */
+  >:first-child {
+    cursor: pointer;
+  }
+
+  > * {
+    cursor: initial;
+  }
+
+  &:hover {
+      background: var(--cmi-hover-background);
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
