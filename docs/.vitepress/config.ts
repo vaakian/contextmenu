@@ -52,6 +52,7 @@ export default defineConfig({
           { text: 'Installation', link: '/react/#installation' },
           { text: 'Component', link: '/react/#component-usage' },
           { text: 'Hook', link: '/react/#hook-usage' },
+          { text: 'Advanced', link: '/react/advanced' },
         ],
       },
     ],
