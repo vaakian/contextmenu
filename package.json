@@ -37,6 +37,7 @@
     "dist"
   ],
   "scripts": {
+    "prebuild": "esno scripts/buildCSS.ts",
     "build": "rollup -c",
     "lint": "eslint .",
     "prepublishOnly": "nr build",
@@ -70,6 +71,8 @@
     "rollup": "^2.79.0",
     "rollup-plugin-dts": "^4.2.2",
     "rollup-plugin-esbuild": "^4.10.1",
+    "rollup-plugin-sass": "^1.12.16",
+    "sass": "^1.56.1",
     "typescript": "^4.7.4",
     "vite": "^3.0.7",
     "vitest": "^0.22.0"
