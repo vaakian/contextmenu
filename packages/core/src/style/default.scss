@@ -13,6 +13,7 @@
   --cmi-border: unset;
   --cmi-border-bottom: 1px solid #ccc;
   --cmi-hover-background: #eee;
+
   --cmg-border: 1px solid #ccc;
   --cmg-padding: 0;
   --cmg-background: white;
@@ -25,10 +26,12 @@
     --cmi-color: white;
     --cmi-border-bottom: 1px solid rgba(84, 84, 84, 0.48);
     --cmi-hover-background: #333;
+
     --cmg-background: #242424;
     --cmg-border: 1px solid rgba(84, 84, 84, 0.48);
   }
 }
+
 div[data-is-menu-group] {
   border: var(--cmg-border);
   background: var(--cmg-background);
@@ -43,17 +46,21 @@ div[data-is-menu-item] {
   border: var(--cmi-border);
   border-bottom: var(--cmi-border-bottom);
   cursor: pointer;
+
   /* incase the item text is wrapped with a new tag */
-}
-div[data-is-menu-item] > :first-child {
-  cursor: pointer;
-}
-div[data-is-menu-item] > * {
-  cursor: initial;
-}
-div[data-is-menu-item]:hover {
-  background: var(--cmi-hover-background);
-}
-div[data-is-menu-item]:last-child {
-  border-bottom: none;
+  >:first-child {
+    cursor: pointer;
+  }
+
+  > * {
+    cursor: initial;
+  }
+
+  &:hover {
+      background: var(--cmi-hover-background);
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
 }

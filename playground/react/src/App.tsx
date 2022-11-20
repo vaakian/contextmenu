@@ -1,6 +1,7 @@
 import { useContextMenu } from '@contextmenu/react'
 import React, { forwardRef, useCallback, useRef, useState } from 'react'
 import './App.css'
+import '@contextmenu/core/../style/default.scss'
 import GlobalMenu from './GlobalMenu'
 
 const BooleanString = ({ value }: { value: boolean }) => {

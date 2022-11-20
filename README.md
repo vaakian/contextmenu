@@ -38,6 +38,8 @@
   - [x] Basic top-level menu using the custom element
   - [x] Deeply nested menu
   - [x] Declarative API
+  - [ ] UI preset
+  - [ ] Online UI design tool
   - [ ] Animation
 
 - [x] Vue (both Vue2 & Vue3, empowered by [Vue Demi](https://github.com/vueuse/vue-demi))
