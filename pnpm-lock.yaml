@@ -28,7 +28,6 @@ importers:
       rollup: ^2.79.0
       rollup-plugin-dts: ^4.2.2
       rollup-plugin-esbuild: ^4.10.1
-      rollup-plugin-sass: ^1.12.16
       sass: ^1.56.1
       typescript: ^4.7.4
       vite: ^3.0.7
@@ -55,7 +54,6 @@ importers:
       rollup: 2.79.0
       rollup-plugin-dts: 4.2.2_xdb5ss5ub2cemhlks3szmapm6q
       rollup-plugin-esbuild: 4.10.1_uu2p2v3owefbwsafzxfcsbbrxa
-      rollup-plugin-sass: 1.12.16_rollup@2.79.0
       sass: 1.56.1
       typescript: 4.7.4
       vite: 3.0.7_sass@1.56.1
@@ -4738,17 +4736,6 @@ packages:
       rollup: 2.79.0
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /rollup-plugin-sass/1.12.16_rollup@2.79.0:
-    resolution: {integrity: sha512-hCX9v9/rkUQ+59ztH8BECSgPGcVSgI31TbsIaJtHdCtcUFoLxSXJDSNQhQnwJwX9FVXL3Uc15Zeti/K25Rwzjg==}
-    engines: {node: '>=10'}
-    dependencies:
-      '@rollup/pluginutils': 3.1.0_rollup@2.79.0
-      resolve: 1.22.1
-      sass: 1.56.1
-    transitivePeerDependencies:
-      - rollup
     dev: true
 
   /rollup/2.77.2:
