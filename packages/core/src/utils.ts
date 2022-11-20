@@ -98,6 +98,6 @@ export function calculateSubMenuOffset(
 
 export function resolveElement<T extends Element>(el: string | T) {
   if (typeof el === 'string')
-    return document.querySelector(el) as T
+    return document.querySelector(el) as T | null
   return el
 }

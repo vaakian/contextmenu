@@ -27,6 +27,11 @@ export function createNestedMenuGroup(descriptor: NestedMenuDescriptor) {
   const { el: elOrSelector, items = [] } = descriptor
   const groupElement = resolveElement<StylableElement>(elOrSelector)
 
+  if (!groupElement) {
+    // TODO: give a warning in dev mode
+    return groupElement
+  }
+
   configureMenuGroup(groupElement)
 
   // run at next render,
@@ -34,11 +39,21 @@ export function createNestedMenuGroup(descriptor: NestedMenuDescriptor) {
   schedular(() => {
     items.forEach((item) => {
       const itemElement = resolveElement<StylableElement>(item.el)
+      if (!itemElement) {
+        // TODO: give a warning in dev mode
+        return
+      }
+
       configureMenuItem(itemElement)
 
       if (item.subMenu) {
         const subMenuElement = createNestedMenuGroup(item.subMenu)
         // append if not inside it
+        if (!subMenuElement) {
+        // TODO: give a warning in dev mode
+          return
+        }
+
         itemElement.append(subMenuElement)
       }
     })
@@ -54,6 +69,12 @@ export function createNestedMenuGroup(descriptor: NestedMenuDescriptor) {
  * @returns
  */
 export function createNestedMenu(descriptor: NestedMenuDescriptor, options?: ContextMenuOptions) {
-  const rootGroupElement = createNestedMenuGroup(descriptor)
+  let rootGroupElement = createNestedMenuGroup(descriptor)
+
+  if (!rootGroupElement) {
+    // fallback empty element
+    rootGroupElement = document.createElement('div')
+  }
+
   return createContextMenu(rootGroupElement, options)
 }
