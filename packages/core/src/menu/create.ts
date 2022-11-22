@@ -8,12 +8,13 @@ import { configureMenuGroup } from './menuGroup'
 import { configureMenuItem } from './menuItem'
 export type NestedMenuElement = string | StylableElement
 
+export interface MenuItemDescriptor {
+  el: NestedMenuElement
+  subMenu?: NestedMenuDescriptor
+}
 export interface NestedMenuDescriptor {
   el: NestedMenuElement
-  items?: {
-    el: NestedMenuElement
-    subMenu?: NestedMenuDescriptor
-  }[]
+  items?: MenuItemDescriptor[]
 }
 
 /**

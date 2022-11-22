@@ -1,8 +1,9 @@
-import { MenuGroup, MenuItem } from '@contextmenu/core'
+import type { MenuItemDescriptor } from '@contextmenu/core'
+import { MenuGroup } from '@contextmenu/core'
 import { expectToBeHidden, expectToBeVisible, mouseEnter, mouseLeave } from './utils'
 
 describe('MenuGroup & MenuItem', () => {
-  let items: MenuItem[]
+  let items: MenuItemDescriptor[]
   let group: MenuGroup
 
   it('should export', () => {
