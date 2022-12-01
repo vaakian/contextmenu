@@ -108,3 +108,4 @@ function syncState(
   }, [resolveUnref(options.hideOnClick)])
 }
 
+export type UseContextMenuReturn = ReturnType<typeof useContextMenu>

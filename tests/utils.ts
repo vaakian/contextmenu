@@ -16,3 +16,20 @@ export const expectToBeHidden = (el: StylableElement) => {
   // expect(el.style.display).toBe('none')
   expect(el.style.visibility).toBe('hidden')
 }
+
+export const dispatchCtxEvent = (target?: EventTarget) => {
+  const contextMenuEvent = new MouseEvent('contextmenu')
+  if (target)
+    target.dispatchEvent(contextMenuEvent)
+  else
+    dispatchEvent(contextMenuEvent)
+}
+
+/**
+ * make a promise resolves in `n` ms
+ * @param n ms to resolve
+ * @returns
+ */
+export const delayedPromise = (n: number) => new Promise((resolve) => {
+  setTimeout(resolve, n)
+})

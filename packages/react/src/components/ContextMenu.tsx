@@ -1,6 +1,6 @@
 import type { StylableElement } from '@contextmenu/shared'
-import React, { useRef } from 'react'
-import type { UseContextMenuOptions } from '../hook'
+import React, { forwardRef, useImperativeHandle, useRef } from 'react'
+import type { UseContextMenuOptions, UseContextMenuReturn } from '../hook'
 import { useContextMenu } from '../hook'
 
 interface IContextMenuProps
@@ -9,10 +9,19 @@ interface IContextMenuProps
   React.ComponentProps<'div'> {
 }
 
-const ContextMenu = (props: IContextMenuProps) => {
+const ContextMenu = forwardRef<UseContextMenuReturn, IContextMenuProps>((props, ref) => {
   const { children } = props
   const menu = useRef<StylableElement>(null)
-  /* const ctx =  */useContextMenu(menu, props)
+  const ctx = useContextMenu(menu, props)
+
+  // Will can't directly mutate the forwarded `ref`
+  // use `useImperativeHandle` to forward the `ctx` value
+  useImperativeHandle<UseContextMenuReturn | null, UseContextMenuReturn | null>(
+    ref,
+    () => ctx,
+    [ctx],
+  )
+
   return React.createElement(
     'div',
     {
@@ -21,6 +30,8 @@ const ContextMenu = (props: IContextMenuProps) => {
     },
     children,
   )
-}
+})
+
+ContextMenu.displayName = 'ContextMenu'
 
 export { ContextMenu }

@@ -23,7 +23,7 @@ export interface UseContextMenuOptions extends Omit<ContextMenuOptions, 'target'
   target?: MayBeElementRef
 }
 
-export interface useContextMenuReturn {
+export interface UseContextMenuReturn {
   /**
    * Hide the menu
    */
@@ -64,7 +64,7 @@ export interface useContextMenuReturn {
 export const useContextMenu = (
   menu: MayBeElementRef,
   options: UseContextMenuOptions = {},
-): useContextMenuReturn => {
+): UseContextMenuReturn => {
   const instance = shallowRef<ContextMenu>()
   const visible = ref(false)
   const enabled = ref(true)

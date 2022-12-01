@@ -1,7 +1,14 @@
 import { defineConfig } from 'vitest/config'
+import react from '@vitejs/plugin-react'
+import vue from '@vitejs/plugin-vue'
+import type { PluginOption } from 'vite'
 import { subPackageAlias } from './meta'
 
 export default defineConfig({
+  plugins: [
+    react() as PluginOption,
+    vue(),
+  ],
   test: {
     globals: true,
     environment: 'jsdom',
