@@ -57,7 +57,7 @@
     "@testing-library/react": "^13.4.0",
     "@types/fs-extra": "^9.0.13",
     "@types/node": "^18.7.5",
-    "@types/react": "^18.0.25",
+    "@types/react": "^18.0.26",
     "@vitejs/plugin-react": "^2.1.0",
     "@vitejs/plugin-vue": "^3.0.3",
     "@vitest/coverage-c8": "^0.23.4",
