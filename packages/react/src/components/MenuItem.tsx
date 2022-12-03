@@ -1,12 +1,12 @@
 import { configureMenuItem } from '@contextmenu/core'
 import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
 
-export interface MenuItemProps extends
-  React.PropsWithChildren,
-  // Enable native props like `className` / `style` or any native event
-  React.ComponentProps<'div'> {
+interface MenuItemCustomProps {
   // custom props to be added
 }
+
+// Enable native props like `className` / `style` or any native event
+export type MenuItemProps = React.ComponentProps<'div'> & MenuItemCustomProps
 
 export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>((
   { children, ...otherProps },

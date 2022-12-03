@@ -1,9 +1,12 @@
 import { configureMenuGroup } from '@contextmenu/core'
 import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
-export interface MenuGroupProps extends
-  React.PropsWithChildren,
-  React.ComponentProps<'div'> {
+
+interface MenuGroupCustomProps {
+  // custom props to be added
 }
+
+// Enable native props like `className` / `style` or any native event
+export type MenuGroupProps = React.ComponentProps<'div'> & MenuGroupCustomProps
 
 export const MenuGroup = forwardRef<HTMLDivElement, MenuGroupProps>((
   { children, ...otherProps },

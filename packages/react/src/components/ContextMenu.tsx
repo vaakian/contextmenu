@@ -3,13 +3,14 @@ import React, { forwardRef, useImperativeHandle, useRef } from 'react'
 import type { UseContextMenuOptions, UseContextMenuReturn } from '../hook'
 import { useContextMenu } from '../hook'
 
-interface IContextMenuProps
-  extends UseContextMenuOptions,
-  React.PropsWithChildren,
-  React.ComponentProps<'div'> {
+interface ContextMenuCustomProps extends UseContextMenuOptions {
+  // custom props to be added
 }
 
-const ContextMenu = forwardRef<UseContextMenuReturn, IContextMenuProps>((props, ref) => {
+// Enable native props like `className` / `style` or any native event
+export type ContextMenuProps = React.ComponentProps<'div'> & ContextMenuCustomProps
+
+const ContextMenu = forwardRef<UseContextMenuReturn, ContextMenuProps>((props, ref) => {
   const { children } = props
   const menu = useRef<StylableElement>(null)
   const ctx = useContextMenu(menu, props)
