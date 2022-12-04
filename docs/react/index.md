@@ -3,14 +3,19 @@
 :TODO
 
 ### Installation
+::: tip NOTICE
+The core package `@contextmenu/core` is a \`peerDependency\` of `@contextmenu/react`.
+:::
+
+Make sure you have `@contextmenu/core` installed along with `@contextmenu/react` so as to import built-in themes presets from it.
 
 ```shell
 # npm
-npm i @contextmenu/react
+npm i @contextmenu/core @contextmenu/react
 # pnpm
-pnpm i @contextmenu/react
+pnpm i @contextmenu/core @contextmenu/react
 # yarn
-yarn add @contextmenu/react
+yarn add @contextmenu/core @contextmenu/react
 ```
 
 

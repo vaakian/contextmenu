@@ -32,10 +32,10 @@
     "dist"
   ],
   "peerDependencies": {
+    "@contextmenu/core": "workspace:^",
     "react": ">=16.8.0"
   },
   "dependencies": {
-    "@contextmenu/core": "workspace:^",
     "@contextmenu/shared": "workspace:^"
   },
   "devDependencies": {

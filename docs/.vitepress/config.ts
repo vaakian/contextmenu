@@ -34,6 +34,7 @@ export default defineConfig({
           { text: 'Get started', link: '/guide/' },
           { text: 'Usage', link: '/guide/usage' },
           { text: 'API', link: '/guide/api' },
+          { text: 'Theme', link: '/guide/theme' },
         ],
       },
       {
