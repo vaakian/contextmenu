@@ -99,12 +99,10 @@ importers:
 
   packages/react:
     specifiers:
-      '@contextmenu/core': workspace:^
       '@contextmenu/shared': workspace:^
       '@types/react': ^18.0.26
       react: ^18.2.0
     dependencies:
-      '@contextmenu/core': link:../core
       '@contextmenu/shared': link:../shared
     devDependencies:
       '@types/react': 18.0.26
@@ -115,12 +113,10 @@ importers:
 
   packages/vue:
     specifiers:
-      '@contextmenu/core': workspace:^
       '@contextmenu/shared': workspace:^
       vue: ^3.2.40
       vue-demi: 0.13.11
     dependencies:
-      '@contextmenu/core': link:../core
       '@contextmenu/shared': link:../shared
       vue-demi: 0.13.11_vue@3.2.40
     devDependencies:
