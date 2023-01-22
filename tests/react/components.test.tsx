@@ -39,9 +39,15 @@ describe('@contextmenu/react', () => {
 
     expectToBeVisible(realDOM)
     await delayedPromise(1)
+    // should sync state
     expect(ref.current?.visible).toBe(true)
-
     dispatchEvent(new MouseEvent('scroll'))
+    expectToBeHidden(realDOM)
+
+    dispatchCtxEvent()
+
+    expectToBeVisible(realDOM)
+    dispatchEvent(new MouseEvent('click'))
     expectToBeHidden(realDOM)
   })
 })

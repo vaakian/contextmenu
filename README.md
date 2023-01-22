@@ -38,7 +38,7 @@
   - [x] Basic top-level menu using the custom element
   - [x] Deeply nested menu
   - [x] Declarative API
-  - [ ] UI preset
+  - [x] UI preset(yet in beta)
   - [ ] Online UI design tool
   - [ ] Animation
 

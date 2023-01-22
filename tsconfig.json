@@ -34,7 +34,8 @@
     "playground/**/*.vue",
     "meta",
     "vitest.config.ts",
-    "tests/**/*.ts",
+    // "tests/**/*.ts",
+    "tests",
     "scripts/*.ts",
     "docs"
   ],
