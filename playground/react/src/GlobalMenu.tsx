@@ -14,22 +14,23 @@ function CustomMenu() {
     </div>
   )
 }
-
+const refresh = () => window.location.reload()
 const GlobalMenu = memo(
   () => {
     // access the wrapper
     const ref = useRef<HTMLDivElement>(null)
     return (
-    <ContextMenu>
+    <ContextMenu style={{ textAlign: 'left' }}>
       <MenuGroup ref={ref}>
-        <MenuItem>Item1</MenuItem>
-        <MenuItem>Item2</MenuItem>
+        <MenuItem>Setting</MenuItem>
+        <MenuItem>General</MenuItem>
+        <MenuItem onClick={refresh}>Reload</MenuItem>
         <MenuItem>
-          <span>Item3</span>
+          <span>More{' =>'}</span>
         <MenuGroup>
             <MenuItem>Sub1</MenuItem>
             <MenuItem>
-              <span>Sub3</span>
+              <span>Sub2</span>
               <MenuGroup>
                 <CustomMenu />
               </MenuGroup>

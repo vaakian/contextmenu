@@ -7,7 +7,7 @@ Import built-in themes in your project entry:
 import { createApp } from 'vue'
 import App from './App.vue'
 // import built-in theme
-import '@contextmenu/core/default.css'
+import '@contextmenu/core/theme/default.css'
 
 createApp(App).mount('#app')
 ```

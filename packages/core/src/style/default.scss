@@ -7,18 +7,18 @@
 
 :root {
   --cmi-padding: 2px 3px;
-  --cmi-color: #333;
+  --cmi-color: #606266;
   --cmi-hover-color: unset;
   --cmi-background: unset;
   --cmi-border: unset;
-  --cmi-border-bottom: 1px solid #ccc;
-  --cmi-hover-background: #eee;
+  --cmi-border-bottom: 1px solid #eee;
+  --cmi-hover-background: rgba(238, 238, 238, 0.5);
 
-  --cmg-border: 1px solid #ccc;
+  --cmg-border: 1px solid #d9e1e4;
   --cmg-padding: 0;
   --cmg-background: white;
   --cmg-border-radius: 5px;
-  --cmg-box-shadow: 0 12px 32px rgba(0, 0, 0, .1), 0 2px 6px rgba(0, 0, 0, .08);
+  --cmg-box-shadow: 0 12px 32px rgba(106, 103, 103, 0.1), 0 2px 4px rgba(0, 0, 0, .08);
 }
 
 @media (prefers-color-scheme: dark) {
