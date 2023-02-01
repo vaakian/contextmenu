@@ -19,6 +19,8 @@ if (version.includes('beta'))
   command += ' --tag beta'
 
 for (const name of availablePackages) {
-  execSync(command, { stdio: 'inherit', cwd: path.join('packages', name/* , 'dist' */) })
+  // TODO: ensure workspace peerDependencies are installed
+  const cwd = path.join('packages', name/* , 'dist' */)
+  execSync(command, { stdio: 'inherit', cwd })
   consola.success(`Published @contextmenu/${name}`)
 }

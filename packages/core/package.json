@@ -1,7 +1,7 @@
 {
   "name": "@contextmenu/core",
   "type": "module",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "packageManager": "pnpm@7.9.0",
   "description": "",
   "author": "vaakian <vaakian@gmail.com>",
@@ -29,7 +29,8 @@
   "jsdelivr": "./dist/index.iife.min.js",
   "types": "./dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "theme"
   ],
   "dependencies": {
     "@contextmenu/shared": "workspace:^"
