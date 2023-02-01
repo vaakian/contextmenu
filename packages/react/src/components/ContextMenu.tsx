@@ -11,7 +11,8 @@ interface ContextMenuCustomProps extends UseContextMenuOptions {
 export type ContextMenuProps = React.ComponentProps<'div'> & ContextMenuCustomProps
 
 const ContextMenu = forwardRef<UseContextMenuReturn, ContextMenuProps>((props, ref) => {
-  const { children } = props
+  // fix unknown prop warning: https://reactjs.org/warnings/unknown-prop.html
+  const { children, onBeforePopup, onVisibleChange, hideOnClick, target, ...wrapperProps } = props
   const menu = useRef<StylableElement>(null)
   const ctx = useContextMenu(menu, props)
 
@@ -26,7 +27,7 @@ const ContextMenu = forwardRef<UseContextMenuReturn, ContextMenuProps>((props, r
   return React.createElement(
     'div',
     {
-      ...props,
+      ...wrapperProps,
       ref: menu,
     },
     children,
