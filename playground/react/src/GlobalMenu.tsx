@@ -20,7 +20,7 @@ const GlobalMenu = memo(
     // access the wrapper
     const ref = useRef<HTMLDivElement>(null)
     return (
-    <ContextMenu style={{ textAlign: 'left' }}>
+    <ContextMenu style={{ textAlign: 'left' }} onBeforePopup={e => console.log(e)}>
       <MenuGroup ref={ref}>
         <MenuItem>Setting</MenuItem>
         <MenuItem>General</MenuItem>

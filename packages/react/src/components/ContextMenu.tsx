@@ -12,6 +12,7 @@ export type ContextMenuProps = React.ComponentProps<'div'> & ContextMenuCustomPr
 
 const ContextMenu = forwardRef<UseContextMenuReturn, ContextMenuProps>((props, ref) => {
   // fix unknown prop warning: https://reactjs.org/warnings/unknown-prop.html
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { children, onBeforePopup, onVisibleChange, hideOnClick, target, ...wrapperProps } = props
   const menu = useRef<StylableElement>(null)
   const ctx = useContextMenu(menu, props)
