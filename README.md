@@ -15,7 +15,8 @@
 
 <p align="center">Add custom <code>contextMenu</code> to you application the simplest way.</p>
 
-> Refer to [Documentations](https://contextmenu.netlify.app/)
+> Online [DEMO](https://contextmenu.netlify.app/vue/advanced#demo)\
+> Refer to the [Documentations](https://contextmenu.netlify.app/)
 
 
 ## Feature
