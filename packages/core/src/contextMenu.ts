@@ -3,6 +3,8 @@ import { defaultDocument, defaultWindow, isClient, isStylableElement } from '@co
 import { _addEventListener } from './eventListener'
 import { calculateOffset } from './utils'
 
+const availableResizeProperties: string[] = ['auto', 'both', 'horizontal', 'vertical', 'block', 'inline']
+
 export type OffsetType = number | string | null
 
 export interface Offset {
@@ -39,6 +41,11 @@ export interface ContextMenuOptions {
    * The target element that the menu applies to.
    */
   target?: EventTarget | null
+
+  /**
+   * Menu support resize property.
+   */
+  resize?: 'unset' | 'auto' | 'horizontal'
 }
 
 export class ContextMenu {
@@ -81,6 +88,8 @@ export class ContextMenu {
   private initMenuElement() {
     this.element.style.setProperty('position', 'fixed')
     this.element.style.setProperty('visibility', 'hidden')
+    if (this.options.resize && availableResizeProperties.includes(this.options.resize))
+      this.element.style.setProperty('resize', this.options.resize)
 
     if (!defaultDocument!.contains(this.element))
       defaultDocument!.body.appendChild(this.element)
@@ -151,7 +160,7 @@ export class ContextMenu {
 
     const menuClickHandler = (e: Event) => {
       // hide on click
-      if (!this.options.hideOnClick)
+      if ((this.options.resize && availableResizeProperties.includes(this.options.resize)) || !this.options.hideOnClick)
         e.stopPropagation()
     }
 
