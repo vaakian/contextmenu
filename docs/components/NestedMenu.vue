@@ -6,33 +6,33 @@ import { ContextMenu, MenuGroup, MenuItem } from '@contextmenu/vue'
   <ContextMenu>
     <MenuGroup class="menu">
       <MenuItem class="item">
-        🍎 Item 1
+        🍎 foo
       </MenuItem>
       <MenuItem class="item">
-        🍌 Item 2
+        🍌 bar
       </MenuItem>
       <MenuItem class="item">
-        🥒 SubMenu1
+        🥒 more
         <!-- sub menu content -->
         <MenuGroup class="menu">
           <MenuItem class="item">
-            Nested1
+            setting
           </MenuItem>
           <MenuItem class="item">
-            Nested2
+            general
           </MenuItem>
           <MenuItem class="item">
-            SubMenu2
+            subMenu
             <!-- deep sub menu content -->
             <MenuGroup class="menu">
               <MenuItem class="item">
-                🌍 Apple
+                🌍 earth
               </MenuItem>
               <MenuItem class="item">
-                ⛰️ Orange
+                🌕 moon
               </MenuItem>
               <MenuItem class="item">
-                ✈️ Banana
+                🌞 sun
               </MenuItem>
             </MenuGroup>
           </MenuItem>
@@ -47,7 +47,7 @@ import { ContextMenu, MenuGroup, MenuItem } from '@contextmenu/vue'
   @apply bg-$vp-c-bg overflow-hidden shadow-xl rounded-md b-1 b-color-gray-400/30;
 }
 .item {
-    @apply hover-bg-$vp-c-bg-mute hover-color-$vp-c-brand color-$vp-c-text-2 cursor-pointer px-2 py-1 capitalize;
+    @apply hover-bg-$vp-c-bg-elv-mute hover-color-$vp-c-brand color-$vp-c-text-2 cursor-pointer px-2 py-1;
 }
 .item > * {
   color: initial;

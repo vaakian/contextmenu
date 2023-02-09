@@ -43,9 +43,9 @@
   },
   "dependencies": {
     "@contextmenu/shared": "workspace:^",
-    "vue-demi": "*"
+    "vue-demi": "0.13.11"
   },
   "devDependencies": {
-    "vue": "^3.2.40"
+    "vue": "^3.2.47"
   }
 }

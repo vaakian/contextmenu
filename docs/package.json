@@ -10,12 +10,12 @@
     "docs:serve": "vitepress serve ."
   },
   "devDependencies": {
-    "@unocss/preset-attributify": "^0.45.29",
-    "@unocss/preset-icons": "^0.45.29",
-    "@unocss/preset-uno": "^0.45.29",
-    "@unocss/transformer-directives": "^0.45.29",
-    "unocss": "^0.45.29",
-    "vitepress": "1.0.0-alpha.21",
-    "vue": "^3.2.40"
+    "@unocss/preset-attributify": "^0.45.30",
+    "@unocss/preset-icons": "^0.45.30",
+    "@unocss/preset-uno": "^0.45.30",
+    "@unocss/transformer-directives": "^0.45.30",
+    "unocss": "^0.45.30",
+    "vitepress": "1.0.0-alpha.45",
+    "vue": "^3.2.47"
   }
 }
