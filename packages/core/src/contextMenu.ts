@@ -70,7 +70,6 @@ export class ContextMenu {
       console.warn('unable to use an un-stylable element as context menu')
       return
     }
-
     this.element = menuElement!
 
     options.hideOnClick = options.hideOnClick ?? true
@@ -79,6 +78,7 @@ export class ContextMenu {
   }
 
   private initMenuElement() {
+    this.element.style.removeProperty('display')
     this.element.style.setProperty('position', 'fixed')
     this.element.style.setProperty('visibility', 'hidden')
 

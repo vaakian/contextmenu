@@ -29,7 +29,8 @@ export default defineComponent<ContextMenuProps>({
 
     return () => {
       if (slots.default)
-        return h(props.as || 'div', { ref: menuRef }, slots.default(data))
+        // `display: none` at first render to avoid flickering
+        return h(props.as || 'div', { ref: menuRef, display: 'none' }, slots.default(data))
     }
   },
 })

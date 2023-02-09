@@ -25,12 +25,19 @@ const ContextMenu = forwardRef<UseContextMenuReturn, ContextMenuProps>((props, r
     [ctx],
   )
 
+  const _wrapperProps = {
+    ...wrapperProps,
+    style: {
+      ...wrapperProps.style,
+      // avoid the menu to be displayed when the page is loaded (flickering)
+      display: 'none',
+    },
+    ref: menu,
+  }
+
   return React.createElement(
     'div',
-    {
-      ...wrapperProps,
-      ref: menu,
-    },
+    _wrapperProps,
     children,
   )
 })
