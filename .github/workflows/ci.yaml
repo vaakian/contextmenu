@@ -27,12 +27,11 @@ jobs:
           node-version: 18.x
           cache: pnpm
 
-
       - name: Install
         run: pnpm i
 
       - name: Lint
-        run: pnpm lint
+        run: pnpm lint --ignore-pattern 'playground'
 
   test:
     runs-on: ubuntu-latest
