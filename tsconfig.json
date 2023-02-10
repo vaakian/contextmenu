@@ -44,7 +44,7 @@
     "**/**/dist",
     "**/**/*.md",
     "tests/**/*.d.ts"
-  ],
+  ]
   // "references": [
   //   { "path": "./playground/react" },
   //   { "path": "./packages/react" }
