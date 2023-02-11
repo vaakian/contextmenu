@@ -40,7 +40,7 @@
   - [x] Deeply nested menu
   - [x] Declarative API
   - [x] UI preset(yet in beta)
-  - [ ] Online UI design tool
+  - [ ] Online preview editor
   - [ ] Animation
 
 - [x] Vue (both Vue2 & Vue3, empowered by [Vue Demi](https://github.com/vueuse/vue-demi))
@@ -73,10 +73,10 @@
 npm i @contextmenu/core
 
 # vue
-npm i @contextmenu/vue
+npm i @contextmenu/vue @contextmenu/core
 
 # react
-npm i @contextmenu/react
+npm i @contextmenu/react @contextmenu/core
 ```
 
 ## Quick example
@@ -120,7 +120,7 @@ Please refer to the [documentation](https://contextmenu.netlify.app/) for more d
 | @contextmenu/shared | [![@contextmenu-shared][v-shared]][url-shared] |
 ## License
 
-[MIT](./LICENSE) License © 2022 [vaakian](https://github.com/vaakian)
+[MIT](./LICENSE) License © 2023 [vaakian](https://github.com/vaakian)
 
 
 [v-core]: https://img.shields.io/npm/v/@contextmenu/core?color=a1b858&label=%40contextmenu%2Fcore&style=plastic

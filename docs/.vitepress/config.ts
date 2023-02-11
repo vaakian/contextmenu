@@ -1,14 +1,15 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: '@contextmenu',
+  title: 'contextmenu',
   description: 'Customize your contextmenu the simplest way',
   markdown: {
     theme: 'github-dark',
   },
-  cleanUrls: 'without-subfolders',
+  cleanUrls: true,
   themeConfig: {
-    siteTitle: '@contextmenu',
+    logo: '/assets/logo.png',
+    siteTitle: 'contextmenu',
     algolia: {
       appId: '',
       apiKey: '',
@@ -17,12 +18,12 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/vaakian/contextmenu' },
     ],
-    localeLinks: {
-      text: 'English',
-      items: [
-        { text: '简体中文', link: '#' },
-      ],
-    },
+    // localeLinks: {
+    //   text: 'English',
+    //   items: [
+    //     { text: '简体中文', link: '#' },
+    //   ],
+    // },
     footer: {
       message: 'Released under the MIT License.',
       copyright: 'Copyright © 2021-PRESENT vaakian',
